@@ -15993,26 +15993,27 @@ const generateUpscaledImage = async (sourceImageUrl, targetResolution, upscaleMo
 // Official provider schemas reviewed 2026-10-24. No cross-provider fallback.
 // 첫 화면 '사용 안내 및 팁': [제목, 한 줄 설명]
 const START_GUIDE_TIPS = [
-  ['API 키', '설정(⚙)에 공급사 키를 넣으면 이 브라우저에 저장되어 다음에도 그대로 쓰입니다.'],
-  ['키 없이', 'FIBO 2.0 · Qwen Image 2.1은 Hugging Face 무료 GPU로 생성·편집합니다. HF 토큰을 넣으면 하루 할당량이 늘어납니다(무료 계정 5분 · PRO 40분).'],
-  ['넉넉하게', '설정 → 오픈 모델 공통의 실행 경로를 "자동"으로 두면, 무료 할당량이 떨어질 때 HF 크레딧·외부 API 키로 이어서 만듭니다.'],
-  ['검색', '입력창 위 🔎 웹 검색 · 🖼 이미지 검색을 켜면 최신 사실과 실제 모습을 반영합니다(검색마다 과금).'],
-  ['생각 수준', '입력창 위 🧠에서 계획 모델·이미지 모델의 생각 수준을 고릅니다.'],
-  ['긴 프롬프트', '이미지 모델 한도를 넘는 긴 글도 계획 모델(약 50만~105만 토큰)이 전부 읽고 반영합니다.'],
+  ['API 키', '설정(⚙)에 넣으면 이 브라우저에 저장됩니다.'],
+  ['키 없이', 'FIBO 2.0 · Qwen Image 2.1은 HF 무료 GPU로 실행됩니다. HF 토큰을 넣으면 하루 할당량이 늘어납니다(무료 5분 · PRO 40분).'],
+  ['넉넉하게', '오픈 모델 실행 경로를 "자동"으로 두면 무료 할당량 소진 시 HF 크레딧·외부 API로 이어 갑니다.'],
+  ['검색', '🔎 웹 · 🖼 이미지 검색을 켜면 최신 사실·실제 모습을 반영합니다(검색마다 과금).'],
+  ['생각 수준', '🧠에서 계획·이미지 모델의 생각 수준을 고릅니다.'],
+  ['긴 프롬프트', '이미지 모델 한도를 넘어도 계획 모델이 전부 읽고 반영합니다.'],
   ['이어서 편집', '"더 밝게"처럼 말하면 직전 결과를 고칩니다.'],
-  [`여러 장(최대 ${MAX_ATTACHED_IMAGES}장)`, '여러 장을 첨부해 한 번에 지시합니다. "3번째 그림체로 맞춰줘" → #3이 기준(★).'],
-  ['첨부', '📄 문서(PDF·Word·한글 등)와 📦 압축 파일·폴더의 내용을 반영해 그립니다.'],
+  [`여러 장(최대 ${MAX_ATTACHED_IMAGES}장)`, '한 번에 지시합니다. "3번째 그림체로" → #3이 기준(★).'],
+  ['첨부', '📄 문서(PDF·Word·한글 등) · 📦 압축 파일·폴더 내용을 반영합니다.'],
   ['마스크 편집', '🖌로 칠한 부분만 바뀌고 나머지는 원본 그대로입니다.'],
-  ['분석(🔍)', '답변은 서식 기호(**, ## 등) 없이 깔끔하게 보이고, Text 복사도 기호 없이 됩니다.'],
-  ['정리', '사이드바 [선택]으로 채팅방을, 상단 [선택]으로 메시지를 여러 개 또는 전부 골라 지웁니다.'],
-  ['재생성·수정', "결과의 '재생성'은 그 결과만, 내 메시지의 Edit은 프롬프트·첨부를 고쳐 다시 만듭니다."],
-  ['잔액', '상단 잔액 버튼에서 공급사별 잔액과 이 앱 사용액을 봅니다.']
+  ['부분 편집', '바꾸라고 하지 않은 얼굴·체형·배경은 원본 픽셀로 되돌립니다(전체를 바꾸는 요청 제외).'],
+  ['분석(🔍)', '서식 기호 없이 깔끔하게 표시·복사됩니다.'],
+  ['정리', '사이드바·상단 [선택]으로 채팅방·메시지를 골라 지웁니다.'],
+  ['재생성·수정', "'재생성'은 그 결과만, 내 메시지 Edit은 프롬프트·첨부를 고쳐 다시 만듭니다."],
+  ['잔액', '상단 잔액 버튼에서 공급사별 잔액·사용액을 봅니다.']
 ];
 // '기능·요금 한눈에' 창의 기능 요약표: [기능, 하는 일, 비용]
 const FEATURE_SUMMARY_ROWS = [
   ['생성·편집', '프롬프트(+첨부)로 새로 그리거나 이전 결과를 고침', '제작 계획 + 이미지'],
-  ['FIBO 2.0(키 없이)', 'Bria 오픈 가중치를 HF 무료 GPU에서 실행 · 생성 Dev / 편집 Edit Turbo · 구조화 JSON 프롬프트 지원', '0원(하루 무료 GPU 안) · 외부 경로 장당 $0.04'],
-  ['Qwen 2.1·Turbo(키 없이)', 'HF 무료 GPU에서 실행 · Turbo 8단계 / 본판 기본 40단계 · 참조 10장 · 마스크 지원', '0원(하루 무료 GPU 안) · 외부 경로 장당 $0.0141~0.075'],
+  ['FIBO 2.0(키 없이)', 'Bria 오픈 모델 · HF 무료 GPU · 생성 Dev / 편집 Edit Turbo · JSON 프롬프트', '0원(하루 무료 GPU 안) · 외부 경로 장당 $0.04'],
+  ['Qwen 2.1·Turbo(키 없이)', 'HF 무료 GPU · Turbo 8단계 / 본판 40단계 · 참조 10장 · 마스크', '0원(하루 무료 GPU 안) · 외부 경로 장당 $0.0141~0.075'],
   ['🔎 웹 검색', '최신 사실을 확인해 반영하고 출처 표시', 'Google 월 5,000건 무료 후 건당 $0.014 · OpenAI 회당 $0.01 · xAI 회당 $0.005'],
   ['🖼 이미지 검색', '실제 대상의 모습을 찾아 참고', '웹 검색과 같은 단가'],
   ['🧠 생각 수준', '계획·이미지 모델·OCR의 생각 수준 선택', '높을수록 사고 토큰 증가'],
@@ -16020,6 +16021,7 @@ const FEATURE_SUMMARY_ROWS = [
   ['결과 재생성', '결과 하나만 다시 만들어 그 자리에 교체', '이미지 1장 + 계획'],
   [`다중 이미지(최대 ${MAX_ATTACHED_IMAGES}장)`, '개별 편집 = 이미지마다 1장 / 합성 = 전부 참고해 새 이미지', '출력 장수만큼'],
   ['마스크 편집', '칠한 영역만 고치고 나머지는 원본 픽셀 유지', '이미지 1장'],
+  ['부분 편집 보존', '요청하지 않은 얼굴·체형·배경은 원본 픽셀 · 색·톤 틀어짐 자동 보정', '무료(브라우저 처리)'],
   ['문서·압축 첨부', `문서 최대 ${MAX_ATTACHED_DOCUMENTS}개 내용 반영 · 압축·폴더는 브라우저에서 풀어 첨부`, '입력 토큰 · 풀기 무료'],
   ['분석(🔍)', '이미지·문서를 일반 모델이 글로 분석(서식 기호 없이 표시)', '일반 모델 토큰'],
   ['업스케일', 'Google 모델로 2K·4K 다시 생성', '이미지 1장'],
@@ -17890,7 +17892,7 @@ const MaskEditorModal = ({
     className: "text-lg font-bold flex items-center gap-2 text-gray-900 dark:text-white"
   }, React.createElement(Icons.Brush, null), " 마스크 편집 — AI가 바꿀 부분만 칠하세요"), React.createElement("p", {
     className: "text-[11px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-  }, "칠한 영역만 편집 지시가 적용되고, 칠하지 않은 부분은 결과에서 원본 픽셀 그대로 유지됩니다(설정 › 마스크 편집 › 영역 밖 원본 픽셀 보존 합성). 경계는 자동으로 부드럽게 이어집니다.")), React.createElement("button", {
+  }, "칠한 영역만 바뀌고 나머지는 원본 픽셀 그대로입니다. 경계는 자동으로 부드럽게 잇습니다.")), React.createElement("button", {
     onClick: onCancel,
     className: "text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition",
     title: "닫기(변경 내용 저장 안 함)"
@@ -21238,7 +21240,7 @@ const App = () => {
       }),
       testId: 'api-keys-remember',
       title: "🔐 API 키를 이 브라우저에 저장 (권장)",
-      description: "새로고침·새 탭·재시작 후에도 키가 유지됩니다. 키는 이 브라우저에만 저장되고 해당 공급사 API를 부를 때만 전송됩니다. 공용 PC에서는 끄세요(끄면 저장된 키를 지웁니다)."
+      description: "새로고침·재시작 후에도 키를 유지합니다(이 브라우저에만 저장, 해당 API 호출에만 전송). 공용 PC에서는 끄세요(저장된 키 삭제)."
     }), React.createElement("button", {
       type: "button",
       onClick: clearSavedApiKeys,
@@ -21312,7 +21314,7 @@ const App = () => {
       className: "px-2.5 py-1 rounded-md bg-blue-600 hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-[11px] font-bold transition"
     }, apiTestLoading.open ? '확인 중...' : '계정·할당량 확인(무료)')), React.createElement("p", {
       className: "text-[10px] text-gray-600 dark:text-gray-300 mb-2 leading-relaxed"
-    }, "기본은 Hugging Face 무료 GPU(ZeroGPU): 하루 비로그인 2분 · 무료 계정 5분 · PRO 40분(PRO는 초과분을 크레딧 10분당 $1로 자동 연장). 실행 경로가 '자동'이면 무료 할당량이 떨어질 때 HF 크레딧(FIBO)·외부 API 키로 이어서 만듭니다."), React.createElement("label", {
+    }, "기본: HF 무료 GPU(하루 비로그인 2분 · 무료 계정 5분 · PRO 40분, PRO 초과분은 10분당 $1). 실행 경로 '자동'이면 할당량 소진 시 HF 크레딧(FIBO)·외부 API로 이어 갑니다."), React.createElement("label", {
       className: "flex items-center gap-2 text-[10px] font-semibold text-gray-600 dark:text-gray-300 mb-1"
     }, "HF 토큰(내 계정 할당량·크레딧 사용)", renderKeySavedBadge('hfToken')), renderApiKeyInput({
       field: 'hfToken',
@@ -21321,7 +21323,7 @@ const App = () => {
       compact: true
     }), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "크레딧이 있는데 '할당량 초과'가 나면 확인: ① PRO 계정인지(크레딧 연장은 PRO·Team·Enterprise 전용) ② 선불 크레딧·결제 수단 ③ fine-grained 토큰의 Billing 읽기 권한. '계정·할당량 확인'이 모두 검사합니다."), React.createElement("div", {
+    }, "크레딧이 있는데 '할당량 초과'라면: ① PRO·Team·Enterprise 계정인지 ② 선불 크레딧·결제 수단 ③ 토큰의 Billing 읽기 권한. '계정·할당량 확인'이 모두 검사합니다."), React.createElement("div", {
       className: "grid grid-cols-2 gap-2 mt-2"
     }, React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300"
@@ -21349,7 +21351,7 @@ const App = () => {
       value: choice
     }, describeOpenRouteChoice(choice, settings, 'fibo_2')))))), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "외부 경로 장당 단가(공식 가격표): Qwen 2.1 Turbo — Runware $0.0141 · OpenRouter $0.0184 / Qwen 2.1(Alibaba 2.1 Pro) — OpenRouter $0.046 · Runware $0.075 / FIBO 2.0 — HF 크레딧·Runware·fal·WaveSpeed $0.04. Qwen 외부 API에는 Alibaba Cloud 콘텐츠 검사가 적용됩니다."), React.createElement("div", {
+    }, "외부 경로 장당 단가(공식): Qwen 2.1 Turbo — Runware $0.0141 · OpenRouter $0.0184 / Qwen 2.1(Alibaba 2.1 Pro) — OpenRouter $0.046 · Runware $0.075 / FIBO 2.0 — $0.04(HF 크레딧·Runware·fal·WaveSpeed). Qwen 외부 API는 Alibaba Cloud 콘텐츠 검사 적용."), React.createElement("div", {
       className: "grid grid-cols-2 gap-2 mt-2"
     }, OPEN_ROUTE_KEY_SETTINGS.map(keySetting => {
       const route = Object.keys(OPEN_ROUTE_INFO).find(name => OPEN_ROUTE_INFO[name].keySetting === keySetting);
@@ -21398,7 +21400,7 @@ const App = () => {
       className: "px-2.5 py-1 rounded-md bg-blue-600 hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-[11px] font-bold transition"
     }, apiTestLoading.fibo ? '확인 중...' : '연결 확인(무료)')), React.createElement("p", {
       className: "text-[10px] text-gray-600 dark:text-gray-300 mb-2 leading-relaxed"
-    }, "Bria 공식 Hugging Face Space의 무료 GPU에서 실행합니다(키·결제 불필요). 생성 = Fibo 2.0 Dev, 편집 = Edit Turbo. 공식 Space는 생성 1회 GPU 120초·편집 60초를 예약하므로 남은 할당량이 적으면 거부되고, 이때 HF 크레딧(장당 $0.04·2K 가능)이나 외부 API로 이어 쓸 수 있습니다."), React.createElement("label", {
+    }, "Bria 공식 HF Space의 무료 GPU에서 실행합니다(키·결제 불필요). 생성 = Dev, 편집 = Edit Turbo. 남은 할당량이 예약량(생성 120초·편집 60초)보다 적으면 거부되며, HF 크레딧(장당 $0.04·2K 가능)이나 외부 API로 이어 쓸 수 있습니다."), React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300 mb-1"
     }, "생성(Dev) 실행 위치"), React.createElement("input", {
       type: "text",
@@ -21424,7 +21426,7 @@ const App = () => {
       className: "w-full p-2 text-xs border rounded-lg bg-white dark:bg-gray-950 border-gray-300 dark:border-gray-700 outline-none focus:ring-2 focus:ring-blue-500 font-mono"
     }), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "비우면 공식 Space. 복제한 내 Space는 '아이디/이름', 직접 실행 서버는 https://…hf.space · …gradio.live · http://localhost:7860"), React.createElement("label", {
+    }, "비우면 공식 Space. 내 Space는 '아이디/이름', 직접 서버는 https://…hf.space · …gradio.live · http://localhost:7860"), React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300 mt-2 mb-1"
     }, "프롬프트 준비"), React.createElement("select", {
       value: settings.fiboPlanner,
@@ -21466,7 +21468,7 @@ const App = () => {
       value: String(steps)
     }, steps === 4 ? '4 — 공식(증류 기준)' : `${steps}`))))), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, `지금 생성 단계: ${getFiboDevSteps(settings)}(속도 우선 모드면 30). 참고(공식 Space 코드 주석): 1024px 30단계 약 55초 · 50단계 약 90초, 편집 4단계 약 7초.`), React.createElement("label", {
+    }, `현재 생성 단계: ${getFiboDevSteps(settings)}(속도 우선 모드 30). 참고: 1024px 30단계 약 55초 · 50단계 약 90초, 편집 4단계 약 7초(공식 Space 주석).`), React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300 mt-2 mb-1"
     }, "스타일(텍스트 생성 전용 · 공식 5종)"), React.createElement("select", {
       value: settings.fiboStyle,
@@ -21493,7 +21495,7 @@ const App = () => {
       value: "inspire"
     }, "Inspire — Dev 가 그 이미지의 주제·스타일·구도를 빌려 새로 그림")), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "Inspire는 참고 이미지를 VGL 설명으로만 바꿔 새로 그립니다(원본 픽셀은 쓰지 않음). 마스크가 있거나 2장 이상이면 항상 편집입니다."), React.createElement("p", {
+    }, "Inspire는 참고 이미지를 설명(VGL)으로만 바꿔 새로 그립니다(원본 픽셀 미사용). 마스크가 있거나 2장 이상이면 편집으로 처리합니다."), React.createElement("p", {
       className: "text-[10px] mt-2 flex flex-wrap gap-2"
     }, [[FIBO_T2I_SPACE_URL, '생성 Space ↗'], [FIBO_EDIT_SPACE_URL, '편집 Space ↗'], [HF_TOKENS_URL, 'HF 토큰 발급 ↗'], [HF_ZEROGPU_DOCS_URL, 'ZeroGPU 할당량 ↗'], [FIBO_DEV_CARD_URL, 'Dev 모델 카드 ↗'], [FIBO_TURBO_CARD_URL, 'Edit Turbo 모델 카드 ↗'], [FIBO_LICENSE_URL, '라이선스(CC BY-NC 4.0) ↗']].map(([href, label]) => React.createElement("a", {
       key: href,
@@ -21503,7 +21505,7 @@ const App = () => {
       className: "text-blue-600 dark:text-blue-400 hover:underline font-semibold"
     }, label))), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "알아 둘 점: 출력은 약 1MP(1024² 안팎)이고 생성 크기는 너비 832~1344·높이 768~1248이라 9:16은 2:3으로 만듭니다. 그림 속 글자는 영문을 권장합니다(학습 폰트에 한글 없음). 요청은 Hugging Face Space와 Bria API(VGL 작성)로 전송됩니다. 라이선스 CC BY-NC 4.0(비상업). 붐비면 내 계정으로 복제해 쓸 수 있습니다(HF_TOKEN·BRIA_API_TOKEN 비밀 값 필요)."), apiTestStatus.fibo && React.createElement("p", {
+    }, "참고: 출력 약 1MP(너비 832~1344·높이 768~1248, 9:16은 2:3). 그림 속 글자는 영문 권장(학습 폰트에 한글 없음). 요청은 HF Space·Bria API(VGL)로 전송. 라이선스 CC BY-NC 4.0(비상업). 붐비면 내 계정에 복제(HF_TOKEN·BRIA_API_TOKEN 필요)."), apiTestStatus.fibo && React.createElement("p", {
       className: "text-[11px] text-indigo-600 dark:text-indigo-400 mt-2 whitespace-pre-wrap",
       "data-testid": "fibo-test-status"
     }, apiTestStatus.fibo)), React.createElement("div", {
@@ -21521,7 +21523,7 @@ const App = () => {
       className: "px-2.5 py-1 rounded-md bg-blue-600 hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-[11px] font-bold transition"
     }, apiTestLoading.qwen ? '확인 중...' : '연결 확인(무료)')), React.createElement("p", {
       className: "text-[10px] text-gray-600 dark:text-gray-300 mb-2 leading-relaxed"
-    }, "HF 공개 Space의 무료 GPU에서 공식 diffusers 파이프라인으로 실행합니다(키·결제 불필요). Turbo = 8단계(1K 1장에 GPU 약 8초 예약), 2.1 본판 = 기본 40단계(1K 약 22초·2K 약 107초 예약). 공개 Space는 이미지가 들어간 편집 요청만 NCII 분류기로 검사합니다."), React.createElement("div", {
+    }, "HF 공개 Space의 무료 GPU에서 공식 파이프라인으로 실행합니다(키·결제 불필요). GPU 예약: Turbo 8단계 1K 약 8초 · 본판 40단계 1K 약 22초·2K 약 107초. 이미지가 들어간 편집 요청만 NCII 분류기로 검사합니다."), React.createElement("div", {
       className: "grid grid-cols-2 gap-2"
     }, React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300"
@@ -21549,7 +21551,7 @@ const App = () => {
       className: "mt-1 w-full p-2 text-xs border rounded-lg bg-white dark:bg-gray-950 border-gray-300 dark:border-gray-700 outline-none focus:ring-2 focus:ring-blue-500 font-mono"
     }))), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "비우면 공개 Space. 복제한 내 Space는 '아이디/이름', 직접 실행 서버는 https://…hf.space · …gradio.live · http://localhost:7860"), React.createElement("label", {
+    }, "비우면 공개 Space. 내 Space는 '아이디/이름', 직접 서버는 https://…hf.space · …gradio.live · http://localhost:7860"), React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300 mt-2 mb-1"
     }, "2.1(본판) 단계 수"), React.createElement("select", {
       value: String(settings.qwenBaseSteps),
@@ -21585,7 +21587,7 @@ const App = () => {
       className: "text-blue-600 dark:text-blue-400 hover:underline font-semibold"
     }, label))), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "라이선스: Qwen Research License(연구·평가용, 상업 이용은 별도 허가). 복제한 내 Space는 대기열을 혼자 씁니다(ZeroGPU Space: 무료 계정 2개·PRO 10개). 공식 보강(PE)은 ZeroGPU 경로 전용이고, 외부 API 경로는 Alibaba Cloud 판(2.1 Turbo·2.1 Pro)을 씁니다."), apiTestStatus.qwen && React.createElement("p", {
+    }, "라이선스: Qwen Research License(연구·평가용, 상업 이용은 별도 허가). 내 Space는 대기열 단독 사용(ZeroGPU Space 무료 2개·PRO 10개). 공식 보강(PE)은 ZeroGPU 경로 전용, 외부 API는 Alibaba Cloud 판(2.1 Turbo·2.1 Pro)."), apiTestStatus.qwen && React.createElement("p", {
       className: "text-[11px] text-indigo-600 dark:text-indigo-400 mt-2 whitespace-pre-wrap",
       "data-testid": "qwen-test-status"
     }, apiTestStatus.qwen)))), React.createElement("div", {
@@ -21617,17 +21619,17 @@ const App = () => {
       className: `toggle-label block overflow-hidden h-7 rounded-full bg-gray-300 dark:bg-gray-700 cursor-pointer transition-colors duration-300 ${settings.saveMode ? 'bg-blue-500' : ''}`
     }))), React.createElement("p", {
       className: "text-xs text-gray-500 dark:text-gray-400 mb-3 leading-relaxed"
-    }, "대화 이력·문서 발췌를 줄이고 1장만 만듭니다(제작 계획 비용은 그대로). 세부 보존이 중요하면 끄세요."), SettingToggle({
+    }, "대화 이력·문서 발췌를 줄이고 1장만 만듭니다(계획 비용은 같음). 세부 보존이 중요하면 끄세요."), SettingToggle({
       tone: 'green',
       checked: settings.turboMode,
       onChange: checked => updateSetting({
         turboMode: checked
       }),
       title: "⚡ 이미지 응답 속도 우선",
-      description: "이미지 모델 생각 수준이 '자동'이면 최저로 낮추고, GPT Image 결과를 JPEG로 받습니다. 복잡한 장면은 품질이 달라질 수 있습니다."
+      description: "이미지 모델 생각 '자동'을 최저로, GPT Image 결과는 JPEG로 받습니다. 복잡한 장면은 품질이 달라질 수 있습니다."
     }), React.createElement("p", {
       className: "text-[11px] text-green-800 dark:text-green-300 mb-3 leading-relaxed bg-white dark:bg-gray-900 rounded-lg border border-green-200 dark:border-green-800 p-2.5"
-    }, "요청 1회 비용 = 제작 계획(일반 모델 토큰) + 이미지 출력 + 검색(켠 경우). 문서 읽기·압축 풀기와 기준(★) 이미지 원본 포함은 무료입니다."), React.createElement("label", {
+    }, "1회 비용 = 제작 계획 + 이미지 출력 + 검색(켠 경우). 문서·압축 처리와 기준(★) 원본 포함은 무료."), React.createElement("label", {
       className: "mb-3 flex items-start gap-2 text-xs text-gray-600 dark:text-gray-300 cursor-pointer select-none"
     }, React.createElement("input", {
       type: "checkbox",
@@ -21647,7 +21649,7 @@ const App = () => {
         batchMode: checked
       }),
       title: "Batch API (비동기 · 공식 50% 할인)" + (isBatchSupportedModel(settings.model) ? '' : ' — 이 모델은 할인 없음'),
-      description: "Google·OpenAI 이미지 50% 할인. 결과는 수 분~최대 24시간 뒤 자동 도착. xAI는 할인 없음, Flex와 함께 쓸 수 없음."
+      description: "Google·OpenAI 이미지 50% 할인, 결과는 수 분~24시간 뒤 도착. xAI는 할인 없음 · Flex와 함께 못 씀."
     }), SettingToggle({
       checked: settings.flexMode,
       disabled: batchOn,
@@ -21655,7 +21657,7 @@ const App = () => {
         flexMode: checked
       }),
       title: "Flex (나노바나나 1 전용 · 50% 할인, 느림)",
-      description: "가격표에 Flex 단가가 있는 나노바나나 1에서만 요청합니다. 실제로 Flex로 처리된 경우만 할인 기록, 거부되면 표준으로 재요청. 목표 지연 1~15분."
+      description: "Flex 단가가 있는 나노바나나 1 전용. 실제 Flex 처리분만 할인 기록, 거부되면 표준으로 재요청(목표 지연 1~15분)."
     }), React.createElement("button", {
       onClick: () => {
         setIsSettingsOpen(false);
@@ -21733,7 +21735,7 @@ const App = () => {
       description: describeImageSearchRoute(settings.model, settings)
     }), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed"
-    }, "모델이 필요할 때만 검색하고, 결과에 검색어·출처를 표시합니다. 요금: Google 월 5,000건 무료 후 1,000건당 $14 · OpenAI 1,000회당 $10 · xAI 1,000회당 $5(둘 다 검색 내용은 입력 토큰으로 별도 과금). Google 약관상 OpenAI·xAI 모델은 각자의 웹 검색을 씁니다.")), React.createElement("div", {
+    }, "필요할 때만 검색하고 검색어·출처를 표시합니다. 요금: Google 월 5,000건 무료 후 1,000건당 $14 · OpenAI 1,000회당 $10 · xAI 1,000회당 $5(OpenAI·xAI는 검색 내용이 입력 토큰으로 별도 과금). Google 약관상 OpenAI·xAI 모델은 각자 검색을 씁니다.")), React.createElement("div", {
       className: "rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-3 space-y-1",
       "data-testid": "thinking-settings"
     }, React.createElement("h3", {
@@ -21790,7 +21792,7 @@ const App = () => {
       value
     }, label))), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed"
-    }, "글자 읽기에는 보통 minimal(공식 권장)로 충분합니다. 올리면 사고 토큰만큼 비용·시간이 늘어납니다.")), React.createElement("div", {
+    }, "글자 읽기는 보통 minimal(공식 권장)이면 충분합니다. 올릴수록 비용·시간이 늘어납니다.")), React.createElement("div", {
       className: "rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-3"
     }, SettingToggle({
       checked: settings.photorealMode !== false,
@@ -21823,7 +21825,7 @@ const App = () => {
       className: "px-2.5 py-2 text-[11px] font-semibold rounded-lg border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 hover:opacity-95"
     }, `📷 ${getProviderLabel(provider)} 실사 최고 품질로 설정`), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-2 leading-relaxed"
-    }, "최고 품질 = 나노바나나 프로 4K · GPT Image 2.5 Sunburst 4K·max · Grok Imagine 2.0 2K·medium · FIBO 2.0 Dev 50단계 · Qwen Image 2.1 2K. 비용이 가장 크고, 항상 더 낫다는 보장은 없습니다.")), SettingToggle({
+    }, "최고 품질 = 나노바나나 프로 4K · GPT Image 2.5 Sunburst 4K·max · Grok Imagine 2.0 2K·medium · FIBO 2.0 Dev 50단계 · Qwen Image 2.1 2K. 비용이 가장 크고 항상 낫다는 보장은 없습니다.")), SettingToggle({
       checked: settings.adultFashionMode,
       onChange: checked => updateSetting({ adultFashionMode: checked }),
       testId: 'adult-fashion-toggle',
@@ -22015,7 +22017,7 @@ const App = () => {
       className: "text-sm font-bold text-gray-800 dark:text-gray-200 mb-2"
     }, "🎨 색·톤 충실도 보정"), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 mb-3 leading-relaxed"
-    }, "생성 모델은 편집할 때도 그림 전체를 다시 그려, 바꾸지 않은 곳까지 색·밝기가 틀어집니다(어두운 곳이 들뜨는 뿌연 막, 분홍·노랑 색 끼임, 대비·채도 변화). 결과를 모델이 받은 기준 이미지와 비교해 같은 부분의 색 차이로 틀어짐을 계산하고 그림 전체를 되돌립니다(편집·원본 유지 재생성·다중 이미지·마스크·Batch·업스케일, 전 모델). 전체 색감·조명·화풍 변경을 요청했거나 구도가 크게 바뀌면 적용하지 않습니다. 기준 이미지가 없는 새 생성에는 해당하지 않습니다."), SettingToggle({
+    }, "모델은 편집 때도 그림 전체를 다시 그려 색·밝기가 틀어집니다(뿌연 막·분홍/노랑 끼임·대비/채도 변화). 기준 이미지와 같은 부분의 색 차이로 틀어짐을 계산해 되돌립니다(전 모델·모든 편집 경로). 전체 색감·조명·화풍 변경 요청, 구도 변경, 새 생성에는 적용하지 않습니다."), SettingToggle({
       tone: 'gray',
       checked: settings.toneFidelity,
       onChange: checked => updateSetting({
@@ -22023,14 +22025,14 @@ const App = () => {
       }),
       testId: 'tone-fidelity-toggle',
       title: "색·톤 틀어짐 자동 보정 (권장)",
-      description: "결과마다 보정 전 출력 보기·되돌리기가 가능합니다. 끄면 모델 출력의 색을 그대로 씁니다."
+      description: "결과마다 보정 전 출력 보기·되돌리기 가능. 끄면 모델 출력 색 그대로."
     })), React.createElement("div", {
       className: "rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-3"
     }, React.createElement("h3", {
       className: "text-sm font-bold text-gray-800 dark:text-gray-200 mb-2"
     }, "🛡️ 원본 보존 편집 (마스크 없이)"), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 mb-3 leading-relaxed"
-    }, "편집 결과에서 실제로 바뀐 부분만 쓰고 나머지(얼굴·머리·배경 등)는 원본 픽셀로 둡니다(칠할 필요 없음). 화풍 변환·재조명처럼 전체를 바꾸는 편집, 원본 복제, 합성 모드에는 적용하지 않습니다."), SettingToggle({
+    }, "편집 결과에서 실제로 바뀐 부분만 쓰고 나머지(얼굴·체형·배경 등)는 원본 픽셀로 둡니다(칠할 필요 없음). 전체를 바꾸는 편집(화풍·재조명)·원본 복제·합성 모드는 제외."), SettingToggle({
       tone: 'gray',
       checked: settings.autoPreserve,
       onChange: checked => updateSetting({
@@ -22038,7 +22040,7 @@ const App = () => {
       }),
       testId: 'auto-preserve-toggle',
       title: "바뀌지 않은 부분은 원본 픽셀 그대로 (권장)",
-      description: "끄면 모델 출력을 그대로 씁니다(이전 방식)."
+      description: "끄면 모델 출력 그대로(이전 방식)."
     }), SettingToggle({
       tone: 'gray',
       checked: settings.autoPreserveFaceLock,
@@ -22048,7 +22050,7 @@ const App = () => {
       }),
       testId: 'auto-preserve-face-toggle',
       title: "얼굴 잠금",
-      description: "계획 모델이 찾은 얼굴은 원본 그대로 둡니다. 표정·화장·얼굴을 바꾸라고 요청하면 자동으로 풉니다."
+      description: "계획 모델이 찾은 얼굴은 원본 그대로. 얼굴 변경(표정·화장 등)을 요청하면 자동 해제."
     }), SettingToggle({
       tone: 'gray',
       checked: settings.autoPreserveRegionLock,
@@ -22067,7 +22069,7 @@ const App = () => {
         autoPreserveColorMatch: checked
       }),
       title: "바뀐 부분 색감·채도를 원본에 맞춤",
-      description: "모델이 전체 밝기·색감을 미세하게 바꾼 만큼 새 부분도 원본 톤에 맞춥니다."
+      description: "모델의 미세한 밝기·색 변화만큼 새 부분도 원본 톤에 맞춥니다."
     }), SettingToggle({
       tone: 'gray',
       checked: settings.autoPreserveMatchResolution,
@@ -22076,21 +22078,21 @@ const App = () => {
         autoPreserveMatchResolution: checked
       }),
       title: "편집 해상도를 원본 크기에 맞춤 (권장)",
-      description: "새로 그려지는 부분이 원본보다 흐려지지 않게 요청 해상도를 원본 크기에 맞춥니다(원본이 크면 비용 증가)."
+      description: "새 부분이 흐려지지 않게 요청 해상도를 원본 크기에 맞춥니다(원본이 크면 비용 증가)."
     })), React.createElement("div", {
       className: "rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-3"
     }, React.createElement("h3", {
       className: "text-sm font-bold text-gray-800 dark:text-gray-200 mb-2"
     }, "🎭 마스크(부분) 편집"), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 mb-3 leading-relaxed"
-    }, "🖌로 칠한 영역만 편집합니다(전 모델). GPT Image·FIBO는 공식 마스크, 그 밖의 모델은 안내 이미지·위치 설명으로 영역을 전달하고, 합성을 켜면 영역 밖은 원본 픽셀 그대로입니다."), SettingToggle({
+    }, "🖌로 칠한 영역만 편집합니다(전 모델). 합성을 켜면 영역 밖은 원본 픽셀 그대로입니다."), SettingToggle({
       tone: 'gray',
       checked: settings.maskComposite,
       onChange: checked => updateSetting({
         maskComposite: checked
       }),
       title: "영역 밖 원본 픽셀 보존 합성 (권장)",
-      description: "칠한 영역만 새 결과로 바꾸고 나머지는 원본 해상도(최대 4096px) 그대로 둡니다. 끄면 모델 출력을 그대로 씁니다."
+      description: "칠한 영역만 새 결과로, 나머지는 원본 해상도(최대 4096px) 그대로. 끄면 모델 출력 그대로."
     }), SettingToggle({
       tone: 'gray',
       checked: settings.maskMatchResolution,
@@ -22099,7 +22101,7 @@ const App = () => {
         maskMatchResolution: checked
       }),
       title: "마스크 편집 해상도를 원본에 자동으로 맞춤 (권장)",
-      description: "요청 해상도를 원본 크기에 맞춥니다(높으면 비용만 증가, 낮으면 칠한 영역이 흐려짐)."
+      description: "요청 해상도를 원본에 맞춥니다(높으면 비용 증가, 낮으면 칠한 영역이 흐려짐)."
     }), React.createElement("div", {
       className: "mb-3",
       style: settings.maskComposite ? undefined : {
@@ -22412,7 +22414,7 @@ const App = () => {
       className: "text-blue-600 dark:text-blue-400 font-semibold hover:underline"
     }, "최신 환율 불러오기")), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed"
-    }, "원화는 위 환율로 환산한 값입니다(카드 청구 환율·수수료와 다를 수 있음). 공식 잔액 API는 xAI만 있고, OpenAI·Google은 콘솔에서 본 잔액을 '기준 저장'하면 이후 사용액을 빼서 추정합니다. 이 앱 사용액에는 다른 앱·콘솔 사용분이 들어가지 않습니다."), cards.map(renderCard))));
+    }, "원화는 위 환율 환산값입니다(카드 청구액과 다를 수 있음). 공식 잔액 API는 xAI만 있고, OpenAI·Google은 콘솔 잔액을 '기준 저장'하면 이후 사용액을 빼서 추정합니다. 다른 앱·콘솔 사용분은 포함되지 않습니다."), cards.map(renderCard))));
   };
   const CreditInfoModal = () => {
     if (!isCreditInfoOpen) return null;
@@ -23203,7 +23205,7 @@ const App = () => {
       className: "text-[11px] text-gray-500 dark:text-gray-400"
     }, `${getProviderLabel(job.provider)} · ${getModelDisplayName(msg.modelKey)} · 공식 50% 할인 · 제출 ${submitted} (${elapsedMin}분 경과) · 상태 ${job.state || '확인 전'}${checkedLabel ? ` · 마지막 확인 ${checkedLabel}` : ''}`), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400"
-    }, "보통 수 분, 최대 24시간 안에 결과가 도착하면 이 자리에 자동으로 표시됩니다. 30초마다 확인합니다."), job.lastError ? React.createElement("p", {
+    }, "보통 수 분(최대 24시간) 뒤 결과가 이 자리에 자동 표시됩니다(30초마다 확인)."), job.lastError ? React.createElement("p", {
       className: "text-[11px] text-red-500 mt-1"
     }, `상태 확인 실패(자동 재시도): ${job.lastError}`) : null))), msgSelectMode ? null : React.createElement("div", {
       className: "flex flex-wrap gap-3 md:gap-4 text-gray-400 pl-2"
@@ -23613,7 +23615,7 @@ const App = () => {
       onOcr: () => runDocumentOcr(doc.id, 'tray')
     }))), readyDocs.length ? React.createElement("p", {
       className: "mt-2 text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed"
-    }, `계획 모델에 최대 ${PLANNER_DOCUMENT_CHARS.toLocaleString('ko-KR')}자까지 보냅니다(현재 ${totalChars.toLocaleString('ko-KR')}자, 넘으면 관련 부분만 발췌). 삽화·표 배치는 반영되지 않을 수 있습니다.`) : null, React.createElement("div", {
+    }, `계획 모델에 최대 ${PLANNER_DOCUMENT_CHARS.toLocaleString('ko-KR')}자 전송(현재 ${totalChars.toLocaleString('ko-KR')}자, 넘으면 관련 부분만 발췌). 삽화·표 배치는 반영되지 않을 수 있습니다.`) : null, React.createElement("div", {
       className: "mt-2 flex flex-wrap items-center gap-2"
     }, DOCUMENT_PRESETS.map(preset => React.createElement("button", {
       key: preset.label,
@@ -23889,12 +23891,12 @@ const App = () => {
     }, preserveActive ? React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed",
       "data-testid": "auto-preserve-hint"
-    }, "🛡️ 편집이면 바뀐 부분만 새 결과로 쓰고, 얼굴·머리·배경 등 나머지는 원본 픽셀 그대로 둡니다(칠할 필요 없음 · 화풍 변환처럼 전체를 바꾸는 요청은 제외).", preserveLines.map((line, i) => React.createElement("span", {
+    }, "🛡️ 편집이면 바뀐 부분만 새 결과로 쓰고 나머지(얼굴·체형·배경 등)는 원본 픽셀 그대로 둡니다(전체를 바꾸는 요청 제외).", preserveLines.map((line, i) => React.createElement("span", {
       key: `preserve-res-${i}`,
       className: "block"
     }, `📐 ${line}`))) : null, React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400"
-    }, "🖌 버튼으로 바꿀 부분만 칠하면 그 영역만 AI가 편집합니다(마스크 편집)."));
+    }, "🖌로 바꿀 부분만 칠하면 그 영역만 편집합니다(마스크 편집)."));
     return React.createElement("div", {
       className: "mb-2 bg-white dark:bg-gray-800 p-2.5 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 animate-slide-up"
     }, React.createElement("div", {
@@ -24271,7 +24273,7 @@ const App = () => {
     className: "block text-[11px] text-gray-500 dark:text-gray-400"
   }, option.desc))), React.createElement("p", {
     className: "px-3 pt-1 pb-1.5 text-[10px] text-gray-400 leading-snug"
-  }, `이미지 최대 ${MAX_ATTACHED_IMAGES}장 · 문서 최대 ${MAX_ATTACHED_DOCUMENTS}개까지 · 브라우저 안에서 풀며 외부로 보내지 않습니다. 암호 압축은 미지원.`))) : null), React.createElement("button", {
+  }, `이미지 최대 ${MAX_ATTACHED_IMAGES}장 · 문서 최대 ${MAX_ATTACHED_DOCUMENTS}개 · 브라우저 안에서 풀며 외부로 보내지 않음 · 암호 압축 미지원.`))) : null), React.createElement("button", {
     onClick: () => docFileInputRef.current?.click(),
     title: `문서 첨부(PDF·Word·PowerPoint·Excel·한글 HWPX·EPUB·TXT 등, 최대 ${MAX_ATTACHED_DOCUMENTS}개)`,
     // 좁은 화면에서는 📦 메뉴의 '문서 선택'으로 대신해 입력창 폭을 확보한다.
