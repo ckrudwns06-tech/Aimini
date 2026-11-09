@@ -10843,9 +10843,9 @@ const APC_FACE_MIN_SKIN = 0.3;
 // 변경 점수 보강(v1.25.0): 질감 변화 가중치 · 계획 모델 지목 영역 가중(analyzeAutoPreserve ④ 참고).
 const APC_TEXTURE_WEIGHT = 30;
 const APC_REGION_BOOST = 1.5;
-// 요청 영역 밖 변화 되돌리기(v1.26.0, analyzeAutoPreserve ④-2): 편집 영역 상자의 여유 띠(긴 변 비율) · 적용에 필요한 '영역에 닿는 변화' 최소 비율.
+// 요청 영역 밖 변화 되돌리기(v1.26.0, analyzeAutoPreserve ④-2): 편집 영역 상자의 여유 띠(긴 변 비율) · 적용 조건(상자 안 변화 밀도 ≥ 상자 밖의 2배).
 const APC_REGION_LOCK_MARGIN = 0.03;
-const APC_REGION_LOCK_MIN_SHARE = 0.25;
+const APC_REGION_LOCK_MIN_DENSITY_RATIO = 2;
 const apcClamp = (v, lo, hi) => v < lo ? lo : v > hi ? hi : v;
 const apcSmoothstep = t => t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t);
 // RGBA → R·G·B 실수 평면
@@ -11667,8 +11667,9 @@ const analyzeAutoPreserve = (src, res, hints = {}) => {
   // 원본으로 되돌린다(조각 단위 — 영역에 닿는 조각은 영역 밖으로 이어진 부분까지 통째로 남겨, 긴 코트처럼 영역을 넘어 자라는 요청한
   // 변화를 자르지 않는다). 근거: OpenAI 이미지 프롬프팅 가이드 "If part of an image must remain pixel-identical, composite the
   // approved edit into the original."(GPT Image 2.6 · 2026-11-09 확인).
-  // 안전장치: 영역에 닿는 변화가 전체 변화의 25% 미만이면(계획 모델의 상자가 실제 변화와 어긋났거나, 요청한 변화보다 다른 곳 변화가
-  // 훨씬 큼) 요청한 변화를 지울 위험이 있어 적용하지 않는다(이전 동작).
+  // 안전장치(상자 어긋남 감지): 요청한 변화는 편집 영역 상자 안에 몰려 있어야 한다. 상자 안 변화 밀도(바뀐 픽셀 ÷ 상자 넓이)가
+  // 상자 밖 밀도의 APC_REGION_LOCK_MIN_DENSITY_RATIO(2)배 미만이면 상자가 실제 변화와 어긋난 것으로 보고 적용하지 않는다(이전 동작).
+  // (비율이 아니라 밀도로 판단해야 '작은 부분 편집 + 넓은 체형 변화' — 예: 안경만 바꿨는데 다리가 가늘어짐 — 에서도 보호가 켜진다.)
   let regionLock = null;
   if (hints.regionLock && regions.length) {
     const margin = Math.max(2, Math.round(longEdge * APC_REGION_LOCK_MARGIN));
@@ -11681,20 +11682,31 @@ const analyzeAutoPreserve = (src, res, hints = {}) => {
     const pieces = apcComponents(changed, sw, sh, null, 1);
     const touching = new Uint8Array(pieces.comps.length);
     let totalChanged = 0;
+    let inArea = 0;
+    let inChanged = 0;
+    let outArea = 0;
+    let outChanged = 0;
     for (let i = 0; i < n; i++) {
+      const x = i % sw;
+      const y = (i - x) / sw;
+      const inside = boxes.some(b => x >= b.x0 && x < b.x1 && y >= b.y0 && y < b.y1);
+      if (cover[i]) {
+        if (inside) inArea++;else outArea++;
+      }
       const id = pieces.labels[i];
       if (!id) continue;
       totalChanged++;
-      if (touching[id]) continue;
-      const x = i % sw;
-      const y = (i - x) / sw;
-      if (boxes.some(b => x >= b.x0 && x < b.x1 && y >= b.y0 && y < b.y1)) touching[id] = 1;
+      if (inside) touching[id] = 1;
+      if (cover[i]) {
+        if (inside) inChanged++;else outChanged++;
+      }
     }
     let keptChanged = 0;
     for (let id = 1; id < pieces.comps.length; id++) if (touching[id]) keptChanged += pieces.comps[id].area;
     const reverted = totalChanged - keptChanged;
-    const keptShare = totalChanged ? keptChanged / totalChanged : 0;
-    const applied = reverted > 0 && keptChanged > 0 && keptShare >= APC_REGION_LOCK_MIN_SHARE;
+    const inDensity = inArea ? inChanged / inArea : 0;
+    const outDensity = outArea ? outChanged / outArea : 0;
+    const applied = reverted > 0 && inChanged > 0 && inDensity >= APC_REGION_LOCK_MIN_DENSITY_RATIO * outDensity;
     if (applied) {
       for (let i = 0; i < n; i++) {
         const id = pieces.labels[i];
@@ -11705,7 +11717,8 @@ const analyzeAutoPreserve = (src, res, hints = {}) => {
       applied,
       reason: applied ? null : !reverted ? 'none-outside' : 'mismatch',
       revertedPct: Math.round(reverted / Math.max(1, coverCount) * 1000) / 10,
-      keptShare: Math.round(keptShare * 100) / 100
+      densityIn: Math.round(inDensity * 1000) / 1000,
+      densityOut: Math.round(outDensity * 1000) / 1000
     };
   }
   // ⑤ 얼굴 확인(가중치 계산 전): 얼굴 상자 검증(피부색)·머리 이동 판정. 머리가 움직였으면 머리 전체(원래 자리 + 옮겨진 자리)를
