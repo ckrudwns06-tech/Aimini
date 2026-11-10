@@ -7,7 +7,12 @@
          This personal local app calls provider APIs directly. Use a backend secret store before public hosting.
          React 18.3.1 is bundled inline with its license notice. Document readers load from a pinned-version external CDN. -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://generativelanguage.googleapis.com https://api.x.ai https://management-api.x.ai https://api.openai.com https://unpkg.com https://data-api.ecb.europa.eu https://huggingface.co https://router.huggingface.co https://*.hf.space https://*.gradio.live https://api.wavespeed.ai https://queue.fal.run https://api.fal.ai https://fal.media https://*.fal.media https://api.runware.ai https://im.runware.ai https://openrouter.ai http://localhost:* http://127.0.0.1:*; worker-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
-    <title>애미나이 ver.1.26.0 · Qwen Image 2.1 · FIBO 2.0</title>
+    <title>애미나이 ver.1.26.1 · Qwen Image 2.1 · FIBO 2.0</title>
+    <style>
+      .edit-compare-dialog { overflow: auto; }
+      .edit-compare-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+      @media (max-width: 767px) { .edit-compare-grid { grid-template-columns: 1fr; } }
+    </style>
     
     <style id="compiled-tailwind">
 *, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Inter, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.pointer-events-auto{pointer-events:auto}.visible{visibility:visible}.invisible{visibility:hidden}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.inset-y-0{top:0px;bottom:0px}.inset-x-0{left:0px;right:0px}.bottom-0{bottom:0px}.bottom-10{bottom:2.5rem}.left-0{left:0px}.left-1\/2{left:50%}.right-2{right:0.5rem}.top-0{top:0px}.-right-2{right:-0.5rem}.-top-2{top:-0.5rem}.-top-20{top:-5rem}.bottom-6{bottom:1.5rem}.left-2{left:0.5rem}.left-4{left:1rem}.right-6{right:1.5rem}.top-2{top:0.5rem}.top-6{top:1.5rem}.z-10{z-index:10}.z-20{z-index:20}.z-30{z-index:30}.z-50{z-index:50}.z-\[250\]{z-index:250}.z-\[500\]{z-index:500}.z-40{z-index:40}.z-\[300\]{z-index:300}.z-\[350\]{z-index:350}.z-\[400\]{z-index:400}.col-span-full{grid-column:1 / -1}.mx-auto{margin-left:auto;margin-right:auto}.-ml-2{margin-left:-0.5rem}.mb-0\.5{margin-bottom:0.125rem}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mr-2{margin-right:0.5rem}.mt-0\.5{margin-top:0.125rem}.mt-10{margin-top:2.5rem}.mt-4{margin-top:1rem}.mb-6{margin-bottom:1.5rem}.ml-4{margin-left:1rem}.mt-1{margin-top:0.25rem}.mt-2{margin-top:0.5rem}.mt-20{margin-top:5rem}.mt-3{margin-top:0.75rem}.line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.aspect-square{aspect-ratio:1 / 1}.h-screen{height:100vh}.h-1\.5{height:0.375rem}.h-16{height:4rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-7{height:1.75rem}.h-8{height:2rem}.h-\[100dvh\]{height:100dvh}.h-full{height:100%}.h-48{height:12rem}.max-h-32{max-height:8rem}.max-h-\[90dvh\]{max-height:90dvh}.max-h-48{max-height:12rem}.max-h-\[300px\]{max-height:300px}.max-h-\[85vh\]{max-height:85vh}.min-h-\[44px\]{min-height:44px}.w-screen{width:100vw}.w-1{width:0.25rem}.w-12{width:3rem}.w-16{width:4rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-72{width:18rem}.w-8{width:2rem}.w-full{width:100%}.w-px{width:1px}.min-w-0{min-width:0px}.min-w-\[280px\]{min-width:280px}.max-w-2xl{max-width:42rem}.max-w-4xl{max-width:56rem}.max-w-md{max-width:28rem}.max-w-\[90\%\]{max-width:90%}.max-w-full{max-width:100%}.max-w-sm{max-width:24rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.-translate-x-1\/2{--tw-translate-x:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-x-full{--tw-translate-x:-100%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.translate-y-4{--tw-translate-y:1rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.translate-x-0{--tw-translate-x:0px;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.scale-100{--tw-scale-x:1;--tw-scale-y:1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}.animate-fade-in{animation:fadeIn 0.2s ease-out}@keyframes bounce{0%, 100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(0.8,0,1,1)}50%{transform:none;animation-timing-function:cubic-bezier(0,0,0.2,1)}}.animate-bounce{animation:bounce 1s infinite}@keyframes pulse{50%{opacity:.5}}.animate-pulse-fast{animation:pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite}@keyframes slideUp{0%{transform:translateY(10px);opacity:0}100%{transform:translateY(0);opacity:1}}.animate-slide-up{animation:slideUp 0.3s ease-out}.cursor-pointer{cursor:pointer}.cursor-zoom-in{cursor:zoom-in}.select-none{-webkit-user-select:none;user-select:none}.resize-none{resize:none}.list-disc{list-style-type:disc}.list-none{list-style-type:none}.appearance-none{-webkit-appearance:none;appearance:none}.grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.content-start{align-content:flex-start}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-start{justify-content:flex-start}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-3{gap:0.75rem}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-4{gap:1rem}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.375rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.divide-y > :not([hidden]) ~ :not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px * calc(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px * var(--tw-divide-y-reverse))}.divide-gray-100 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(243 244 246 / var(--tw-divide-opacity, 1))}.self-start{align-self:flex-start}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.scroll-smooth{scroll-behavior:smooth}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.whitespace-nowrap{white-space:nowrap}.whitespace-pre-wrap{white-space:pre-wrap}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.rounded-xl{border-radius:0.75rem}.rounded-none{border-radius:0px}.rounded-tl-sm{border-top-left-radius:0.125rem}.rounded-tr-sm{border-top-right-radius:0.125rem}.border{border-width:1px}.border-4{border-width:4px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-r{border-right-width:1px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.border-blue-100{--tw-border-opacity:1;border-color:rgb(219 234 254 / var(--tw-border-opacity, 1))}.border-blue-200{--tw-border-opacity:1;border-color:rgb(191 219 254 / var(--tw-border-opacity, 1))}.border-gray-100{--tw-border-opacity:1;border-color:rgb(243 244 246 / var(--tw-border-opacity, 1))}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235 / var(--tw-border-opacity, 1))}.border-gray-300{--tw-border-opacity:1;border-color:rgb(209 213 219 / var(--tw-border-opacity, 1))}.border-green-200{--tw-border-opacity:1;border-color:rgb(187 247 208 / var(--tw-border-opacity, 1))}.border-indigo-200{--tw-border-opacity:1;border-color:rgb(199 210 254 / var(--tw-border-opacity, 1))}.border-blue-500{--tw-border-opacity:1;border-color:rgb(59 130 246 / var(--tw-border-opacity, 1))}.border-gray-700{--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity, 1))}.border-gray-800{--tw-border-opacity:1;border-color:rgb(31 41 55 / var(--tw-border-opacity, 1))}.border-purple-200{--tw-border-opacity:1;border-color:rgb(233 213 255 / var(--tw-border-opacity, 1))}.border-red-200{--tw-border-opacity:1;border-color:rgb(254 202 202 / var(--tw-border-opacity, 1))}.border-transparent{border-color:transparent}.border-white\/20{border-color:rgb(255 255 255 / 0.2)}.border-yellow-200{--tw-border-opacity:1;border-color:rgb(254 240 138 / var(--tw-border-opacity, 1))}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity, 1))}.bg-black\/60{background-color:rgb(0 0 0 / 0.6)}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.bg-blue-500{--tw-bg-opacity:1;background-color:rgb(59 130 246 / var(--tw-bg-opacity, 1))}.bg-blue-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.bg-current{background-color:currentColor}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.bg-gray-100\/90{background-color:rgb(243 244 246 / 0.9)}.bg-gray-200{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.bg-gray-300{--tw-bg-opacity:1;background-color:rgb(209 213 219 / var(--tw-bg-opacity, 1))}.bg-gray-700{--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity, 1))}.bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity, 1))}.bg-green-50{--tw-bg-opacity:1;background-color:rgb(240 253 244 / var(--tw-bg-opacity, 1))}.bg-indigo-50{--tw-bg-opacity:1;background-color:rgb(238 242 255 / var(--tw-bg-opacity, 1))}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(79 70 229 / var(--tw-bg-opacity, 1))}.bg-transparent{background-color:transparent}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/80{background-color:rgb(255 255 255 / 0.8)}.bg-black\/50{background-color:rgb(0 0 0 / 0.5)}.bg-black\/95{background-color:rgb(0 0 0 / 0.95)}.bg-blue-100{--tw-bg-opacity:1;background-color:rgb(219 234 254 / var(--tw-bg-opacity, 1))}.bg-blue-50\/20{background-color:rgb(239 246 255 / 0.2)}.bg-blue-50\/50{background-color:rgb(239 246 255 / 0.5)}.bg-blue-600\/20{background-color:rgb(37 99 235 / 0.2)}.bg-blue-600\/90{background-color:rgb(37 99 235 / 0.9)}.bg-gray-800{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.bg-gray-900\/95{background-color:rgb(17 24 39 / 0.95)}.bg-green-100{--tw-bg-opacity:1;background-color:rgb(220 252 231 / var(--tw-bg-opacity, 1))}.bg-green-50\/20{background-color:rgb(240 253 244 / 0.2)}.bg-green-50\/50{background-color:rgb(240 253 244 / 0.5)}.bg-purple-100{--tw-bg-opacity:1;background-color:rgb(243 232 255 / var(--tw-bg-opacity, 1))}.bg-purple-50\/20{background-color:rgb(250 245 255 / 0.2)}.bg-purple-50\/50{background-color:rgb(250 245 255 / 0.5)}.bg-red-500{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity, 1))}.bg-teal-600{--tw-bg-opacity:1;background-color:rgb(13 148 136 / var(--tw-bg-opacity, 1))}.bg-white\/10{background-color:rgb(255 255 255 / 0.1)}.bg-yellow-100{--tw-bg-opacity:1;background-color:rgb(254 249 195 / var(--tw-bg-opacity, 1))}.bg-yellow-50{--tw-bg-opacity:1;background-color:rgb(254 252 232 / var(--tw-bg-opacity, 1))}.bg-gradient-to-br{background-image:linear-gradient(to bottom right, var(--tw-gradient-stops))}.bg-gradient-to-t{background-image:linear-gradient(to top, var(--tw-gradient-stops))}.bg-gradient-to-tr{background-image:linear-gradient(to top right, var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-blue-100{--tw-gradient-from:#dbeafe var(--tw-gradient-from-position);--tw-gradient-to:rgb(219 234 254 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-blue-500{--tw-gradient-from:#3b82f6 var(--tw-gradient-from-position);--tw-gradient-to:rgb(59 130 246 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-white{--tw-gradient-from:#fff var(--tw-gradient-from-position);--tw-gradient-to:rgb(255 255 255 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-black\/90{--tw-gradient-from:rgb(0 0 0 / 0.9) var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-white{--tw-gradient-to:rgb(255 255 255 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #fff var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-black\/60{--tw-gradient-to:rgb(0 0 0 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), rgb(0 0 0 / 0.6) var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-indigo-50{--tw-gradient-to:#eef2ff var(--tw-gradient-to-position)}.to-indigo-600{--tw-gradient-to:#4f46e5 var(--tw-gradient-to-position)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.to-indigo-500{--tw-gradient-to:#6366f1 var(--tw-gradient-to-position)}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.object-contain{object-fit:contain}.object-cover{object-fit:cover}.p-1\.5{padding:0.375rem}.p-2{padding:0.5rem}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-1{padding:0.25rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.pb-2{padding-bottom:0.5rem}.pb-4{padding-bottom:1rem}.pb-40{padding-bottom:10rem}.pl-5{padding-left:1.25rem}.pr-2{padding-right:0.5rem}.pt-4{padding-top:1rem}.pb-6{padding-bottom:1.5rem}.pl-2{padding-left:0.5rem}.pr-1{padding-right:0.25rem}.pt-8{padding-top:2rem}.text-left{text-align:left}.text-center{text-align:center}.align-middle{vertical-align:middle}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[13px\]{font-size:13px}.text-\[9px\]{font-size:9px}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-\[15px\]{font-size:15px}.font-medium{font-weight:500}.font-bold{font-weight:700}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-0.025em}.tracking-wider{letter-spacing:0.05em}.text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-blue-500{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.text-blue-600{--tw-text-opacity:1;color:rgb(37 99 235 / var(--tw-text-opacity, 1))}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-green-500{--tw-text-opacity:1;color:rgb(34 197 94 / var(--tw-text-opacity, 1))}.text-green-600{--tw-text-opacity:1;color:rgb(22 163 74 / var(--tw-text-opacity, 1))}.text-indigo-600{--tw-text-opacity:1;color:rgb(79 70 229 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-500{--tw-text-opacity:1;color:rgb(234 179 8 / var(--tw-text-opacity, 1))}.text-blue-900{--tw-text-opacity:1;color:rgb(30 58 138 / var(--tw-text-opacity, 1))}.text-green-800{--tw-text-opacity:1;color:rgb(22 101 52 / var(--tw-text-opacity, 1))}.text-purple-800{--tw-text-opacity:1;color:rgb(107 33 168 / var(--tw-text-opacity, 1))}.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.text-red-600{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.text-transparent{color:transparent}.text-white\/90{color:rgb(255 255 255 / 0.9)}.text-yellow-600{--tw-text-opacity:1;color:rgb(202 138 4 / var(--tw-text-opacity, 1))}.text-yellow-800{--tw-text-opacity:1;color:rgb(133 77 14 / var(--tw-text-opacity, 1))}.placeholder-gray-400::placeholder{--tw-placeholder-opacity:1;color:rgb(156 163 175 / var(--tw-placeholder-opacity, 1))}.opacity-0{opacity:0}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-xl{--tw-backdrop-blur:blur(24px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.duration-200{transition-duration:200ms}.duration-500{transition-duration:500ms}.ease-in{transition-timing-function:cubic-bezier(0.4, 0, 1, 1)}.focus-within\:border-blue-500:focus-within{--tw-border-opacity:1;border-color:rgb(59 130 246 / var(--tw-border-opacity, 1))}.focus-within\:ring-2:focus-within{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus-within\:ring-blue-500\/50:focus-within{--tw-ring-color:rgb(59 130 246 / 0.5)}.hover\:border-blue-500:hover{--tw-border-opacity:1;border-color:rgb(59 130 246 / var(--tw-border-opacity, 1))}.hover\:bg-blue-50:hover{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.hover\:bg-blue-700:hover{--tw-bg-opacity:1;background-color:rgb(29 78 216 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-200:hover{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-800:hover{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.hover\:bg-indigo-700:hover{--tw-bg-opacity:1;background-color:rgb(67 56 202 / var(--tw-bg-opacity, 1))}.hover\:bg-blue-600:hover{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-100:hover{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-200\/50:hover{background-color:rgb(229 231 235 / 0.5)}.hover\:bg-gray-300:hover{--tw-bg-opacity:1;background-color:rgb(209 213 219 / var(--tw-bg-opacity, 1))}.hover\:bg-red-50:hover{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity, 1))}.hover\:bg-red-500:hover{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity, 1))}.hover\:bg-red-600:hover{--tw-bg-opacity:1;background-color:rgb(220 38 38 / var(--tw-bg-opacity, 1))}.hover\:bg-teal-700:hover{--tw-bg-opacity:1;background-color:rgb(15 118 110 / var(--tw-bg-opacity, 1))}.hover\:bg-white\/20:hover{background-color:rgb(255 255 255 / 0.2)}.hover\:text-blue-500:hover{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.hover\:text-blue-600:hover{--tw-text-opacity:1;color:rgb(37 99 235 / var(--tw-text-opacity, 1))}.hover\:text-gray-700:hover{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.hover\:text-green-500:hover{--tw-text-opacity:1;color:rgb(34 197 94 / var(--tw-text-opacity, 1))}.hover\:text-red-500:hover{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.hover\:text-yellow-500:hover{--tw-text-opacity:1;color:rgb(234 179 8 / var(--tw-text-opacity, 1))}.hover\:text-red-600:hover{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:text-yellow-800:hover{--tw-text-opacity:1;color:rgb(133 77 14 / var(--tw-text-opacity, 1))}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}.hover\:opacity-95:hover{opacity:0.95}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-blue-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(59 130 246 / var(--tw-ring-opacity, 1))}.disabled\:cursor-not-allowed:disabled{cursor:not-allowed}.disabled\:opacity-40:disabled{opacity:0.4}.disabled\:opacity-50:disabled{opacity:0.5}.group:hover .group-hover\:flex{display:flex}.group:hover .group-hover\:scale-110{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group\/img:hover .group-hover\/img\:opacity-100{opacity:1}.group:hover .group-hover\:opacity-100{opacity:1}.dark\:divide-gray-800:is(.dark *) > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(31 41 55 / var(--tw-divide-opacity, 1))}.dark\:border-blue-800:is(.dark *){--tw-border-opacity:1;border-color:rgb(30 64 175 / var(--tw-border-opacity, 1))}.dark\:border-blue-800\/30:is(.dark *){border-color:rgb(30 64 175 / 0.3)}.dark\:border-blue-800\/50:is(.dark *){border-color:rgb(30 64 175 / 0.5)}.dark\:border-blue-900\/50:is(.dark *){border-color:rgb(30 58 138 / 0.5)}.dark\:border-gray-700:is(.dark *){--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity, 1))}.dark\:border-gray-800:is(.dark *){--tw-border-opacity:1;border-color:rgb(31 41 55 / var(--tw-border-opacity, 1))}.dark\:border-green-800:is(.dark *){--tw-border-opacity:1;border-color:rgb(22 101 52 / var(--tw-border-opacity, 1))}.dark\:border-indigo-800\/50:is(.dark *){border-color:rgb(55 48 163 / 0.5)}.dark\:border-gray-600:is(.dark *){--tw-border-opacity:1;border-color:rgb(75 85 99 / var(--tw-border-opacity, 1))}.dark\:border-green-900\/50:is(.dark *){border-color:rgb(20 83 45 / 0.5)}.dark\:border-purple-800:is(.dark *){--tw-border-opacity:1;border-color:rgb(107 33 168 / var(--tw-border-opacity, 1))}.dark\:border-purple-900\/50:is(.dark *){border-color:rgb(88 28 135 / 0.5)}.dark\:border-red-900\/50:is(.dark *){border-color:rgb(127 29 29 / 0.5)}.dark\:border-yellow-800\/50:is(.dark *){border-color:rgb(133 77 14 / 0.5)}.dark\:bg-gray-900:is(.dark *){--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity, 1))}.dark\:bg-\[\#0d1117\]:is(.dark *){--tw-bg-opacity:1;background-color:rgb(13 17 23 / var(--tw-bg-opacity, 1))}.dark\:bg-\[\#0d1117\]\/80:is(.dark *){background-color:rgb(13 17 23 / 0.8)}.dark\:bg-\[\#161b22\]:is(.dark *){--tw-bg-opacity:1;background-color:rgb(22 27 34 / var(--tw-bg-opacity, 1))}.dark\:bg-blue-900\/20:is(.dark *){background-color:rgb(30 58 138 / 0.2)}.dark\:bg-blue-950\/30:is(.dark *){background-color:rgb(23 37 84 / 0.3)}.dark\:bg-gray-700:is(.dark *){--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity, 1))}.dark\:bg-gray-800:is(.dark *){--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.dark\:bg-gray-800\/50:is(.dark *){background-color:rgb(31 41 55 / 0.5)}.dark\:bg-gray-800\/80:is(.dark *){background-color:rgb(31 41 55 / 0.8)}.dark\:bg-gray-950:is(.dark *){--tw-bg-opacity:1;background-color:rgb(10 13 20 / var(--tw-bg-opacity, 1))}.dark\:bg-gray-950\/90:is(.dark *){background-color:rgb(10 13 20 / 0.9)}.dark\:bg-green-900\/20:is(.dark *){background-color:rgb(20 83 45 / 0.2)}.dark\:bg-indigo-900\/30:is(.dark *){background-color:rgb(49 46 129 / 0.3)}.dark\:bg-white:is(.dark *){--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.dark\:bg-blue-900\/10:is(.dark *){background-color:rgb(30 58 138 / 0.1)}.dark\:bg-blue-900\/40:is(.dark *){background-color:rgb(30 58 138 / 0.4)}.dark\:bg-blue-900\/5:is(.dark *){background-color:rgb(30 58 138 / 0.05)}.dark\:bg-blue-950\/20:is(.dark *){background-color:rgb(23 37 84 / 0.2)}.dark\:bg-gray-850:is(.dark *){--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.dark\:bg-green-900\/10:is(.dark *){background-color:rgb(20 83 45 / 0.1)}.dark\:bg-green-900\/40:is(.dark *){background-color:rgb(20 83 45 / 0.4)}.dark\:bg-green-900\/5:is(.dark *){background-color:rgb(20 83 45 / 0.05)}.dark\:bg-purple-900\/10:is(.dark *){background-color:rgb(88 28 135 / 0.1)}.dark\:bg-purple-900\/40:is(.dark *){background-color:rgb(88 28 135 / 0.4)}.dark\:bg-purple-900\/5:is(.dark *){background-color:rgb(88 28 135 / 0.05)}.dark\:bg-yellow-800\/50:is(.dark *){background-color:rgb(133 77 14 / 0.5)}.dark\:bg-yellow-900\/30:is(.dark *){background-color:rgb(113 63 18 / 0.3)}.dark\:from-\[\#0d1117\]:is(.dark *){--tw-gradient-from:#0d1117 var(--tw-gradient-from-position);--tw-gradient-to:rgb(13 17 23 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.dark\:from-blue-900\/20:is(.dark *){--tw-gradient-from:rgb(30 58 138 / 0.2) var(--tw-gradient-from-position);--tw-gradient-to:rgb(30 58 138 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.dark\:via-\[\#0d1117\]:is(.dark *){--tw-gradient-to:rgb(13 17 23 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #0d1117 var(--tw-gradient-via-position), var(--tw-gradient-to)}.dark\:to-indigo-800\/20:is(.dark *){--tw-gradient-to:rgb(55 48 163 / 0.2) var(--tw-gradient-to-position)}.dark\:text-gray-100:is(.dark *){--tw-text-opacity:1;color:rgb(243 244 246 / var(--tw-text-opacity, 1))}.dark\:text-gray-400:is(.dark *){--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.dark\:text-blue-300:is(.dark *){--tw-text-opacity:1;color:rgb(147 197 253 / var(--tw-text-opacity, 1))}.dark\:text-blue-400:is(.dark *){--tw-text-opacity:1;color:rgb(96 165 250 / var(--tw-text-opacity, 1))}.dark\:text-gray-200:is(.dark *){--tw-text-opacity:1;color:rgb(229 231 235 / var(--tw-text-opacity, 1))}.dark\:text-gray-300:is(.dark *){--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.dark\:text-gray-900:is(.dark *){--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity, 1))}.dark\:text-green-400:is(.dark *){--tw-text-opacity:1;color:rgb(74 222 128 / var(--tw-text-opacity, 1))}.dark\:text-indigo-400:is(.dark *){--tw-text-opacity:1;color:rgb(129 140 248 / var(--tw-text-opacity, 1))}.dark\:text-white:is(.dark *){--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.dark\:text-blue-200:is(.dark *){--tw-text-opacity:1;color:rgb(191 219 254 / var(--tw-text-opacity, 1))}.dark\:text-green-300:is(.dark *){--tw-text-opacity:1;color:rgb(134 239 172 / var(--tw-text-opacity, 1))}.dark\:text-purple-300:is(.dark *){--tw-text-opacity:1;color:rgb(216 180 254 / var(--tw-text-opacity, 1))}.dark\:text-red-400:is(.dark *){--tw-text-opacity:1;color:rgb(248 113 113 / var(--tw-text-opacity, 1))}.dark\:text-yellow-200:is(.dark *){--tw-text-opacity:1;color:rgb(254 240 138 / var(--tw-text-opacity, 1))}.dark\:text-yellow-400:is(.dark *){--tw-text-opacity:1;color:rgb(250 204 21 / var(--tw-text-opacity, 1))}.dark\:hover\:bg-gray-800:hover:is(.dark *){--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.dark\:hover\:bg-gray-600:hover:is(.dark *){--tw-bg-opacity:1;background-color:rgb(75 85 99 / var(--tw-bg-opacity, 1))}.dark\:hover\:bg-gray-700:hover:is(.dark *){--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity, 1))}.dark\:hover\:bg-gray-900\/50:hover:is(.dark *){background-color:rgb(17 24 39 / 0.5)}.dark\:hover\:bg-red-900\/30:hover:is(.dark *){background-color:rgb(127 29 29 / 0.3)}.dark\:hover\:text-blue-400:hover:is(.dark *){--tw-text-opacity:1;color:rgb(96 165 250 / var(--tw-text-opacity, 1))}.dark\:hover\:text-gray-200:hover:is(.dark *){--tw-text-opacity:1;color:rgb(229 231 235 / var(--tw-text-opacity, 1))}.dark\:hover\:text-yellow-200:hover:is(.dark *){--tw-text-opacity:1;color:rgb(254 240 138 / var(--tw-text-opacity, 1))}@media (min-width: 640px){.sm\:mb-0{margin-bottom:0px}.sm\:inline{display:inline}.sm\:flex{display:flex}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.sm\:items-center{align-items:center}}@media (min-width: 768px){.md\:relative{position:relative}.md\:bottom-10{bottom:2.5rem}.md\:mt-0{margin-top:0px}.md\:flex{display:flex}.md\:hidden{display:none}.md\:max-h-64{max-height:16rem}.md\:max-h-\[500px\]{max-height:500px}.md\:max-w-\[75\%\]{max-width:75%}.md\:translate-x-0{--tw-translate-x:0px;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:gap-2{gap:0.5rem}.md\:gap-3{gap:0.75rem}.md\:gap-4{gap:1rem}.md\:p-2{padding:0.5rem}.md\:p-3{padding:0.75rem}.md\:p-3\.5{padding:0.875rem}.md\:p-5{padding:1.25rem}.md\:p-6{padding:1.5rem}.md\:p-8{padding:2rem}.md\:p-4{padding:1rem}.md\:px-2{padding-left:0.5rem;padding-right:0.5rem}.md\:px-6{padding-left:1.5rem;padding-right:1.5rem}.md\:py-3{padding-top:0.75rem;padding-bottom:0.75rem}.md\:px-5{padding-left:1.25rem;padding-right:1.25rem}.md\:pb-32{padding-bottom:8rem}.md\:text-2xl{font-size:1.5rem;line-height:2rem}.md\:text-\[15px\]{font-size:15px}.md\:text-base{font-size:1rem;line-height:1.5rem}.md\:text-sm{font-size:0.875rem;line-height:1.25rem}.md\:text-xs{font-size:0.75rem;line-height:1rem}}@media (min-width: 1024px){.lg\:max-w-\[60\%\]{max-width:60%}.lg\:grid-cols-5{grid-template-columns:repeat(5, minmax(0, 1fr))}}
@@ -669,6 +674,35 @@ const MODEL_INFO = {
   }
 };
 const SELECTABLE_MODEL_KEYS = Object.keys(MODEL_INFO).filter(key => !MODEL_INFO[key].hidden);
+// 조회 성공은 생성·편집 성공을 뜻하지 않는다. 응답 구조와 선택 모델 접근까지만 확인한다.
+const verifyProviderModelAccess = async (settings, provider, signal) => {
+  if (!['google', 'openai', 'xai'].includes(provider)) throw new Error('지원하지 않는 제공자입니다.');
+  const modelKey = MODEL_INFO[settings.model]?.provider === provider ? settings.model : SELECTABLE_MODEL_KEYS.find(key => MODEL_INFO[key].provider === provider);
+  const modelId = MODEL_INFO[modelKey]?.id;
+  const isGoogle = provider === 'google';
+  const base = isGoogle ? GOOGLE_API_BASE : provider === 'openai' ? OPENAI_API_BASE : XAI_API_BASE;
+  const key = isGoogle ? getGoogleApiKey(settings) : provider === 'openai' ? getOpenaiApiKey(settings) : String(settings.xaiApiKey || '').trim();
+  if (!key) throw new Error('API 키가 없습니다.');
+  const response = await fetch(`${base}/models${isGoogle ? '/' + encodeURIComponent(modelId) : ''}`, {
+    method: 'GET', signal,
+    headers: isGoogle ? buildGoogleHeaders(settings) : { Authorization: `Bearer ${key}` }
+  });
+  let data;
+  try { data = await response.json(); }
+  catch (error) {
+    if (error?.name === 'AbortError') throw error;
+    throw new Error(`모델 조회 응답이 JSON이 아닙니다(HTTP ${response.status}).`);
+  }
+  if (!response.ok) throw new Error(buildApiErrorMessage(data, response.status, provider));
+  if (!data || typeof data !== 'object' || data.error) throw new Error('모델 조회 응답을 확인할 수 없습니다.');
+  if (isGoogle) {
+    if (data.name !== `models/${modelId}` && data.name !== modelId) throw new Error('조회 결과의 모델 ID가 일치하지 않습니다.');
+  } else {
+    if (!Array.isArray(data.data) || !data.data.every(item => item && typeof item.id === 'string')) throw new Error('모델 목록 응답 형식이 올바르지 않습니다.');
+    if (!data.data.some(item => item.id === modelId || Array.isArray(item.aliases) && item.aliases.includes(modelId))) throw new Error(`선택 모델(${modelId})이 이 키의 모델 목록에 없습니다. 생성·편집 접근은 확인되지 않았습니다.`);
+  }
+  return { provider, modelId, stage: 'model-access', generationVerified: false, editingVerified: false };
+};
 const getModelResolutions = modelKey => MODEL_INFO[modelKey]?.resolutions || ['1K'];
 const getModelMaxInputImages = modelKey => Math.max(1, Number(MODEL_INFO[modelKey]?.maxInputImages) || 1);
 const isBatchSupportedModel = modelKey => Boolean(MODEL_INFO[modelKey]?.batch);
@@ -781,8 +815,7 @@ const OUTPUT_DPI = 300;
 const MAX_UPLOAD_BYTES = 20 * 1024 * 1024;
 const XAI_EDIT_REFERENCE_MAX_DIM = 2048;
 const XAI_EDIT_REFERENCE_QUALITY = 0.96;
-// xAI Grok Imagine 프롬프트 한도 — 공식 문서에 없어 실측(2026-10-30, API 오류 문구): grok-imagine-image "maximum allowed
-// length of 16000", grok-imagine-image-2.0 "... 64000". 한국어 8,000자(UTF-8 17,906바이트)도 거부돼 단위는 UTF-8 바이트로 본다.
+// xAI 프롬프트 상한은 첨부 코드의 보수적 기존값이며, 이번 실제 API 한도 검증은 보류 상태다.
 // (바이트 수 ≥ 토큰 수이므로 바이트로 세면 단위가 토큰이어도 항상 한도 안이다.)
 const XAI_PROMPT_BYTE_LIMITS = {
   'grok-imagine-image': 16000,
@@ -916,7 +949,6 @@ const fetchEcbUsdKrw = async signal => {
 // 사전 추정에는 출력 단가만 쓰고, 실제 기록 단가는 응답 usage.cost_in_usd_ticks(1달러 = 10^10 ticks)로 계산한다.
 // Grok Imagine 공식 단가(USD/장). docs.x.ai/developers/pricing 페이지 데이터(resolutionPricing · pricePerInputImage, 2026-10-31 확인).
 // 2.0 은 실제로 제공된(served) 품질로 과금된다(공식 이미지 생성 문서). low 1K $0.04 · 2K $0.06 / medium 1K $0.06 · 2K $0.08,
-// 입력(참조) 이미지는 1장당 $0.01(1.0 은 $0.002). 실측 청구액과 일치: low 1K 생성 $0.04 · medium 1K 생성 $0.06 · medium 2K 편집(입력 1장) $0.09.
 // 이 표는 사전 추정에만 쓰고, 결과의 기록 비용은 항상 응답의 usage.cost_in_usd_ticks(실제 청구액)를 쓴다.
 const XAI_PRICES_USD = {
   'grok-imagine-image-2.0': {
@@ -962,8 +994,6 @@ const XAI_USD_TICKS = 10000000000;
 // 구조화 프롬프트(VGL JSON)는 Space 가 Bria API(/v2/vgl)로 작성한다(Space 쪽 비용 · 사용자 무료). 복제한 내 Space 는 BRIA_API_TOKEN
 // 비밀 값이 있어야 같은 방식으로 되고, 없으면 'VGL 없이 바로'(앱이 최소 JSON 을 만들어 보냄)를 쓴다.
 // ZeroGPU 일일 GPU 할당량(공식): 비로그인 2분 · 무료 계정 5분 · PRO 40분(PRO 는 선불 크레딧 10분당 $1 로 초과 사용).
-// HF 토큰을 보내면 그 계정의 할당량을 쓴다. 공식 Space 의 GPU 예약 시간: 생성 120초(30단계 약 55초 · 50단계 약 90초 실측,
-// Space 코드 주석) · 편집 60초(4단계 약 7초, L40S 실측) — 남은 할당량이 예약 시간보다 적으면 그 요청은 거부된다.
 const FIBO_DEV_REPO = 'briaai/Fibo-2.0-dev';
 const FIBO_TURBO_REPO = 'briaai/Fibo-2.0-edit-turbo';
 const FIBO_T2I_DEFAULT_SPACE = 'briaai/Fibo-2.0-T2I';
@@ -1025,12 +1055,10 @@ const HF_SPACE_WAKE_TIMEOUT_MS = 15 * 60 * 1000;
 //    2.1 Turbo(2026-10-09 공개)는 체크포인트에 저장된 8단계·CFG 1 스케줄의 증류판이다(같은 QwenImage21Pipeline).
 //  - 해상도 기준 1024·1536·2048(기본 2048), 비율 1:1·4:3·3:4·3:2·2:3·16:9·9:16. 편집 참조 이미지 최대 10장(<image1>…<image10>).
 //  - 비율을 정하지 않은 편집은 마지막 입력 이미지의 비율을 따른다(파이프라인 코드). 앱은 공식 데모 관례대로 편집 대상을 첫 번째에 두고
-//    (2026-11-01 실측: 대상을 마지막에 두자 첫 참조 장면을 바탕으로 다시 그림), 비율은 공식 비율 지정·영역 안내·대상 사본으로 맞춘다.
 //  - 라이선스: Qwen Research License(연구·평가용, 상업적 이용은 별도 허가 필요). 가중치에는 안전 검사기 구성 요소가 없다(model_index.json).
 // 실행: HF 'hugging-apps' 의 공개 ZeroGPU Space(공식 diffusers 파이프라인 데모)를 Gradio 대기열 API 로 브라우저에서 바로 부른다.
 // ZeroGPU 일일 GPU 할당량(공식): 비로그인 2분 · 무료 계정 5분 · PRO 40분(PRO 는 선불 크레딧 10분당 $1 로 자동 초과 사용).
 // HF 토큰을 보내면 그 계정의 할당량을 쓴다. 무료 계정(가입 30일 이상·이메일 인증)도 ZeroGPU Space 를 2개까지(PRO 10개) 직접 올릴 수 있다.
-// 2026-10-31 실측: 토큰 없이는 GPU 시간과 별개로 실행 횟수도 제한된다(2번 실행 후 "ZeroGPU runs limit … Authenticate with a Hugging Face token").
 const QWEN_MODEL_REPO = 'Qwen/Qwen-Image-2.1-Turbo';
 const QWEN_DEFAULT_SPACE = 'hugging-apps/qwen-qwen-image-2-1-turbo';
 const QWEN_BASE_REPO = 'Qwen/Qwen-Image-2.1';
@@ -1335,7 +1363,7 @@ const DEFAULT_SETTINGS = {
   // 얼굴 잠금(계획 모델이 찾은 얼굴은 얼굴 변경을 요청하지 않는 한 원본) / 바뀐 곳 색감·채도를 원본에 맞춤 / 요청 해상도를 원본 크기에 맞춤.
   autoPreserve: true,
   autoPreserveFaceLock: true,
-  // 요청 영역 밖 변화 되돌리기(v1.26.0, 기본 켜짐): 부분 편집에서 계획 모델이 지목한 편집 영역에 닿지 않는 변화(다리 굵기·가슴·
+  // 요청 영역 밖 변화 되돌리기(v1.26.1, 기본 켜짐): 부분 편집에서 계획 모델이 지목한 편집 영역에 닿지 않는 변화(다리 굵기·가슴·
   // 얼굴 등 바꾸라고 하지 않은 곳이 모델 재렌더링으로 달라진 부분)는 원본 픽셀로 되돌린다.
   autoPreserveRegionLock: true,
   autoPreserveColorMatch: true,
@@ -1876,7 +1904,6 @@ const computeGoogleCostFromUsage = (modelKey, usage, tier = 'standard') => {
     if (/IMAGE/i.test(String(detail?.modality || ''))) imageTokens += count;else detailTextTokens += count;
   });
   if (imageTokens <= 0) return null;
-  // candidatesTokensDetails 는 이미지 토큰만 싣고 함께 출력된 텍스트 토큰을 빠뜨리는 경우가 있다(실측 확인:
   // candidatesTokenCount 1606 vs IMAGE 상세 1120). 전체 출력 토큰에서 이미지 토큰을 뺀 값으로 텍스트 출력 토큰을
   // 보정해, 텍스트 출력 단가($7.50/1M 등)가 누락되지 않게 한다. (thoughtsTokenCount 는 공식 과금식상 별도 합산.)
   const textTokens = Math.max(detailTextTokens, candidateTokens - imageTokens);
@@ -2394,7 +2421,6 @@ const initDB = () => {
 };
 // ── 큰 값 분리 저장(v1.19.0 에서 검증된 방식 이식) ──────────────────────────────────────────────────────────────────────────
 // 크롬·엣지(Chromium) IndexedDB 는 값 1개가 약 127MB(133,169,152바이트)를 넘으면 저장을 거부한다 — 동기 예외 없이 트랜잭션이
-// UnknownError 로 중단된다(2026-10-30 Chrome 152 실측: 126MB 성공 · 128MB 실패, 한 트랜잭션 안의 100MB 레코드 4개는 성공).
 // 예전에는 모든 채팅(4K 이미지 data URL 포함)을 'chats' 값 하나로 기록해, 4K 이미지 5~6장 분량을 넘으면 이후 변경이 경고 없이
 // 저장되지 않았다(새로고침하면 사라짐). 이제 큰 문자열(이미지 data URL 64KB 이상 · 그 밖의 글 256K자 이상)은 'blob:<키>:<id>'
 // 레코드로 따로 저장하고(같은 내용은 1번만, 32M자를 넘으면 조각으로) 본 값에는 참조만 남긴다. 새로 생긴 큰 값만 기록하므로 저장도
@@ -3522,9 +3548,10 @@ const limitGooglePrompt = (promptText, userPrompt, visualMemorySummary = '', pre
 const getXaiReferenceSource = (messages, settings) => {
   if (!Array.isArray(messages) || messages.length === 0) return null;
   const latestUserIndex = messages.map(m => m?.role).lastIndexOf('user');
-  if (latestUserIndex !== -1 && messages[latestUserIndex]?.imageUrl) {
+  const latestImage = latestUserIndex !== -1 ? getMessageImageUrls(messages[latestUserIndex])[0] : null;
+  if (latestImage) {
     return {
-      url: messages[latestUserIndex].imageUrl,
+      url: latestImage,
       source: 'current-user-upload'
     };
   }
@@ -3534,9 +3561,10 @@ const getXaiReferenceSource = (messages, settings) => {
   if (!saveMode) {
     for (let i = messages.length - 1; i >= 0; i--) {
       const msg = messages[i];
-      if (msg?.role === 'user' && msg.imageUrl) {
+      const userImage = msg?.role === 'user' ? getMessageImageUrls(msg)[0] : null;
+      if (userImage) {
         return {
-          url: msg.imageUrl,
+          url: userImage,
           source: 'user-upload'
         };
       }
@@ -4474,7 +4502,6 @@ const extractWithSevenZip = async (buffer, archiveName, quota) => {
   sevenZip.FS.writeFile(archivePath, new Uint8Array(buffer));
   // 존재하지 않는 암호를 넘겨 암호 압축에서 입력 대기 없이 바로 실패하게 한다(암호 압축은 지원하지 않음).
   const common = ['-sccUTF-8', '-bsp0', '-pAEMINAI-NO-PASSWORD'];
-  // 일부 암호·손상 압축은 7-Zip(WASM)이 종료 코드 대신 C++ 예외(숫자)를 던진다(실측). 어떤 형태든 읽을 수 있는 오류로 바꾼다.
   const runSevenZip = args => {
     try {
       return sevenZip.callMain(args);
@@ -5704,7 +5731,6 @@ const buildGoogleGenerationPayload = (contents, settings, modelId, visualSeed = 
   const imageConfig = {};
   if (aspectRatio && aspectRatio !== 'auto') imageConfig.aspectRatio = aspectRatio;
   if (resolution && resolution !== '1K') imageConfig.imageSize = resolution;
-  // 검색 도구가 실리면 TEXT+IMAGE 로 받는다. 실측(2026-10-30, 나노바나나 2.1): IMAGE 전용 응답에서는 이미지 검색이 6회 중 0회
   // 실행됐고, TEXT+IMAGE 에서는 2회 중 2회 실행됐다(공식 웹 검색 예시도 TEXT+IMAGE). 추가 텍스트 토큰은 소량이다.
   const generationConfig = {
     responseModalities: imageOnly && !searchTool ? ['IMAGE'] : ['TEXT', 'IMAGE']
@@ -5801,7 +5827,6 @@ const executeGoogleGenerateContent = async ({
   const relaxed = new Set();
   let apiBase = GOOGLE_API_BASE;
   let triedFallbackBase = false;
-  let useMinimal = false;
   let quotaRetries = 0;
   let flexDropped = false;
   let searchDropReason = '';
@@ -5809,8 +5834,7 @@ const executeGoogleGenerateContent = async ({
   for (let attempt = 0; attempt < 10; attempt++) {
     throwIfAborted(signal);
     const payload = buildGoogleGenerationPayload(contents, settings, modelId, seed, {
-      ...options,
-      minimal: useMinimal
+      ...options
     });
     const response = await fetchWithRetry(buildGoogleApiUrl(modelId, settings, apiBase), {
       method: 'POST',
@@ -5870,11 +5894,6 @@ const executeGoogleGenerateContent = async ({
       apiBase = GOOGLE_API_FALLBACK_BASE;
       continue;
     }
-    if (!useMinimal && isGooglePayloadSchemaError(data)) {
-      useMinimal = true;
-      apiBase = GOOGLE_API_BASE;
-      continue;
-    }
     throw new Error(buildGoogleApiErrorMessage(data, status));
   }
   throw new Error('Google Gemini 요청을 완료하지 못했습니다. 잠시 후 다시 시도해주세요.');
@@ -5929,7 +5948,6 @@ const getUrlHost = url => {
 const SEARCH_SOURCE_MAX = 12;
 const SEARCH_SUGGESTIONS_HTML_MAX = 80000;
 const uniqueTrimmed = values => [...new Set((Array.isArray(values) ? values : []).map(value => String(value || '').trim()).filter(Boolean))];
-// 검색 결과 제목에는 강조 태그(<b>…</b>)와 HTML 엔티티가 섞여 온다(실측) — 글자만 남긴다.
 const plainSearchTitle = value => String(value || '').replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/\s+/g, ' ').trim().slice(0, 200);
 // 검색 근거 객체: { engine, queries, imageQueries, sources[{url,title}], images[{pageUrl,imageUrl,title}], suggestionsHtml,
 //   searchCount, requested{web,image}, dropReason, usd(공급사 검색 요금, 알 수 없으면 null) }
@@ -5943,7 +5961,6 @@ const dedupeSearchLinks = (items, key) => {
   }).slice(0, SEARCH_SOURCE_MAX);
 };
 // Google groundingMetadata(공식 필드: webSearchQueries·imageSearchQueries·groundingChunks·searchEntryPoint.renderedContent).
-// 이미지 검색 근거는 이미지 청크로 온다 — 실측(2026-10-30): { image: { sourceUri(이미지가 있는 웹페이지, 리다이렉트 주소),
 // imageUri(이미지 주소, 리다이렉트), title(<b> 태그 포함), domain } }. 웹 청크: { web: { uri(리다이렉트), title(도메인) } }.
 const normalizeGoogleGrounding = (metadata, request = {}) => {
   const md = metadata && typeof metadata === 'object' ? metadata : null;
@@ -6109,7 +6126,6 @@ const executeXaiImageRequest = async ({
   let includeQuality = Boolean(MODEL_INFO[modelKey]?.supportsQuality);
   let requestImages = images;
   let usedLetterbox = false;
-  // 모델별 실측 한도(UTF-8 바이트) 안으로만 맞춘다. 계획 경로에서 이미 맞춰 오므로 보통은 그대로 통과한다.
   const requestPrompt = fitTextToUtf8Bytes(compactPromptText(prompt, Number.MAX_SAFE_INTEGER), getXaiPromptByteLimit(modelKey) - XAI_PROMPT_BYTE_MARGIN);
   for (let attempt = 0; attempt < 4; attempt++) {
     const payload = {
@@ -6987,7 +7003,11 @@ const runOpenRouterImage = async ({
     signal
   });
   const item = Array.isArray(result?.data) ? result.data[0] : null;
-  if (!item?.b64_json) throw routeHttpError(route, 502, result, '이미지 없이 응답했습니다.');
+  if (!item?.b64_json) throw makeRouteError(route, 'output', buildRouteErrorMessage({
+    route,
+    raw: '이미지 없이 응답했습니다. 공급사 사용 내역을 확인하세요.',
+    code: 'output'
+  }));
   return {
     dataUrl: base64ToDataUrl(item.b64_json, item.media_type || sniffBase64ImageMime(item.b64_json)),
     costUsd: Number.isFinite(Number(result?.usage?.cost)) ? Number(result.usage.cost) : null,
@@ -6996,7 +7016,6 @@ const runOpenRouterImage = async ({
 };
 // ─── Hugging Face 계정·ZeroGPU 할당량 확인(GPU 를 쓰지 않는 조회) ───────────────────────────────────────────
 // GET /api/whoami-v2(계정·PRO·결제 수단·토큰 종류) + GET /api/spaces/zero-gpu/quota(남은 할당량, huggingface_hub get_zero_gpu_quota 와 같은 API:
-// { base, current, resetsAt, overquotaUsed } — 초 단위). 두 API 모두 브라우저 CORS 허용(2026-11-01 실측).
 // 공식 docstring: fine-grained 토큰은 "Billing > Read billing usage and payment method status" 권한이 있어야 할당량 API 를 읽는다.
 // HF 포럼(2026-05-07, "You have exceeded your Pro GPU quota … even with credits loaded")에서 API 요청이 크레딧으로 연장되지 않던 문제는
 // 사용 중인 토큰의 이 Billing 권한을 켜자 해결됐다고 보고됐다 → 할당량 API 를 못 읽는 토큰은 크레딧 연장도 안 될 수 있다고 안내한다.
@@ -7186,7 +7205,6 @@ const readZeroGpuOverquota = async (token, signal) => {
 // 2026-11-01 /config·/gradio_api/info 확인)의 API 는 같은 모양이다:
 //  /prepare(prompt, input_images, enhance, seed, randomize_seed, aspect_ratio) = 공식 PE(Qwen-Image-2.1-PE) 보강
 //  /generate(prompt, input_images, [negative_prompt, true_cfg_scale, num_inference_steps 8~60 — 본판만], seed, resolution 1024|1536|2048, aspect_ratio)
-// GPU 예약(Space 코드의 estimate_duration, AOTI 가속 실측 기반): Turbo 1K 생성 약 8초 · 2K 약 25초 / 본판 40단계 1K 약 22초 · 2K 약 107초.
 // 공개 Space 는 이미지가 들어간 요청(편집)의 프롬프트만 hfmlsoc/ncii-guard-v02(동의 없는 성적 이미지 방지 분류기)로 먼저 검사하고,
 // 텍스트만으로 새로 만드는 생성은 검사하지 않는다(app.py check_guard, 2026-11-01 확인). 앱은 이 분류기를 우회하지 않는다.
 // HF 토큰은 huggingface.co 와 *.hf.space 에만 보낸다(직접 실행 서버 주소로는 보내지 않는다).
@@ -7210,7 +7228,6 @@ const buildQwenErrorMessage = ({
   const retry = text.match(/retry in\s+(\d+:\d{2}:\d{2}|\d+\s*s)/i);
   const left = text.match(/\((\d+)\s*s left vs\.?\s*(\d+)\s*s requested\)|\((\d+)\s*s requested vs\.?\s*(\d+)\s*s left\)/i);
   if (/runs? limit/i.test(text)) {
-    // 2026-10-31 실측: 토큰 없이 2번 실행한 뒤 "You have exceeded your ZeroGPU runs limit. Authenticate with a Hugging Face token for
     // more quota" — GPU 시간과 별개로 비로그인 실행 횟수가 제한된다.
     title = 'HF ZeroGPU 실행 횟수 한도에 도달했습니다';
     summary = '토큰 없이(비로그인) 쓸 수 있는 실행 횟수를 다 썼거나, 계정의 하루 실행 한도에 걸렸습니다. Hugging Face 는 토큰으로 인증하면 더 많은 할당량을 준다고 안내합니다(무료 계정 하루 GPU 5분 · PRO 40분, 공식).';
@@ -7844,7 +7861,6 @@ const composeQwenPrompt = ({
 };
 // 사용자 번호(#2 · 2번 · 2번째 · 두 번째 · 사진 2 · 2nd · second image · 마지막 사진 · user image #2)를 이번 요청의 입력 위치
 // 표기(<imageN>)로 바꾼다. Qwen 은 입력 순서로 이미지를 가리키므로, 대상 이미지를 마지막에 보내는 등 입력 순서가 사용자 번호와
-// 다르면 혼동한다(2026-11-01 실측: 개별 편집 [2번, 1번] 순서에서 "2번 사진처럼"을 두 번째 입력(대상)으로 읽어 참조 장면을 그대로 복사).
 // 이번 요청에 없는 번호는 그대로 둔다. 번호 인식 규칙은 parseReferencedImageIndices 와 같다.
 const QWEN_IMAGE_NUMBER_RULES = [{
   re: /(?<!\d)(\d{1,2})\s*(?:번\s*째|번째|째)/g,
@@ -8097,8 +8113,6 @@ const generateQwenImages = async (prompt, chatHistoryMessages, settings, signal,
 //  대기열 경로가 없는 서버는 REST /call/{이름}(huggingface.co/docs/hub/spaces-api-endpoints)로 처리한다.
 // 생성 = briaai/Fibo-2.0-T2I 의 /generate_image(Gradio 5.49 · 결과는 Gradio 기본 WebP 파일) ·
 // 편집 = briaai/Fibo-2.0-editing 의 /edit(Gradio 6.30 gr.Server · 결과는 PNG data URL).
-// 두 Space 모두 요청 Origin(파일로 연 앱의 null 포함)에 CORS 를 허용한다(2026-11-01 실측). 공개 Space 는 여러 사용자가 대기열을
-// 나눠 써서 바로 끝나는 요청도 차례를 기다릴 수 있다(2026-11-01 실측: 편집 Space 대기 82초).
 // HF 토큰은 huggingface.co 와 *.hf.space 에만 보낸다(직접 실행 서버 주소로는 보내지 않는다).
 const HF_SPACE_ID_PATTERN = /^[A-Za-z0-9][\w.-]{0,95}\/[A-Za-z0-9][\w.-]{0,95}$/;
 // 실행 위치 입력 → { kind: 'space', spaceId } | { kind: 'url', base } | { kind: 'invalid' }. 비우면 기본(공식) Space.
@@ -8195,7 +8209,6 @@ const buildFiboErrorMessage = ({
   const retry = text.match(/retry in\s+(\d+:\d{2}:\d{2}|\d+\s*s)/i);
   const left = text.match(/\((\d+)\s*s left vs\.?\s*(\d+)\s*s requested\)|\((\d+)\s*s requested vs\.?\s*(\d+)\s*s left\)/i);
   if (/runs? limit/i.test(text)) {
-    // 2026-10-31 실측(다른 ZeroGPU Space): 토큰 없이 2번 실행한 뒤 "You have exceeded your ZeroGPU runs limit. Authenticate with a
     // Hugging Face token for more quota" — GPU 시간과 별개로 비로그인 실행 횟수가 제한된다.
     title = 'HF ZeroGPU 실행 횟수 한도에 도달했습니다';
     summary = '토큰 없이(비로그인) 쓸 수 있는 실행 횟수를 다 썼습니다. Hugging Face 는 토큰으로 인증하면 더 많은 할당량을 준다고 안내합니다(무료 계정 하루 GPU 5분 · PRO 40분, 공식).';
@@ -8306,6 +8319,16 @@ const fiboHttpError = (status, data, text, stage = '', task = '') => makeFiboErr
 });
 // HF Space 공용 클라이언트(FIBO 2.0·Qwen 공용) 오류 어댑터: 모델별 안내문(buildFiboErrorMessage · buildQwenErrorMessage)으로 만든다.
 // fail(code, raw, { status, stage, ...extra }) · http(status, data, text, stage). 오류에는 공통 hfCode(quota·guard·vgl·network…)가 붙는다.
+const classifyHfHttpCode = (status, raw) => {
+  // 내용 거부는 HTTP 상태보다 우선한다. 인증·일시 장애로 오인해 다른 공급사로 재전송하지 않는다.
+  if (/prompt invalid based on our classifiers/i.test(raw)) return 'guard';
+  if (/Prompt service rejected|BRIA_API_TOKEN/i.test(raw)) return 'vgl';
+  if (/moderat|safety|nsfw|inappropriate|sensitive|content polic|flagged|violat/i.test(raw)) return 'moderation';
+  if (status === 401) return 'key';
+  if (status === 429) return 'rate';
+  if (status >= 500) return 'unavailable';
+  return 'http';
+};
 const makeHfErrors = (family, task = '') => {
   const qwen = family === 'qwen';
   const fail = (code, raw, {
@@ -8330,10 +8353,10 @@ const makeHfErrors = (family, task = '') => {
     family: qwen ? 'qwen' : 'fibo',
     task,
     fail,
-    http: (status, data, text, stage = '') => fail('http', describeHfHttpDetail(data, text), {
-      status,
-      stage
-    })
+    http: (status, data, text, stage = '') => {
+      const raw = describeHfHttpDetail(data, text);
+      return fail(classifyHfHttpCode(status, raw), raw, { status, stage });
+    }
   };
 };
 const toHfErrors = value => value && typeof value === 'object' && typeof value.fail === 'function' ? value : makeHfErrors('fibo', value || '');
@@ -8628,7 +8651,6 @@ const callGradioEndpoint = async (runtime, name, data, signal, onStatus, waiting
 };
 // 대기열 호출(공식 JS 클라이언트와 같은 프로토콜): POST {api}/queue/join → GET {api}/queue/data?session_hash=… (SSE, msg 별 JSON).
 // /call/ 과 달리 ① 대기 순서·예상 시간(estimation) ② 진행(progress) ③ 실패 원문(process_completed.output.error)을 준다 —
-// Gradio 5 의 /call/ 은 실패 원문을 버리고 data: null 만 보낸다(gradio 5.49.1 routes.py simple_predict_get, 2026-11-01 실측:
 // 같은 요청이 /call/ 은 null, 대기열은 "You have exceeded your ZeroGPU runs limit…"). 중지하면 /cancel 로 대기열 작업도 취소한다.
 // 함수 번호를 모르거나 대기열 경로가 없는 서버(404·405)는 /call/ 로 처리한다.
 const createGradioSessionHash = () => {
@@ -9903,7 +9925,7 @@ const getMessageImageOriginals = msg => {
 // 합성 해상도 상한(앱의 4K 출력 긴 변과 같다). 원본이 이보다 크면 이 크기로 한 번만 줄여 바탕으로 쓴다.
 const MASK_COMPOSITE_MAX_DIM = 4096;
 // 첨부 원본 → 마스크 합성 바탕. 긴 변이 상한 이내면 원본 바이트를 그대로 쓰고(재인코딩 없음 = 화질 손실 0),
-// 넘으면 상한까지 한 번만 고품질 축소한다(PNG 원본은 PNG, 그 외는 WebP 0.95). 트레이 사본과 같으면 null.
+// 넘으면 상한까지 한 번만 고품질 축소해 PNG로 저장한다. 트레이 사본과 같으면 null.
 const prepareMaskBaseImage = async (originalUrl, trayUrl, signal) => {
   if (!originalUrl || originalUrl === trayUrl) return null;
   const img = await loadImageElement(originalUrl, signal);
@@ -9919,8 +9941,8 @@ const prepareMaskBaseImage = async (originalUrl, trayUrl, signal) => {
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
   await drawImageHighQuality(ctx, img, canvas.width, canvas.height, signal);
-  const isPng = /^data:image\/png;/.test(originalUrl);
-  return canvasToDataUrlWithAbort(canvas, isPng ? 'image/png' : 'image/webp', isPng ? undefined : 0.95, signal);
+  // 축소가 필요해도 합성 바탕을 다시 손실 압축하지 않는다.
+  return canvasToDataUrlWithAbort(canvas, 'image/png', undefined, signal);
 };
 // 원본 보존 편집용 첨부 원본 목록(첨부 순서). 마스크 이미지(원본은 마스크 바탕에 저장)와 원본이 첨부 사본과 같은 이미지는 null.
 // 한 메시지에 저장하는 원본 총량을 제한한다(넘는 이미지는 첨부 사본을 바탕으로 쓴다 — IndexedDB 용량 보호).
@@ -10737,7 +10759,7 @@ const runMaskCompositeSerial = task => {
 // 모델 출력 1장 → 마스크 합성 결과 { url, meta }.
 // cfg: { sourceUrl(트레이 사본·마스크 좌표 기준), baseUrl?(원본 전체 해상도 바탕), maskUrl, feather, composite, colorMatch, autoAlign, prepared? }
 // 합성 크기는 항상 바탕(원본) 크기다 — 원본을 늘리거나 줄이지 않으므로 영역 밖은 원본 픽셀 그대로이고,
-// 모델 출력만 바탕 크기에 맞춰 그린다. 합성에 실패해도 결과를 잃지 않도록 모델 출력을 그대로 돌려주고 사유를 meta 에 남긴다.
+// 모델 출력만 바탕 크기에 맞춰 그린다. 합성이 켜져 있으면 실패 시 결과 채택을 중단한다.
 const applyMaskComposite = (resultUrl, cfg, signal) => runMaskCompositeSerial(async () => {
   throwIfAborted(signal);
   if (!cfg || cfg.composite === false) return {
@@ -10749,12 +10771,7 @@ const applyMaskComposite = (resultUrl, cfg, signal) => runMaskCompositeSerial(as
   };
   try {
     const prepared = cfg.prepared || (await prepareMaskData(cfg.sourceUrl, cfg.maskUrl, cfg.feather, signal));
-    if (prepared.empty) return {
-      url: resultUrl,
-      meta: {
-        maskApplied: false
-      }
-    };
+    if (prepared.empty) throw new Error('편집 영역이 비어 있습니다. 마스크를 다시 칠해주세요.');
     const resultImg = await loadImageElement(resultUrl, signal);
     await yieldToMainThread(signal);
     const align = await estimateMaskAlignment(prepared, resultImg, {
@@ -10772,7 +10789,7 @@ const applyMaskComposite = (resultUrl, cfg, signal) => runMaskCompositeSerial(as
         fullResolutionBase = true;
       } catch (baseError) {
         if (baseError?.name === 'AbortError') throw baseError;
-        baseImg = prepared.sourceImg;
+        throw new Error('원본 이미지를 읽지 못해 부분 편집을 중단했습니다.');
       }
     }
     const outW = baseImg.naturalWidth || baseImg.width;
@@ -10815,14 +10832,7 @@ const applyMaskComposite = (resultUrl, cfg, signal) => runMaskCompositeSerial(as
     };
   } catch (error) {
     if (error?.name === 'AbortError') throw error;
-    return {
-      url: resultUrl,
-      meta: {
-        maskApplied: true,
-        maskComposited: false,
-        maskCompositeError: String(error?.message || error || '알 수 없는 오류').slice(0, 200)
-      }
-    };
+    throw new Error(`부분 편집 보존 실패: ${String(error?.message || '합성 오류').slice(0, 160)} 전체 모델 출력을 결과로 사용하지 않았습니다.`);
   }
 });
 // ─── 자동 원본 보존 합성(마스크 없는 편집) ─────────────────────────────────────────────────────────
@@ -10843,7 +10853,7 @@ const APC_FACE_MIN_SKIN = 0.3;
 // 변경 점수 보강(v1.25.0): 질감 변화 가중치 · 계획 모델 지목 영역 가중(analyzeAutoPreserve ④ 참고).
 const APC_TEXTURE_WEIGHT = 30;
 const APC_REGION_BOOST = 1.5;
-// 요청 영역 밖 변화 되돌리기(v1.26.0, analyzeAutoPreserve ④-2): 편집 영역 상자의 여유 띠(긴 변 비율) · 적용 조건(아래 ④-2 안전장치).
+// 요청 영역 밖 변화 되돌리기(v1.26.1, analyzeAutoPreserve ④-2): 편집 영역 상자의 여유 띠(긴 변 비율) · 적용 조건(아래 ④-2 안전장치).
 const APC_REGION_LOCK_MARGIN = 0.03;
 const APC_REGION_LOCK_MIN_DENSITY_RATIO = 2;
 const APC_REGION_LOCK_MIN_DENSITY = 0.02;
@@ -10852,6 +10862,25 @@ const APC_REGION_LOCK_MAX_STRENGTH_RATIO = 3;
 const APC_REGION_LOCK_STRENGTH_FLOOR = 2;
 const apcClamp = (v, lo, hi) => v < lo ? lo : v > hi ? hi : v;
 const apcSmoothstep = t => t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t);
+// 계획 상자는 추정치다. 영역 밖으로 연결된 변화도 잘라내고, 경계 안쪽에서만 페더링한다.
+const apcRegionWeight = (u, v, regions, width, height) => {
+  let weight = 0;
+  const margin = APC_REGION_LOCK_MARGIN;
+  const feather = Math.max(1, Math.min(width, height) * 0.008);
+  for (const box of regions) {
+    const x0 = Math.max(0, box.x0 - margin);
+    const y0 = Math.max(0, box.y0 - margin);
+    const x1 = Math.min(1, box.x1 + margin);
+    const y1 = Math.min(1, box.y1 + margin);
+    if (u < x0 || u >= x1 || v < y0 || v >= y1) continue;
+    const edge = Math.min(x0 === 0 ? Infinity : (u - x0) * width,
+      x1 === 1 ? Infinity : (x1 - u) * width,
+      y0 === 0 ? Infinity : (v - y0) * height,
+      y1 === 1 ? Infinity : (y1 - v) * height);
+    weight = Math.max(weight, apcSmoothstep(edge / feather));
+  }
+  return weight;
+};
 // RGBA → R·G·B 실수 평면
 const apcPlanesFromRgba = (data, n) => {
   const r = new Float32Array(n);
@@ -11445,7 +11474,6 @@ const apcFaceShift = (sL, rL, cover, changed, w, h, box) => {
   };
 };
 // 얼굴 상자 검증: 상자 안쪽 타원에서 피부색(YCbCr — Cb 77~127, Cr 133~173; Chai & Ngan 1999) 픽셀 비율.
-// 계획 모델이 얼굴이 아닌 곳(머리카락·배경)을 짚은 상자를 걸러 낸다(실측: Grok 4.7 의 상자가 얼굴 옆 머리카락에 놓인 사례).
 const apcSkinFraction = (planes, w, h, box) => {
   const [r, g, b] = planes;
   const cx = (box.x0 + box.x1) / 2 * w;
@@ -11597,7 +11625,6 @@ const analyzeAutoPreserve = (src, res, hints = {}) => {
   const gDiff = apcBoxBlur(apcGradientDiff(srcLab[0], resLab[0], sw, sh), sw, sh, blurRadius);
   // 질감 변화(v1.25.0, 대비와 무관): 국소 밝기 표준편차의 상대 차이 |σ원본 − σ결과| ÷ (σ원본 + σ결과 + 0.5).
   // 검은 머리카락 ↔ 어두운 배경처럼 색차·밝기 기울기 차가 작아도 한쪽에만 결이 있으면 크게 나온다.
-  // 실측(2026-11-08, xAI 실제 편집 '긴 머리 → 단발'): 머리가 사라진 곳의 색차 중앙값 5.2(감지 시작 14 미만)라 합성이 긴 머리를 되살렸다.
   // 같은 곳의 질감 차이는 0.24~0.58, 바뀌지 않은 배경·다리는 99% 지점 0.18~0.24 → ×30 이면 바뀐 곳만 감지 범위에 든다.
   const texRadius = Math.max(2, Math.round(longEdge / 256));
   const localSd = L => {
@@ -11665,21 +11692,9 @@ const analyzeAutoPreserve = (src, res, hints = {}) => {
     const comp = parts.comps[id];
     if (comp.area < minArea && !(regionHit(comp) && comp.area >= n * 0.00005)) changed[i] = 0;
   }
-  // ④-2 요청 영역 밖 변화 되돌리기(v1.26.0 · 체형·얼굴 보존). 이미지 모델은 부분 편집에서도 그림 전체를 다시 그려, 바꾸라고 하지 않은
-  // 다리 굵기·길이, 가슴, 몸 윤곽, 얼굴이 달라질 수 있다(평균적인 체형 쪽으로 끌려감). 변화 검출은 그 차이도 '바뀐 곳'으로 잡으므로
-  // 그대로 두면 합성이 달라진 체형을 채택한다. 계획 모델이 지목한 편집 영역(여유 띠 포함)에 한 픽셀도 닿지 않는 변화 조각은
-  // 원본으로 되돌린다(조각 단위 — 영역에 닿는 조각은 영역 밖으로 이어진 부분까지 통째로 남겨, 긴 코트처럼 영역을 넘어 자라는 요청한
-  // 변화를 자르지 않는다). 근거: OpenAI 이미지 프롬프팅 가이드 "If part of an image must remain pixel-identical, composite the
-  // approved edit into the original."(GPT Image 2.6 · 2026-11-09 확인).
-  // 안전장치(상자 어긋남 감지) — 계획 모델의 상자가 실제 요청 변화와 어긋났으면 요청한 변화를 지우게 되므로, 아래를 모두 만족할 때만
-  // 적용하고 아니면 이전 동작(되돌리지 않음)으로 둔다.
-  //  ① 상자 안 변화 밀도(바뀐 픽셀 ÷ 상자 넓이) ≥ 상자 밖 밀도, 그리고 밖의 2배 이상이거나 그 자체로 2% 이상
-  //     (비율이 아니라 밀도로 봐야 '작은 부분 편집 + 넓은 체형 변화'에서도 보호가 켜진다 — 예: 안경만 바꿨는데 다리가 가늘어짐.
-  //      '2% 이상'은 큰 상자 속 작은 물건 + 가장자리 띠처럼 넓게 퍼진 변화용 — 실측 Grok 'V 배지 은색': 안 4.6% · 밖 4.0%)
-  //  ② 상자 밖 변화 강도 < 3 × max(상자 안 강도, 2) — 강도 = 바뀐 픽셀의 색 보정 후 색차 중앙값. 요청한 변화(색·물건 교체)는 강하고
-  //     재렌더링 변형(윤곽 이동·미세 결)은 약하다. 밖이 훨씬 강하면 요청한 변화가 상자 밖에 있다는 뜻이다.
-  // 검증(2026-11-09, 첨부 10장): 실제 Grok Imagine 2.0 편집 30건 모두 적용(밖 강도 최대 4.2) · 올바른 상자 + 다리 변형 합성 10건 모두 적용 ·
-  // 잘못된 상자(배경 구석 10건 · 다리 위 10건, 밖 강도 13.5~76.2) 20건 모두 건너뜀(요청 변화 보존).
+  // 요청 영역과 분리된 변화 조각은 밀도·강도가 타당할 때 먼저 되돌린다.
+  // 아래 strictRegions 상한은 이 판정과 무관하게 항상 적용되어, 연결된 변화도 영역 밖으로 새지 않는다.
+  // 영역은 계획 모델의 추정값이므로 잘못된 상자는 요청한 변경 일부를 잘라낼 수 있다.
   let regionLock = null;
   if (hints.regionLock && regions.length) {
     const margin = Math.max(2, Math.round(longEdge * APC_REGION_LOCK_MARGIN));
@@ -11754,15 +11769,15 @@ const analyzeAutoPreserve = (src, res, hints = {}) => {
       const locked = shift.score >= APC_FACE_MIN_SCORE && skin >= APC_FACE_MIN_SKIN;
       faces.push({
         box,
-        shiftX: shift.dx,
-        shiftY: shift.dy,
+        shiftX: hints.regionLock ? 0 : shift.dx,
+        shiftY: hints.regionLock ? 0 : shift.dy,
         score: shift.score,
         identityScore: shift.identity,
         ringChanged: shift.ringChangedFraction,
         skin,
         locked
       });
-      if (!locked || !shift.dx && !shift.dy) return;
+      if (!locked || hints.regionLock || !shift.dx && !shift.dy) return;
       const bw = (box.x1 - box.x0) * sw;
       const bh = (box.y1 - box.y0) * sh;
       const hx = (box.x0 + box.x1) / 2 * sw;
@@ -11859,6 +11874,17 @@ const analyzeAutoPreserve = (src, res, hints = {}) => {
   const stableWeight = new Float32Array(n);
   for (let i = 0; i < n; i++) stableWeight[i] = cover[i] && !grown[i] && score[i] < lo ? 1 : 0;
   const residual = hints.colorMatch !== false ? apcResidualField(srcBlur, resCorrected, stableWeight, sw, sh) : null;
+  const strictRegions = hints.regionLock ? regions : [];
+  if (strictRegions.length) {
+    let capped = 0;
+    for (let i = 0; i < n; i++) {
+      const gate = apcRegionWeight((i % sw + 0.5) / sw, (Math.floor(i / sw) + 0.5) / sh, strictRegions, sw, sh);
+      if (!gate && changed[i]) capped++;
+      weight[i] *= gate;
+    }
+    regionLock = { ...regionLock, strictBounds: true,
+      cappedPct: Math.round(capped / Math.max(1, coverCount) * 1000) / 10 };
+  }
   let weighted = 0;
   for (let i = 0; i < n; i++) weighted += weight[i] * (1 - protect[i]);
   return {
@@ -11877,6 +11903,7 @@ const analyzeAutoPreserve = (src, res, hints = {}) => {
     changed,
     changedFraction,
     regionLock,
+    strictRegions,
     modelFraction: weighted / n,
     thresholds: {
       lo,
@@ -11939,8 +11966,10 @@ const compositeAutoPreservePixels = (src, res, W, H, analysis) => {
     const r1 = gy1 * gw;
     for (let x = 0; x < W; x++) {
       const i = (y * W + x) * 4;
-      const w = bilinear(weight, r0, r1, fy, x);
-      const p = bilinear(protect, r0, r1, fy, x);
+      // 분석 격자 보간으로 경계 밖에 1px이라도 새 결과가 새지 않도록 출력 좌표에서 재확인한다.
+      const gate = analysis.strictRegions?.length ? apcRegionWeight((x + 0.5) / W, (y + 0.5) / H, analysis.strictRegions, W, H) : 1;
+      const w = bilinear(weight, r0, r1, fy, x) * gate;
+      const p = bilinear(protect, r0, r1, fy, x) * gate;
       if (w <= 1e-4 && p <= 1e-4) {
         res[i] = src[i];
         res[i + 1] = src[i + 1];
@@ -12047,7 +12076,7 @@ const buildAutoPreserveMaskPreview = async (analysis, signal) => {
 };
 // 모델 출력 1장 → 원본 보존 합성 결과 { url, meta }. cfg = prepareAutoPreserve 의 cfg(직렬화 가능 — Batch 결과 도착 때도 같은 합성).
 // 합성은 항상 원본(바탕) 크기로 하고, 원본을 늘리거나 줄이지 않는다(가중치 0 인 픽셀 = 원본과 같은 값).
-// 적용하지 않았거나(이미지 전체가 바뀜·구도 변경) 실패하면 모델 출력을 그대로 쓰고 사유를 meta.autoPreserve 에 남긴다.
+// 명시된 부분 편집은 보존 분석·합성 실패 시 중단한다. 범위가 불명확한 기존 요청은 미적용 사유를 남긴다.
 const applyAutoPreserveComposite = (resultUrl, cfg, signal) => runMaskCompositeSerial(async () => {
   throwIfAborted(signal);
   try {
@@ -12076,6 +12105,7 @@ const applyAutoPreserveComposite = (resultUrl, cfg, signal) => runMaskCompositeS
       modelHeight: rH,
       alignScore: analysis.alignScore != null ? Math.round(analysis.alignScore * 1000) / 1000 : null
     };
+    if (!analysis.ok && cfg.strictFailure) throw new Error(`원본 보존을 확인할 수 없습니다(${analysis.reason}). 편집 영역을 직접 칠해 다시 요청해주세요.`);
     if (!analysis.ok) return {
       url: resultUrl,
       meta: {
@@ -12137,6 +12167,7 @@ const applyAutoPreserveComposite = (resultUrl, cfg, signal) => runMaskCompositeS
     };
   } catch (error) {
     if (error?.name === 'AbortError') throw error;
+    if (cfg.strictFailure) throw new Error(`부분 편집 보존 실패: ${String(error?.message || '합성 오류').slice(0, 160)} 전체 모델 출력을 결과로 사용하지 않았습니다.`);
     return {
       url: resultUrl,
       meta: {
@@ -12149,24 +12180,11 @@ const applyAutoPreserveComposite = (resultUrl, cfg, signal) => runMaskCompositeS
     };
   }
 });
-// ─── 색·톤 충실도 보정(TFL · Tone Fidelity Lock, v1.25.0) ───────────────────────────────────────
-// 원인: 생성형 이미지 모델은 편집·재현·업스케일 때도 그림 전체를 새로 그린다. 그래서 바꾸라고 하지 않은 곳까지 전체 색·밝기가
-// 틀어진다(어두운 곳이 들뜨는 '뿌연 막', 마젠타·노랑 같은 색 끼임, 대비·채도 변화). 결과가 다음 편집의 기준이 되면 틀어짐이 쌓인다.
-// 실측(2026-11-08): 사용자 예시(같은 구도 두 장) — 바뀌지 않은 부분의 CIEDE2000 중앙값 4.8, 배경 R+10·B+8, 흰 셔츠 G−13(마젠타 막).
-//   xAI grok-imagine-image-2.0 실제 3회 연속 편집 — 보정 없음 1.28 → 2.46 → 3.54(누적), 보정 0.87 → 1.17 → 1.42.
-// 기존 v1.24 는 원본 보존 합성·마스크 합성이 적용될 때만 색을 맞췄고, 그 밖의 경로(생성 모드 참조·원본 유지 재생성·업스케일·다중 합성·
-// 대화 기록 경로·합성 미적용)는 틀어진 출력을 그대로 썼다.
-// 해결: 모델 출력을 "모델이 받은 기준 이미지"에 다시 맞춘다(모든 공급자·모든 편집 경로 공통, 합성 전에 실행).
-//  ① 위치 정렬: 원본 보존 합성과 같은 NCC 정렬. 후보(항등·전체 검색·안정 픽셀 재검색) 중 '같은 내용' 픽셀이 가장 많은 것을 쓴다.
-//  ② 안정 픽셀: 국소 휘도 상관(NCC)이 높은 결·음영 픽셀 + 양쪽 모두 평탄한 픽셀. NCC 는 밝기·대비가 바뀌어도 그대로라
-//     색 틀어짐의 크기와 무관하게 같은 내용을 고른다. 원래 색차가 전형적 틀어짐 범위(CIEDE2000 ≤ max(8, 3 × 결 표본 중앙값))를
-//     넘는 픽셀은 뺀다(배경 색 교체·옷 색 변경처럼 일부러 바꾼 곳).
-//  ③ 색 변환: 채널별 단조 곡선(32구간 가중 중앙값 + PAVA, Tukey 재추정) + 2차 다항 RGB 회귀(능형·Tukey)를 표본 색 밀도로 섞는다.
-//     표본이 있는 색은 다항이 색조별 틀어짐까지 맞추고, 표본이 없는 색(새로 생긴 옷 색 등)은 곡선만 써서 엉뚱하게 바뀌지 않는다.
-//  ④ 저주파 잔차장: 같은 색이라도 물체·위치마다 다르게 틀어진 부분(긴 변 24칸 격자, ±10 제한, 표본 없는 칸은 이웃에서 채움)
-//  ⑤ 검증: 안정 픽셀의 CIEDE2000(CIE 15:2018) 중앙값이 충분히 줄 때만 적용, 아니면 모델 출력을 그대로 둔다.
-// 의도된 전체 변경은 건드리지 않는다: 전체 색감·조명·노출·채도·시간대·화풍 변경 요청(계획 모델 tone_change 또는 원문 판단),
-// 흑백·세피아처럼 채도·색상이 통째로 바뀐 결과, 구도가 새로 짜인 결과.
+// ─── 색·톤 충실도 보정 ──────────────────────────────────────────────────────────
+// 같은 내용으로 추정한 영역에서 색 변환을 학습하고 별도 공간 표본으로 검증한다.
+// 결과 픽셀의 색만 조정하며 위치·해상도·초점은 바꾸지 않는다. 흐린 원본의 선명도를 복원하는 기능은 아니다.
+// 명시적 색·조명·화풍 변경은 건너뛴다. 표본이 없는 새 색은 보수적으로 유지한다.
+// 이 검사는 색차의 추정치이며 인물 동일성이나 모든 결과의 품질을 보증하지 않는다.
 const TFL_ANALYSIS_LONG_EDGE = 640;
 const TFL_MIN_ALIGN_SCORE = 0.5;
 const TFL_NCC_RADIUS = 3;
@@ -12178,7 +12196,7 @@ const TFL_FLAT_MAX = 1.5;
 const TFL_MIN_TEXTURED_SAMPLES = 600;
 const TFL_MIN_TEXTURED_FRACTION = 0.04;
 const TFL_CHROMA_RATIO_RANGE = [0.4, 2.5];
-// v1.26.0: 색 끼임(a*b* 평행 이동)을 뺀 뒤의 색상각 차 상한 · 색 끼임 크기(a*b* 이동량) 상한. analyzeToneFidelity 의 '의도된 전체 변경' 참고.
+// v1.26.1: 색 끼임(a*b* 평행 이동)을 뺀 뒤의 색상각 차 상한 · 색 끼임 크기(a*b* 이동량) 상한. analyzeToneFidelity 의 '의도된 전체 변경' 참고.
 const TFL_MAX_HUE_SHIFT = 15;
 const TFL_MAX_CAST_SHIFT = 10;
 const TFL_MIN_STABLE_FRACTION = 0.06;
@@ -12189,6 +12207,9 @@ const TFL_MIN_IMPROVEMENT = 0.25;
 const TFL_FIELD_CELLS = 24;
 const TFL_FIELD_LIMIT = 10;
 const TFL_MAX_ANCHORS = 4;
+const TFL_CURVE_MIN_SLOPE = 0.5;
+const TFL_CURVE_MAX_SLOPE = 2;
+const TFL_MAX_CHANNEL_SHIFT = 32;
 const TFL_SKIP_LABELS = {
   disabled: '설정에서 꺼짐',
   'tone-request': '전체 색감·조명·화풍 변경 요청이라 그대로 둠',
@@ -12261,7 +12282,7 @@ const tflDeltaE2000 = (L1, a1, b1, L2, a2, b2) => {
 };
 // 색 변환 모델 = 채널별 단조 곡선(안전한 기본) + 2차 다항 RGB 회귀(교차 채널·색조별 차이), 둘의 혼합 비율 κ 는 표본 색 밀도.
 // 표본이 있는 색 영역(κ→1)에서는 다항이 색조별 틀어짐까지 맞추고, 표본이 없는 색(새로 생긴 옷 색 등, κ→0)은 곡선만 쓴다.
-// (다항만 쓰면 어두운 배경처럼 채널이 서로 강하게 엮인 표본에서 교차 항이 커져, 표본 밖의 순색을 크게 틀어 버린다 — 실측 확인.)
+// 표본이 없는 색에는 학습한 보정을 그대로 확장하지 않는다.
 const TFL_CURVE_BINS = 32;
 const TFL_DENSITY_CELLS = 8;
 const TFL_POLY_DATA_LIMIT = 40;
@@ -12348,6 +12369,21 @@ const tflPava = (y, w) => {
   });
   return out;
 };
+// 평평한 구간·과도한 기울기로 명암 단계가 사라지지 않게 중간 매듭을 기준으로 기울기를 제한한다.
+const tflBoundCurve = curve => {
+  const { x, y } = curve;
+  const bounded = y.slice();
+  const mid = x.length >> 1;
+  for (let i = mid + 1; i < x.length; i++) {
+    const dx = x[i] - x[i - 1];
+    bounded[i] = apcClamp(y[i], bounded[i - 1] + TFL_CURVE_MIN_SLOPE * dx, bounded[i - 1] + TFL_CURVE_MAX_SLOPE * dx);
+  }
+  for (let i = mid - 1; i >= 0; i--) {
+    const dx = x[i + 1] - x[i];
+    bounded[i] = apcClamp(y[i], bounded[i + 1] - TFL_CURVE_MAX_SLOPE * dx, bounded[i + 1] - TFL_CURVE_MIN_SLOPE * dx);
+  }
+  return { x, y: bounded };
+};
 // 채널별 단조 곡선(0~255): 32칸 구간마다 가중 중앙값(결과 → 기준), 가중 PAVA 로 단조 증가, 표본이 없는 양 끝은
 // 대각 가중 최소제곱 이득(0.5~2)으로 연장한다. 반환 [{ x:[], y:[] } × 3].
 const tflFitCurves = (xs, ys, weights, count) => {
@@ -12421,7 +12457,7 @@ const tflFitCurves = (xs, ys, weights, count) => {
       y
     });
   }
-  return curves;
+  return curves.map(tflBoundCurve);
 };
 // 곡선 → 256칸 표(정수 입력은 그대로, 실수 입력은 이웃 칸 선형 보간).
 const tflCurveLut = curve => {
@@ -12554,28 +12590,56 @@ const tflKappaAt = (density, r, g, b) => {
   const c11 = at(r1, g1, b0) * (1 - tb) + at(r1, g1, b1) * tb;
   return (c00 * (1 - tg) + c01 * tg) * (1 - tr) + (c10 * (1 - tg) + c11 * tg) * tr;
 };
-// 색 변환 적용(0~255 실수 → 0~255 실수, 잔차장 제외). model = { luts, poly, density }.
-const tflMapColor = (model, r, g, b, f, out) => {
+// 표본 색의 지지도가 낮을수록 보정을 줄인다. 새 옷·배경 색으로의 무근거한 외삽을 피한다.
+const tflSupportAt = (model, r, g, b) => model.support ? Math.min(1, 8 * tflKappaAt(model.support, r, g, b)) : 1;
+// 분석과 저장 모두 같은 범위 제한·반올림을 사용한다.
+const tflOutputChannel = (mapped, original, residual = 0, support = 1) => Math.round(apcClamp(original + apcClamp(mapped - original + residual * support, -TFL_MAX_CHANNEL_SHIFT, TFL_MAX_CHANNEL_SHIFT), 0, 255));
+// 색 변환 적용(0~255 실수 → 0~255 실수, 잔차장 제외).
+
+const tflMapColor = (model, r, g, b, f, out, supportOverride = null) => {
   const base0 = tflCurveAt(model.luts[0], r);
   const base1 = tflCurveAt(model.luts[1], g);
   const base2 = tflCurveAt(model.luts[2], b);
   const kap = model.poly && model.density ? tflKappaAt(model.density, r, g, b) : 0;
+  const support = supportOverride == null ? tflSupportAt(model, r, g, b) : supportOverride;
   if (kap <= 1e-4) {
-    out[0] = base0;
-    out[1] = base1;
-    out[2] = base2;
+    out[0] = r + support * apcClamp(base0 - r, -TFL_MAX_CHANNEL_SHIFT, TFL_MAX_CHANNEL_SHIFT);
+    out[1] = g + support * apcClamp(base1 - g, -TFL_MAX_CHANNEL_SHIFT, TFL_MAX_CHANNEL_SHIFT);
+    out[2] = b + support * apcClamp(base2 - b, -TFL_MAX_CHANNEL_SHIFT, TFL_MAX_CHANNEL_SHIFT);
     return out;
   }
   tflFeatures(r / 255, g / 255, b / 255, f);
-  const base = [base0, base1, base2];
   for (let c = 0; c < 3; c++) {
     const row = model.poly[c];
     let p = 0;
     for (let j = 0; j < 10; j++) p += row[j] * f[j];
     p = apcClamp(p * 255, -30, 285);
-    out[c] = base[c] + kap * (p - base[c]);
+    const base = c === 0 ? base0 : c === 1 ? base1 : base2;
+    const original = c === 0 ? r : c === 1 ? g : b;
+    out[c] = original + support * apcClamp(base + kap * (p - base) - original, -TFL_MAX_CHANNEL_SHIFT, TFL_MAX_CHANNEL_SHIFT);
   }
   return out;
+};
+// 표본 색 주변의 명암 변화가 뒤집히거나 과도하게 압축되는 다항 회귀는 쓰지 않는다.
+const tflContrastIsSafe = (model, set) => {
+  const f = new Float64Array(10);
+  const lo = new Float64Array(3);
+  const hi = new Float64Array(3);
+  let count = 0;
+  let unsafe = 0;
+  const stride = Math.max(1, Math.floor(set.count / 512));
+  for (let s = 0; s < set.count; s += stride) {
+    const r = set.xs[s * 3], g = set.xs[s * 3 + 1], b = set.xs[s * 3 + 2];
+    const down = Math.min(1, r, g, b);
+    const up = Math.min(1, 255 - r, 255 - g, 255 - b);
+    if (down + up < 0.5) continue;
+    tflMapColor(model, r - down, g - down, b - down, f, lo);
+    tflMapColor(model, r + up, g + up, b + up, f, hi);
+    const slope = (0.299 * (hi[0] - lo[0]) + 0.587 * (hi[1] - lo[1]) + 0.114 * (hi[2] - lo[2])) / (down + up);
+    count++;
+    if (!Number.isFinite(slope) || slope < 0.35 || slope > 2.5) unsafe++;
+  }
+  return count > 0 && unsafe / count <= 0.01;
 };
 // 표본 묶음 { xs, ys, count }(0~255)으로 모델을 맞춘다: 곡선(Tukey 3회) + 다항(Tukey 6회) + 밀도.
 // 다항이 표본 영역(κ>0.5)에서 곡선과 40(0~255) 넘게 다르면 다항을 쓰지 않는다(곡선만).
@@ -12602,7 +12666,8 @@ const tflFitModel = set => {
     curves,
     luts,
     poly: poly ? poly.coef.map(row => Array.from(row)) : null,
-    density: poly ? tflBuildDensity(set.xs, poly.weights, set.count) : null
+    density: poly ? tflBuildDensity(set.xs, poly.weights, set.count) : null,
+    support: tflBuildDensity(set.xs, curveWeights, set.count)
   };
   // 다항 검사: 다항이 이상치로 버리지 않은 표본(가중치 > 0.5) 중 색 밀도가 충분한 곳(κ > 0.5)에서 다항과 곡선의 차이 99% 지점이
   // 40(0~255)을 넘으면 다항이 표본 영역 안에서도 무리하게 휜 것이므로 쓰지 않는다(곡선만).
@@ -12631,6 +12696,10 @@ const tflFitModel = set => {
       model.density = null;
     }
     model.polyGap99 = Number.isFinite(p99) ? Math.round(p99 * 10) / 10 : null;
+  }
+  if (model.poly && !tflContrastIsSafe(model, set)) {
+    model.poly = null;
+    model.density = null;
   }
   model.kind = model.poly ? 'curves+poly2' : 'curves';
   return model;
@@ -12737,6 +12806,8 @@ const tflFieldAt = (field, u, v, c) => {
 };
 // 분석(순수 계산 — 테스트 가능). src·res = 분석 격자 RGBA { width, height, data }. 반환 { ok, reason?, model?, field?, metrics }.
 const analyzeToneFidelity = (src, res) => {
+  const validImage = image => Number.isInteger(image?.width) && Number.isInteger(image?.height) && image.width >= 8 && image.height >= 8 && image.data?.length === image.width * image.height * 4;
+  if (!validImage(src) || !validImage(res)) return { ok: false, reason: 'insufficient', metrics: {} };
   const sw = src.width;
   const sh = src.height;
   const rw = res.width;
@@ -12750,7 +12821,7 @@ const analyzeToneFidelity = (src, res) => {
   for (let p = 0; p < rw * rh; p++) resAlpha[p] = res.data[p * 4 + 3];
   const sL = apcLumaPlane(srcPlanes);
   const rL = apcLumaPlane(resPlanes);
-  // ① 정렬: 전체 NCC 검색은 바뀐 영역(머리·얼굴 등)에 끌려 정적인 부분을 몇 px 어긋나게 잡을 수 있다(실측: 같은 구도인데 1% 확대 선택).
+  // ① 정렬: 전체 NCC 검색은 바뀐 영역(머리·얼굴 등)의 영향을 받아 정적인 부분의 위치를 잘못 추정할 수 있다.
   // 그래서 후보(항등 · 전체 검색 · 안정 픽셀만으로 다시 검색) 가운데 '같은 내용(국소 NCC > 0.85) 픽셀'이 가장 많은 변환을 쓴다.
   // 전체 NCC 점수가 낮아도(배경을 통째로 바꾼 편집 등) 항등 정렬로 같은 내용이 충분하면 쓴다. 판정은 '같은 내용 픽셀 비율'로 한다.
   const align = apcEstimateAlignment(sL, sw, sh, rL, rw, rh, null, true);
@@ -12898,7 +12969,7 @@ const analyzeToneFidelity = (src, res) => {
   };
   // 표본은 원래 색차가 결·음영 표본의 전형적 틀어짐 범위 안일 때만 쓴다: CIEDE2000 ≤ max(8, 3 × 결·음영 표본 중앙값).
   // 평탄 픽셀(구조가 없어 같은 내용인지 모르는 곳) 중 배경을 다른 색으로 바꾼 편집처럼 크게 다른 영역은 빠진다.
-  // (1차 모델 잔차로 거르면, 결 표본이 없는 색 — 예: 접힘을 다시 그린 흰 셔츠 — 의 평탄 픽셀이 모두 빠져 그 색이 덜 보정된다: 실측.)
+  // 표본이 없는 색의 평탄 영역은 기준과 같은 내용인지 확실하지 않아 보수적으로 다룬다.
   const labA = new Float64Array(3);
   const labB = new Float64Array(3);
   const rawDe = p => {
@@ -12918,11 +12989,8 @@ const analyzeToneFidelity = (src, res) => {
   //  ① 색 끼임 = 결·음영 표본의 Δa*·Δb* 중앙값(평행 이동 t). |t| > TFL_MAX_CAST_SHIFT(10) 이면 의도된 톤 변경.
   //  ② t 를 뺀 뒤 양쪽 모두 색이 있는(C*ab > 10) 픽셀의 색상각 차 중앙값 > TFL_MAX_HUE_SHIFT(15°) 이면 색상 회전.
   //  ③ 결과 채도 중앙값 ÷ 기준 채도 중앙값이 0.4~2.5 밖이면 흑백·과채도(채도는 t 를 빼지 않고 잰다 — 빼면 흑백 결과의 채도가 |t| 로 보여 놓친다).
-  // v1.25.0 은 색상각을 t 를 빼지 않고 쟀다. 채도가 낮은(C*ab 중앙값 4~12) 어두운 보라 톤 그림에서는 몇 단위의 색 끼임도
-  // 색상각을 크게 돌려(25~33°) '의도된 변경'으로 오판해 보정을 건너뛰었다(2026-11-09 실측: 첨부 10장 × 색 틀어짐 3종 중 3건).
-  // 개정 후 같은 30건 모두 보정(색차 중앙값 6.01 → 0.19), 의도된 변경은 흑백·세피아·90° 회전·틸앤오렌지·야간 청색 50건 모두 보호.
-  // 한계: 채도가 낮은 그림의 40° 색상 회전은 색 끼임과 구별되지 않아 10건 중 4건을 되돌린다(v1.25.0 은 1건). 색감 변경 요청은
-  // 이 판정 전에 요청문(계획 모델 tone_change·원문)으로 걸러지고, 결과의 '보정 전 모델 출력' 버튼으로 언제든 되돌릴 수 있다.
+  // 색 끼임과 의도된 저채도 색 변경은 영상 통계만으로 완전히 구별할 수 없다.
+  // 명시적인 원문 변경 요청은 계획 모델의 false 판정보다 우선한다.
   const pairs = texturedIdx.map(p => {
     tflLab(apcClamp(sB[0][p], 0, 255), apcClamp(sB[1][p], 0, 255), apcClamp(sB[2][p], 0, 255), labA);
     tflLab(apcClamp(rB[0][p], 0, 255), apcClamp(rB[1][p], 0, 255), apcClamp(rB[2][p], 0, 255), labB);
@@ -12962,32 +13030,39 @@ const analyzeToneFidelity = (src, res) => {
     reason: 'global-change',
     metrics: baseMetrics
   };
-  const set = toSet(sampleIdx);
-  const model = tflFitModel(set);
+  // 공간적으로 분리한 약 20% 표본은 학습과 잔차장 계산에 사용하지 않는다.
+  const isValidation = p => (Math.floor((p % sw) / 12) + 3 * Math.floor(Math.floor(p / sw) / 12)) % 5 === 0;
+  const trainIdx = sampleIdx.filter(p => !isValidation(p));
+  const validationIdx = sampleIdx.filter(isValidation);
+  if (trainIdx.length < 400 || validationIdx.length < 100) return { ok: false, reason: 'insufficient', metrics: baseMetrics };
+  const training = toSet(trainIdx);
+  const set = toSet(validationIdx);
+  const model = tflFitModel(training);
   // ④ 잔차장(결과 좌표): 혼합 모델 잔차의 Tukey 가중치 > 0.5 인 표본만 쓴다.
-  const finalRes = new Float32Array(set.count);
-  for (let s = 0; s < set.count; s++) finalRes[s] = residualOf(model, set, s);
-  const finalWeights = new Float32Array(set.count);
+  const finalRes = new Float32Array(training.count);
+  for (let s = 0; s < training.count; s++) finalRes[s] = residualOf(model, training, s);
+  const finalWeights = new Float32Array(training.count);
   tflTukey(finalRes, finalWeights);
   const fieldSamples = [];
-  for (let s = 0; s < set.count; s++) {
+  for (let s = 0; s < training.count; s++) {
     if (!(finalWeights[s] > 0.5)) continue;
-    const p = sampleIdx[s];
+    const p = trainIdx[s];
     const x = p % sw;
     const y = (p - x) / sw;
-    tflMapColor(model, set.xs[s * 3], set.xs[s * 3 + 1], set.xs[s * 3 + 2], f, out);
+    tflMapColor(model, training.xs[s * 3], training.xs[s * 3 + 1], training.xs[s * 3 + 2], f, out);
     fieldSamples.push({
       u: ((x + 0.5) / sw) * ax + bx,
       v: ((y + 0.5) / sh) * ay + by,
-      d: [set.ys[s * 3] - out[0], set.ys[s * 3 + 1] - out[1], set.ys[s * 3 + 2] - out[2]]
+      d: [training.ys[s * 3] - out[0], training.ys[s * 3 + 1] - out[1], training.ys[s * 3 + 2] - out[2]]
     });
   }
   const field = tflBuildResidualField(fieldSamples, rw / rh);
-  // ⑤ 검증: 안정 표본의 CIEDE2000(전·후)
+  // ⑤ 검증: 학습하지 않은 공간 표본의 CIEDE2000(전·후). 실제 저장과 동일한 클리핑·반올림.
   const before = new Float32Array(set.count);
   const after = new Float32Array(set.count);
+  const corrected = new Float32Array(set.count * 3);
   for (let s = 0; s < set.count; s++) {
-    const p = sampleIdx[s];
+    const p = validationIdx[s];
     const x = p % sw;
     const y = (p - x) / sw;
     tflLab(set.ys[s * 3], set.ys[s * 3 + 1], set.ys[s * 3 + 2], labA);
@@ -12996,7 +13071,9 @@ const analyzeToneFidelity = (src, res) => {
     tflMapColor(model, set.xs[s * 3], set.xs[s * 3 + 1], set.xs[s * 3 + 2], f, out);
     const u = ((x + 0.5) / sw) * ax + bx;
     const v = ((y + 0.5) / sh) * ay + by;
-    tflLab(out[0] + tflFieldAt(field, u, v, 0), out[1] + tflFieldAt(field, u, v, 1), out[2] + tflFieldAt(field, u, v, 2), labB);
+    const support = tflSupportAt(model, set.xs[s * 3], set.xs[s * 3 + 1], set.xs[s * 3 + 2]);
+    for (let c = 0; c < 3; c++) corrected[s * 3 + c] = tflOutputChannel(out[c], set.xs[s * 3 + c], tflFieldAt(field, u, v, c), support);
+    tflLab(corrected[s * 3], corrected[s * 3 + 1], corrected[s * 3 + 2], labB);
     after[s] = tflDeltaE2000(labA[0], labA[1], labA[2], labB[0], labB[1], labB[2]);
   }
   const quantile = (arr, q) => {
@@ -13010,21 +13087,28 @@ const analyzeToneFidelity = (src, res) => {
   for (let s = 0; s < set.count; s++) lumas[s] = lumaAt(s);
   const darkCut = quantile(lumas, 0.05);
   const darkLift = [0, 0, 0];
+  const darkLiftAfter = [0, 0, 0];
   let darkN = 0;
   for (let s = 0; s < set.count; s++) {
     if (lumas[s] > darkCut) continue;
     darkN++;
-    for (let c = 0; c < 3; c++) darkLift[c] += set.xs[s * 3 + c] - set.ys[s * 3 + c];
+    for (let c = 0; c < 3; c++) {
+      darkLift[c] += set.xs[s * 3 + c] - set.ys[s * 3 + c];
+      darkLiftAfter[c] += corrected[s * 3 + c] - set.ys[s * 3 + c];
+    }
   }
   const metrics = {
     ...baseMetrics,
     model: model.kind,
     samples: set.count,
+    trainingSamples: training.count,
+    validation: 'spatial-holdout',
     deBefore: r2(quantile(before, 0.5)),
     deAfter: r2(quantile(after, 0.5)),
     p90Before: r2(quantile(before, 0.9)),
     p90After: r2(quantile(after, 0.9)),
     darkLift: darkN ? darkLift.map(v => Math.round(v / darkN * 10) / 10) : [0, 0, 0],
+    darkLiftAfter: darkN ? darkLiftAfter.map(v => Math.round(v / darkN * 10) / 10) : [0, 0, 0],
     field: Boolean(field)
   };
   if (metrics.deBefore < TFL_NOOP_DE) return {
@@ -13037,7 +13121,7 @@ const analyzeToneFidelity = (src, res) => {
     reason: 'global-change',
     metrics
   };
-  if (metrics.deBefore - metrics.deAfter < Math.max(0.5, TFL_MIN_IMPROVEMENT * metrics.deBefore)) return {
+  if (!Object.values(metrics).filter(v => typeof v === 'number').every(Number.isFinite) || metrics.p90After > metrics.p90Before + Math.max(0.25, 0.05 * metrics.p90Before) || metrics.deBefore - metrics.deAfter < Math.max(0.5, TFL_MIN_IMPROVEMENT * metrics.deBefore)) return {
     ok: false,
     reason: 'no-gain',
     metrics
@@ -13048,6 +13132,7 @@ const analyzeToneFidelity = (src, res) => {
       kind: model.kind,
       curves: model.curves,
       poly: model.poly,
+      support: model.support ? { g: model.support.g, k: Array.from(model.support.k) } : null,
       density: model.density ? {
         g: model.density.g,
         k: Array.from(model.density.k)
@@ -13062,12 +13147,13 @@ const analyzeToneFidelity = (src, res) => {
   };
 };
 // 전체 해상도 적용(결과 이미지 자기 좌표, 알파 유지). 정수 입력이라 곡선은 256칸 표를 그대로 쓰고, κ 가 0 인 색은 다항 계산을 건너뛴다.
-// 반올림은 일반 반올림이다(실측: 해시 디더는 색차가 같으면서 PNG 가 3배 커졌고, 반올림도 배경 그라데이션에 빠지는 단계가 없었다).
+// 색만 조정하고 알파·화소 위치는 유지한다. PNG로 저장해 손실 압축의 누적을 피한다.
 // 약 100만 화소마다 화면에 양보한다.
 const applyToneFidelityPixels = async (data, W, H, model, field, signal) => {
   const mapper = {
     luts: model.curves.map(tflCurveLut),
     poly: model.poly,
+    support: model.support,
     density: model.density ? {
       g: model.density.g,
       k: Float32Array.from(model.density.k)
@@ -13092,6 +13178,7 @@ const applyToneFidelityPixels = async (data, W, H, model, field, signal) => {
   }
   const rowsPerChunk = Math.max(1, Math.floor(1000000 / Math.max(1, W)));
   let lastKey = -1;
+  let lastSupport = 1;
   for (let y = 0; y < H; y++) {
     if (y > 0 && y % rowsPerChunk === 0) await yieldToMainThread(signal);
     let r0 = 0;
@@ -13106,20 +13193,21 @@ const applyToneFidelityPixels = async (data, W, H, model, field, signal) => {
     }
     for (let x = 0; x < W; x++) {
       const i = (y * W + x) * 4;
+      if (!data[i + 3]) continue;
       const key = data[i] << 16 | data[i + 1] << 8 | data[i + 2];
       if (key !== lastKey) {
-        tflMapColor(mapper, data[i], data[i + 1], data[i + 2], f, mapped);
+        lastSupport = tflSupportAt(mapper, data[i], data[i + 1], data[i + 2]);
+        tflMapColor(mapper, data[i], data[i + 1], data[i + 2], f, mapped, lastSupport);
         lastKey = key;
       }
       for (let c = 0; c < 3; c++) {
-        let val = mapped[c];
+        let residual = 0;
         if (field) {
           const p = field.planes[c];
           const fx = colFx[x];
-          val += (p[r0 + colX0[x]] * (1 - fx) + p[r0 + colX1[x]] * fx) * (1 - fy) + (p[r1 + colX0[x]] * (1 - fx) + p[r1 + colX1[x]] * fx) * fy;
+          residual = (p[r0 + colX0[x]] * (1 - fx) + p[r0 + colX1[x]] * fx) * (1 - fy) + (p[r1 + colX0[x]] * (1 - fx) + p[r1 + colX1[x]] * fx) * fy;
         }
-        const q = Math.round(val);
-        data[i + c] = q < 0 ? 0 : q > 255 ? 255 : q;
+        data[i + c] = tflOutputChannel(mapped[c], data[i + c], residual, lastSupport);
       }
     }
   }
@@ -13133,7 +13221,7 @@ const TONE_CHANGE_PATTERN = /색감|색조|색온도|색\s*보정|컬러\s*그�
 const TONE_KEEP_PATTERN = /유지|그대로|같게|같은|동일|보존|바꾸지\s*(?:말|마)|변경하지\s*(?:말|마)|건드리지|손대지|\b(?:keep|preserve|same|unchanged|retain|maintain|don'?t\s+change|do\s+not\s+change|without\s+changing)\b/i;
 const TONE_CLAUSE_END = /(?:다|요|줘|해|게|라|자|고|며|서|기|음|함|로|으로|하|되|돼|유지|그대로|동일|같게|변경|조정|보정|처리|적용|느낌|스타일|톤|풍)\s*$/;
 const isToneChangeRequest = (prompt, plan = null) => {
-  if (typeof plan?.editScope?.toneChange === 'boolean') return plan.editScope.toneChange;
+  if (plan?.editScope?.toneChange === true) return true;
   const text = String(prompt || '').normalize('NFKC');
   const clauses = [];
   text.split(/[\n.!?;:。！？]+|(?:하고|하되|하면서|면서|지만|는데|고서)\s+|(?<=[가-힣])고[\s,]+|\s+(?:but|while|then)\s+/i).forEach(sentence => {
@@ -13314,6 +13402,7 @@ const applyResultComposite = async (modelUrl, {
       composited,
       meta: {
         ...(masked.meta || {}),
+        editComparison: { sourceUrl: maskComposite.baseUrl || maskComposite.sourceUrl, scope: 'mask', anatomyVerified: false },
         ...(composited ? withoutToneOriginal(toneMeta) : toneMeta)
       }
     };
@@ -13326,6 +13415,7 @@ const applyResultComposite = async (modelUrl, {
       composited: applied,
       meta: {
         ...preserved.meta,
+        editComparison: { sourceUrl: autoPreserve.baseUrl, scope: 'estimated-regions', anatomyVerified: false },
         ...(applied ? withoutToneOriginal(toneMeta) : toneMeta),
         ...(applied ? {
           modelOutputUrl: workingUrl
@@ -13365,9 +13455,13 @@ const prepareAutoPreserve = async ({
     dims = await getImageDimensions(baseUrl, signal);
   } catch (error) {
     if (error?.name === 'AbortError') throw error;
+    if (scope?.kind === 'local') throw new Error('원본을 읽지 못해 부분 편집을 중단했습니다. 이미지를 다시 첨부해주세요.');
     return null;
   }
-  if (!(dims?.width > 0 && dims?.height > 0)) return null;
+  if (!(dims?.width > 0 && dims?.height > 0)) {
+    if (scope?.kind === 'local') throw new Error('원본 크기를 확인할 수 없어 부분 편집을 중단했습니다.');
+    return null;
+  }
   const faceLock = settings.autoPreserveFaceLock !== false && !scope?.faceChange;
   return {
     baseWidth: dims.width,
@@ -13376,6 +13470,7 @@ const prepareAutoPreserve = async ({
     resolutionAuto: settings.autoPreserveMatchResolution !== false,
     cfg: {
       baseUrl,
+      strictFailure: scope?.kind === 'local',
       faces: faceHints && faceLock ? scope?.faces || [] : [],
       regions: faceHints ? scope?.regions || [] : [],
       faceLock,
@@ -13495,7 +13590,7 @@ const buildMaskedEditRequest = async ({
   if (1 + refs.length > maxInputs) {
     throw new Error(`⚠️ ${modelName}은(는) 한 요청에 이미지를 최대 ${maxInputs}장까지 받습니다.\n이번 마스크 편집은 대상 1장 + 참조 ${refs.length}장이 필요합니다.\n\n해결 방법\n- 참조(기준) 이미지 수를 줄이거나\n- 다중 참조를 지원하는 모델(나노바나나 2.1·프로, Grok Imagine 2.0, GPT Image 2.5)을 선택하세요.`);
   }
-  // 합성 바탕 크기(원본 전체 해상도). 바탕을 읽지 못하면 트레이 사본으로 대신한다.
+  // 합성이 켜져 있으면 원본 읽기 실패를 저해상도 사본으로 숨기지 않는다.
   let base = baseUrl;
   let baseWidth = prepared.width;
   let baseHeight = prepared.height;
@@ -13506,6 +13601,7 @@ const buildMaskedEditRequest = async ({
       baseHeight = dims.height;
     } catch (error) {
       if (error?.name === 'AbortError') throw error;
+      if (settings.maskComposite !== false) throw new Error('원본을 읽지 못해 부분 편집을 중단했습니다. 이미지를 다시 첨부해주세요.');
       base = null;
     }
   }
@@ -13592,7 +13688,6 @@ const buildMaskedEditRequest = async ({
   }
   if (provider === 'qwen') {
     // Qwen: 입력 순서 [대상, 참조…, 영역 안내]. 공식 데모의 다중 이미지 예시처럼 바탕(편집 대상)을 첫 번째(<image1>)에 둔다
-    // (2026-11-01 실측: 대상을 마지막에 두자 첫 번째 참조 장면을 바탕으로 다시 그렸다). 비율 Auto 는 마지막 입력을 따르는데
     // 영역 안내 이미지는 대상과 같은 그림·같은 비율이라 마지막에 두면 출력이 대상 비율을 그대로 따른다(파이프라인 규칙).
     // 공식 README: 동그라미·칠한 표시·별도 마스크로 국소 편집을 지정할 수 있다 → 영역 안내 이미지를 함께 보낸다.
     const guideUrl = 2 + refs.length <= maxInputs ? await buildMaskGuideImage(prepared, signal, MASK_GUIDE_MAX_DIM) : null;
@@ -16028,20 +16123,20 @@ const generateUpscaledImage = async (sourceImageUrl, targetResolution, upscaleMo
 // Official provider schemas reviewed 2026-10-24. No cross-provider fallback.
 // 첫 화면 '사용 안내 및 팁': [제목, 한 줄 설명]
 const START_GUIDE_TIPS = [
-  ['API 키', '설정(⚙)에 넣으면 이 브라우저에 저장됩니다.'],
-  ['키 없이', 'FIBO 2.0 · Qwen Image 2.1은 HF 무료 GPU로 실행됩니다. HF 토큰을 넣으면 하루 할당량이 늘어납니다(무료 5분 · PRO 40분).'],
-  ['넉넉하게', '오픈 모델 실행 경로를 "자동"으로 두면 무료 할당량 소진 시 HF 크레딧·외부 API로 이어 갑니다.'],
-  ['검색', '🔎 웹 · 🖼 이미지 검색을 켜면 최신 사실·실제 모습을 반영합니다(검색마다 과금).'],
+  ['API 키', '설정(⚙)에서 입력·저장합니다. 공용 기기에서는 저장을 끄세요.'],
+  ['키 없이', 'FIBO·Qwen은 HF 무료 GPU로 실행합니다. 할당량·대기열 제한이 있습니다.'],
+  ['실행 경로', '자동 경로는 무료 할당량 소진 시 크레딧·외부 API로 전환합니다. 추가 비용이 생길 수 있습니다.'],
+  ['검색', '🔎 웹·🖼 이미지 검색으로 자료를 참고합니다. 검색 비용은 별도입니다.'],
   ['생각 수준', '🧠에서 계획·이미지 모델의 생각 수준을 고릅니다.'],
-  ['긴 프롬프트', '이미지 모델 한도를 넘어도 계획 모델이 전부 읽고 반영합니다.'],
-  ['이어서 편집', '"더 밝게"처럼 말하면 직전 결과를 고칩니다.'],
+  ['긴 프롬프트', '모델 입력 한도를 확인하세요. 계획 과정에서 내용이 요약될 수 있습니다.'],
+  ['이어서 편집', '"더 밝게"처럼 직전 결과의 변경점을 입력하세요.'],
   [`여러 장(최대 ${MAX_ATTACHED_IMAGES}장)`, '한 번에 지시합니다. "3번째 그림체로" → #3이 기준(★).'],
   ['첨부', '📄 문서(PDF·Word·한글 등) · 📦 압축 파일·폴더 내용을 반영합니다.'],
-  ['마스크 편집', '🖌로 칠한 부분만 바뀌고 나머지는 원본 그대로입니다.'],
-  ['부분 편집', '바꾸라고 하지 않은 얼굴·체형·배경은 원본 픽셀로 되돌립니다(전체를 바꾸는 요청 제외).'],
-  ['분석(🔍)', '서식 기호 없이 깔끔하게 표시·복사됩니다.'],
+  ['마스크 편집', '🖌로 칠한 영역과 경계 혼합 범위를 편집합니다. 보존 합성 시 그 밖의 픽셀을 유지합니다.'],
+  ['부분 편집', '요청 밖 얼굴·체형을 보존하도록 합성합니다. 적용 여부와 비교 결과를 확인하세요.'],
+  ['분석(🔍)', '이미지·문서를 글로 분석하고 복사합니다.'],
   ['정리', '사이드바·상단 [선택]으로 채팅방·메시지를 골라 지웁니다.'],
-  ['재생성·수정', "'재생성'은 그 결과만, 내 메시지 Edit은 프롬프트·첨부를 고쳐 다시 만듭니다."],
+  ['재생성·수정', "'재생성'은 결과 하나를 교체합니다. 'Edit'은 지시·첨부를 수정합니다."],
   ['잔액', '상단 잔액 버튼에서 공급사별 잔액·사용액을 봅니다.']
 ];
 // '기능·요금 한눈에' 창의 기능 요약표: [기능, 하는 일, 비용]
@@ -16052,11 +16147,11 @@ const FEATURE_SUMMARY_ROWS = [
   ['🔎 웹 검색', '최신 사실을 확인해 반영하고 출처 표시', 'Google 월 5,000건 무료 후 건당 $0.014 · OpenAI 회당 $0.01 · xAI 회당 $0.005'],
   ['🖼 이미지 검색', '실제 대상의 모습을 찾아 참고', '웹 검색과 같은 단가'],
   ['🧠 생각 수준', '계획·이미지 모델·OCR의 생각 수준 선택', '높을수록 사고 토큰 증가'],
-  ['긴 프롬프트', '이미지 모델 한도를 넘는 글은 계획 모델이 전부 읽고 반영', '입력 토큰'],
+  ['긴 프롬프트', '입력 한도 내에서 계획 모델이 지시를 요약·전달', '입력 토큰'],
   ['결과 재생성', '결과 하나만 다시 만들어 그 자리에 교체', '이미지 1장 + 계획'],
   [`다중 이미지(최대 ${MAX_ATTACHED_IMAGES}장)`, '개별 편집 = 이미지마다 1장 / 합성 = 전부 참고해 새 이미지', '출력 장수만큼'],
-  ['마스크 편집', '칠한 영역만 고치고 나머지는 원본 픽셀 유지', '이미지 1장'],
-  ['부분 편집 보존', '요청하지 않은 얼굴·체형·배경은 원본 픽셀 · 색·톤 틀어짐 자동 보정', '무료(브라우저 처리)'],
+  ['마스크 편집', '칠한 영역·페더 범위 편집 · 합성 시 그 밖의 픽셀 유지', '이미지 1장'],
+  ['부분 편집 보존', '요청 밖 영역 보존 합성 · 추정 색·톤 변화 보정', '무료(브라우저 처리)'],
   ['문서·압축 첨부', `문서 최대 ${MAX_ATTACHED_DOCUMENTS}개 내용 반영 · 압축·폴더는 브라우저에서 풀어 첨부`, '입력 토큰 · 풀기 무료'],
   ['분석(🔍)', '이미지·문서를 일반 모델이 글로 분석(서식 기호 없이 표시)', '일반 모델 토큰'],
   ['업스케일', 'Google 모델로 2K·4K 다시 생성', '이미지 1장'],
@@ -16305,7 +16400,6 @@ const fetchXaiPrepaidStatus = async (managementKey, signal) => {
 // Local context bounds, not provider context-window claims. Coverage is recorded.
 const PLANNER_DOCUMENT_CHARS = 200000;
 // 이전 대화(계획 모델 입력). 이전 제작 지시(최대 12,000자)는 통째로 남기고, 전체는 30,000자까지 보낸다.
-// 이전 대화는 매 요청마다 다시 과금되므로(실측: 3만 자 프롬프트가 있는 대화의 다음 계획 입력 31,485 토큰) 현재 요청과 달리 상한을 둔다.
 const PLANNER_HISTORY_CHARS = 30000;
 const PLANNER_HISTORY_ITEM_CHARS = 12000;
 // 제작 지시(plan.prompt) 상한. 긴·세부 요청일 때만 이만큼 쓰도록 지시한다(짧은 요청은 짧게).
@@ -16412,9 +16506,9 @@ const PHOTOREAL_PLANNER_GUIDANCE = 'PHOTOREALISM MODE (selected by the user) —
 //  - OpenAI 이미지 프롬프팅 가이드: "For edits, say "change only X" and list the details to preserve" · 의상 교체 예시 "Do not change her face,
 //    facial features, skin tone, body shape, pose, or identity in any way. Preserve her exact likeness, expression, hairstyle, and proportions."
 //  - xAI 이미지 프롬프팅 가이드: 바꿀 내용을 먼저 쓰고 같은 피사체·각도·크롭을 유지하는 문장을 덧붙인다(전체 장면을 다시 쓰면 피사체가 흔들린다).
-//  - OpenAI GPT Image 2.6 프롬프팅 가이드(2026-11-09 확인): "State which facial features and proportions must remain unchanged."
+// 인물 보존 지시는 결과 동일성을 보장하지 않는다. 실제 검증 범위는 REVIEW_REPORT.md 참조.
 // 사용자 요청이 직접 바꾸라는 항목은 요청이 우선한다(마지막 줄).
-// v1.26.0: 이미지 모델은 과장된(스타일화된) 비율을 평균 체형 쪽으로 되돌리는 경향이 있어(다리를 가늘게·가슴을 작게), 비율 항목을
+// v1.26.1: 이미지 모델은 과장된(스타일화된) 비율을 평균 체형 쪽으로 되돌리는 경향이 있어(다리를 가늘게·가슴을 작게), 비율 항목을
 // 구체적으로(머리·몸 비율, 다리 길이·굵기, 상체 길이) 적고 '평균화하지 말 것'을 명시한다. 얼굴·체형 줄은 전체 편집(자세·구도·화풍 변경)
 // 에도 넣는다 — 같은 인물의 얼굴·체형은 요청하지 않는 한 그대로여야 한다.
 const SOURCE_FIDELITY_FACE_LINE = '- Face and identity: the exact same face — eye shape, size and spacing, eyelids, brows, nose, lips, jawline and face shape — skin tone, makeup, expression and apparent age. Do not beautify, idealize, retouch or redraw the face.';
@@ -16520,7 +16614,6 @@ const normalizeResponsesSearch = (data, provider) => {
   calls.forEach(call => {
     const action = call?.action && typeof call.action === 'object' ? call.action : {};
     if ((action.type || 'search') === 'search') billableSearches++;
-    // xAI 는 이미지 검색 호출을 id 가 'is_' 로 시작하는 web_search_call 로 돌려준다(실측 2026-10-30, 문서 미기재 — 표시용 구분).
     const queryList = provider === 'xai' && /^is_/.test(String(call?.id || '')) ? imageQueries : queries;
     if (typeof action.query === 'string') queryList.push(action.query);
     (Array.isArray(action.queries) ? action.queries : []).forEach(query => queries.push(query));
@@ -16853,7 +16946,6 @@ const applyVisualPlanContext = (messages, plan) => {
 // 남겨 한도에 맞춘다(결과의 제작 계획에 표시). 공식 한도(2026-10-30 확인):
 //  · OpenAI GPT Image: prompt 최대 32,000자(API 레퍼런스)
 //  · Google 나노바나나: 입력 토큰 2.1·2 = 131,072 / 프로·2 Lite·1 = 65,536(모델 카드). 참조 이미지 최대 장수·실행 맥락 몫을 뺀다.
-//  · xAI Grok Imagine: 공식 문서에 한도가 없어 실측한 UTF-8 바이트 한도(XAI_PROMPT_BYTE_LIMITS: 1.0 = 16,000 · 2.0 = 64,000)를 쓴다.
 const GOOGLE_PROMPT_TOKEN_MARGIN = 6000;
 const GOOGLE_REFERENCE_IMAGE_TOKENS = 1120;
 const getImagePromptBudget = (target, settings) => {
@@ -18253,6 +18345,16 @@ const App = () => {
   const [upscaleModel, setUpscaleModel] = useState(DEFAULT_UPSCALE_MODEL_KEY);
   const [toastMsg, setToastMsg] = useState(null);
   const [lightboxImg, setLightboxImg] = useState(null);
+  const [editComparison, setEditComparison] = useState(null);
+  useEffect(() => {
+    if (!editComparison && !lightboxImg) return;
+    const close = event => {
+      if (event.key !== 'Escape') return;
+      if (lightboxImg) setLightboxImg(null); else setEditComparison(null);
+    };
+    window.addEventListener('keydown', close);
+    return () => window.removeEventListener('keydown', close);
+  }, [editComparison, lightboxImg]);
   // 원본 보존 편집 결과 보기 방식(메시지별): 'result'(합성 결과) · 'mask'(바뀐 영역 표시) · 'model'(모델 원래 출력)
   const [autoPreserveViews, setAutoPreserveViews] = useState({});
   // 색·톤 보정 결과의 보기 전환(보정 결과 / 보정 전 모델 출력).
@@ -18573,63 +18675,11 @@ const App = () => {
     }));
     setApiTestStatus(prev => ({
       ...prev,
-      [provider]: `${providerLabel} 연결 확인 중...`
+      [provider]: `${providerLabel} 인증·모델 조회 중...`
     }));
     try {
-      if (isGoogle) {
-        // 과금 없는 모델 조회(GET models/{id})로 키 유효성과 선택 모델 접근 가능 여부를 함께 확인한다.
-        // (과거에는 텍스트 생성 요청을 보내 테스트할 때마다 소량의 토큰이 과금됐다.)
-        const testModelId = getModelProvider(settings.model) === 'google' ? getModelId(settings.model) : MODEL_INFO[DEFAULT_MODEL_KEY].id;
-        const response = await fetch(`${GOOGLE_API_BASE}/models/${testModelId}`, {
-          method: 'GET',
-          headers: buildGoogleHeaders(settings),
-          signal: controller.signal
-        });
-        const text = await response.text();
-        let data = {};
-        try {
-          data = text ? JSON.parse(text) : {};
-        } catch (error) {
-          throw new Error(`응답 파싱 실패 (HTTP ${response.status})`);
-        }
-        if (!response.ok) throw new Error(buildApiErrorMessage(data, response.status, 'Gemini'));
-        if (!data || typeof data !== 'object' || data.error || !data.name) {
-          throw new Error('응답 본문 확인 실패');
-        }
-      } else if (isOpenai) {
-        const response = await fetch(`${OPENAI_API_BASE}/models`, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${key}`
-          },
-          signal: controller.signal
-        });
-        const text = await response.text();
-        let data = {};
-        try {
-          data = text ? JSON.parse(text) : {};
-        } catch (error) {
-          data = {};
-        }
-        if (!response.ok) throw new Error(buildApiErrorMessage(data, response.status, 'OpenAI'));
-      } else {
-        const response = await fetch(`${XAI_API_BASE}/models`, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${key}`
-          },
-          signal: controller.signal
-        });
-        const text = await response.text();
-        let data = {};
-        try {
-          data = text ? JSON.parse(text) : {};
-        } catch (error) {
-          data = {};
-        }
-        if (!response.ok) throw new Error(buildApiErrorMessage(data, response.status, 'xAI/Grok'));
-      }
-      const message = `${providerLabel} 연결 테스트 성공`;
+      const result = await verifyProviderModelAccess(settings, provider, controller.signal);
+      const message = `${providerLabel} 인증·모델 조회 확인(${result.modelId}) · 생성·편집 미검증`;
       setApiTestStatus(prev => ({
         ...prev,
         [provider]: message
@@ -19945,6 +19995,7 @@ const App = () => {
     rawContent: imgObj.rawContent,
     prompt: ctx.promptText,
     sourceImageUrl: imgObj.sourceImageUrl,
+    editComparison: imgObj.editComparison || null,
     resolution: imgObj.resolution || ctx.settings.resolution,
     aspectRatio: imgObj.aspectRatio || ctx.settings.aspectRatio,
     provider: imgObj.provider || getModelProvider(ctx.settings.model),
@@ -21274,8 +21325,8 @@ const App = () => {
         apiKeysRemember: checked
       }),
       testId: 'api-keys-remember',
-      title: "🔐 API 키를 이 브라우저에 저장 (권장)",
-      description: "새로고침·재시작 후에도 키를 유지합니다(이 브라우저에만 저장, 해당 API 호출에만 전송). 공용 PC에서는 끄세요(저장된 키 삭제)."
+      title: "🔐 이 브라우저에 API 키 저장",
+      description: "재시작 후에도 유지합니다. 공용 기기에서는 끄세요. 끄면 저장된 키를 삭제합니다."
     }), React.createElement("button", {
       type: "button",
       onClick: clearSavedApiKeys,
@@ -21294,7 +21345,7 @@ const App = () => {
       onClick: () => testApiConnection('google'),
       disabled: apiTestLoading.google || !getGoogleApiKey(settings),
       className: "px-2.5 py-1 rounded-md bg-blue-600 hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-[11px] font-bold transition"
-    }, apiTestLoading.google ? '확인 중...' : '연결 테스트(무료)')), renderApiKeyInput({
+    }, apiTestLoading.google ? '확인 중...' : '인증·모델 조회(무료)')), renderApiKeyInput({
       field: 'googleApiKey',
       placeholder: "Google API 키 — 나노바나나·Gemini에 사용",
       testId: 'google-key'
@@ -21311,7 +21362,7 @@ const App = () => {
       onClick: () => testApiConnection('xai'),
       disabled: apiTestLoading.xai || !(settings.xaiApiKey || '').trim(),
       className: "px-2.5 py-1 rounded-md bg-gray-700 hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed text-white text-[11px] font-bold transition"
-    }, apiTestLoading.xai ? '확인 중...' : '연결 테스트(무료)')), renderApiKeyInput({
+    }, apiTestLoading.xai ? '확인 중...' : '인증·모델 조회(무료)')), renderApiKeyInput({
       field: 'xaiApiKey',
       placeholder: "xAI API 키 — Grok에 사용",
       testId: 'xai-key'
@@ -21328,7 +21379,7 @@ const App = () => {
       onClick: () => testApiConnection('openai'),
       disabled: apiTestLoading.openai || !getOpenaiApiKey(settings),
       className: "px-2.5 py-1 rounded-md bg-teal-600 hover:bg-teal-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-[11px] font-bold transition"
-    }, apiTestLoading.openai ? '확인 중...' : '연결 테스트(무료)')), renderApiKeyInput({
+    }, apiTestLoading.openai ? '확인 중...' : '인증·모델 조회(무료)')), renderApiKeyInput({
       field: 'openaiApiKey',
       placeholder: "OpenAI API 키 — GPT Image·GPT에 사용",
       testId: 'openai-key'
@@ -21341,7 +21392,7 @@ const App = () => {
       className: "flex items-center justify-between gap-2 mb-1"
     }, React.createElement("label", {
       className: "block text-[11px] font-bold text-indigo-600 dark:text-indigo-400"
-    }, "오픈 모델 공통(Qwen Image 2.1 · FIBO 2.0) — HF 계정·할당량 · 실행 경로 · 외부 API"), React.createElement("button", {
+    }, "오픈 모델 공통 · HF 계정·실행 경로"), React.createElement("button", {
       type: "button",
       onClick: testOpenModelAccount,
       disabled: apiTestLoading.open,
@@ -21349,7 +21400,7 @@ const App = () => {
       className: "px-2.5 py-1 rounded-md bg-blue-600 hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-[11px] font-bold transition"
     }, apiTestLoading.open ? '확인 중...' : '계정·할당량 확인(무료)')), React.createElement("p", {
       className: "text-[10px] text-gray-600 dark:text-gray-300 mb-2 leading-relaxed"
-    }, "기본: HF 무료 GPU(하루 비로그인 2분 · 무료 계정 5분 · PRO 40분, PRO 초과분은 10분당 $1). 실행 경로 '자동'이면 할당량 소진 시 HF 크레딧(FIBO)·외부 API로 이어 갑니다."), React.createElement("label", {
+    }, "기본은 HF 무료 GPU입니다(비로그인 2분·무료 계정 5분·PRO 40분/일). PRO 초과분은 $1/10분입니다. '자동'은 크레딧·외부 유료 API로 전환할 수 있습니다."), React.createElement("label", {
       className: "flex items-center gap-2 text-[10px] font-semibold text-gray-600 dark:text-gray-300 mb-1"
     }, "HF 토큰(내 계정 할당량·크레딧 사용)", renderKeySavedBadge('hfToken')), renderApiKeyInput({
       field: 'hfToken',
@@ -21358,7 +21409,7 @@ const App = () => {
       compact: true
     }), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "크레딧이 있는데 '할당량 초과'라면: ① PRO·Team·Enterprise 계정인지 ② 선불 크레딧·결제 수단 ③ 토큰의 Billing 읽기 권한. '계정·할당량 확인'이 모두 검사합니다."), React.createElement("div", {
+    }, "할당량 초과 시 계정 등급·선불 크레딧·결제 수단·Billing 읽기 권한을 확인하세요."), React.createElement("div", {
       className: "grid grid-cols-2 gap-2 mt-2"
     }, React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300"
@@ -21386,7 +21437,7 @@ const App = () => {
       value: choice
     }, describeOpenRouteChoice(choice, settings, 'fibo_2')))))), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "외부 경로 장당 단가(공식): Qwen 2.1 Turbo — Runware $0.0141 · OpenRouter $0.0184 / Qwen 2.1(Alibaba 2.1 Pro) — OpenRouter $0.046 · Runware $0.075 / FIBO 2.0 — $0.04(HF 크레딧·Runware·fal·WaveSpeed). Qwen 외부 API는 Alibaba Cloud 콘텐츠 검사 적용."), React.createElement("div", {
+    }, "장당 단가: Qwen Turbo $0.0141~0.0184·Pro $0.046~0.075, FIBO $0.04. 경로별 요금은 아래 표를 확인하세요. Qwen 외부 경로에는 Alibaba Cloud 검사가 적용됩니다."), React.createElement("div", {
       className: "grid grid-cols-2 gap-2 mt-2"
     }, OPEN_ROUTE_KEY_SETTINGS.map(keySetting => {
       const route = Object.keys(OPEN_ROUTE_INFO).find(name => OPEN_ROUTE_INFO[name].keySetting === keySetting);
@@ -21417,7 +21468,7 @@ const App = () => {
       }),
       "data-testid": "open-raw-mode",
       className: "mt-0.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-    }), React.createElement("span", null, React.createElement("strong", null, "무검열 우선"), " — Qwen '자동' 준비는 입력을 그대로 보내고, FIBO 생성은 Bria VGL 작성기가 거부하면 VGL 없이 한 번 더 시도하며, 끌 수 있는 선택형 검사기(Runware)는 끕니다. 공개 Space의 NCII 분류기(편집 요청)·Alibaba Cloud 검사·각 서비스 약관은 끌 수 없습니다.")), apiTestStatus.open && React.createElement("p", {
+    }), React.createElement("span", null, React.createElement("strong", null, "원문 우선"), " — Qwen은 원문을 전달하고 FIBO는 VGL 거부 시 직접 전달로 재시도합니다. Runware 선택형 검사를 끕니다. NCII·Alibaba 검사와 서비스 정책은 계속 적용됩니다.")), apiTestStatus.open && React.createElement("p", {
       className: "text-[11px] text-indigo-600 dark:text-indigo-400 mt-2 whitespace-pre-wrap",
       "data-testid": "open-account-status"
     }, apiTestStatus.open)), React.createElement("div", {
@@ -21435,7 +21486,7 @@ const App = () => {
       className: "px-2.5 py-1 rounded-md bg-blue-600 hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-[11px] font-bold transition"
     }, apiTestLoading.fibo ? '확인 중...' : '연결 확인(무료)')), React.createElement("p", {
       className: "text-[10px] text-gray-600 dark:text-gray-300 mb-2 leading-relaxed"
-    }, "Bria 공식 HF Space의 무료 GPU에서 실행합니다(키·결제 불필요). 생성 = Dev, 편집 = Edit Turbo. 남은 할당량이 예약량(생성 120초·편집 60초)보다 적으면 거부되며, HF 크레딧(장당 $0.04·2K 가능)이나 외부 API로 이어 쓸 수 있습니다."), React.createElement("label", {
+    }, "HF 무료 GPU: 생성 Dev·편집 Edit Turbo. 남은 할당량이 예약량(생성 120초·편집 60초)보다 적으면 실행되지 않습니다. 크레딧·외부 경로는 장당 $0.04입니다."), React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300 mb-1"
     }, "생성(Dev) 실행 위치"), React.createElement("input", {
       type: "text",
@@ -21461,7 +21512,7 @@ const App = () => {
       className: "w-full p-2 text-xs border rounded-lg bg-white dark:bg-gray-950 border-gray-300 dark:border-gray-700 outline-none focus:ring-2 focus:ring-blue-500 font-mono"
     }), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "비우면 공식 Space. 내 Space는 '아이디/이름', 직접 서버는 https://…hf.space · …gradio.live · http://localhost:7860"), React.createElement("label", {
+    }, "기본은 공식 Space입니다. 직접 지정: 아이디/이름 또는 hf.space·gradio.live·localhost:7860 주소."), React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300 mt-2 mb-1"
     }, "프롬프트 준비"), React.createElement("select", {
       value: settings.fiboPlanner,
@@ -21475,7 +21526,7 @@ const App = () => {
       value: choice
     }, describeFiboPlanChoice(choice, settings)))), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, `지금 적용: ${describeFiboPlanMode(resolveFiboPlanMode(settings))} · 입력창에 JSON 객체(구조화 프롬프트)를 쓰면 그대로 보냅니다(편집용 JSON 은 "edit_instruction" 키 필요).`), React.createElement("div", {
+    }, `현재: ${describeFiboPlanMode(resolveFiboPlanMode(settings))}. JSON 입력은 그대로 전달합니다(편집: "edit_instruction" 키 필요).`), React.createElement("div", {
       className: "grid grid-cols-2 gap-2 mt-2"
     }, React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300"
@@ -21489,7 +21540,7 @@ const App = () => {
     }, FIBO_DEV_STEP_CHOICES.map(steps => React.createElement("option", {
       key: steps,
       value: String(steps)
-    }, steps === 50 ? '50 — 공식 권장(최고 품질)' : steps === 30 ? '30 — 공식 Space 기본(빠름)' : `${steps}`)))), React.createElement("label", {
+    }, steps === 50 ? '50 — 공식 권장' : steps === 30 ? '30 — Space 기본·빠름' : `${steps}`)))), React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300"
     }, "편집 단계(Edit Turbo)", React.createElement("select", {
       value: String(settings.fiboTurboSteps),
@@ -21503,7 +21554,7 @@ const App = () => {
       value: String(steps)
     }, steps === 4 ? '4 — 공식(증류 기준)' : `${steps}`))))), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, `현재 생성 단계: ${getFiboDevSteps(settings)}(속도 우선 모드 30). 참고: 1024px 30단계 약 55초 · 50단계 약 90초, 편집 4단계 약 7초(공식 Space 주석).`), React.createElement("label", {
+    }, `현재 ${getFiboDevSteps(settings)}단계(속도 우선: 30). Space 참고 시간: 생성 30/50단계 약 55/90초·편집 4단계 약 7초. 실제 시간은 다를 수 있습니다.`), React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300 mt-2 mb-1"
     }, "스타일(텍스트 생성 전용 · 공식 5종)"), React.createElement("select", {
       value: settings.fiboStyle,
@@ -21517,7 +21568,7 @@ const App = () => {
       value: style
     }, FIBO_STYLE_LABELS[style] || style))), React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300 mt-2 mb-1"
-    }, "이번 메시지에 첨부한 이미지 1장 쓰는 법"), React.createElement("select", {
+    }, "첨부 이미지 1장 처리"), React.createElement("select", {
       value: settings.fiboImageMode,
       onChange: e => updateSetting({
         fiboImageMode: e.target.value
@@ -21528,9 +21579,9 @@ const App = () => {
       value: "edit"
     }, "편집 — Edit Turbo 로 그 이미지를 고침(기본)"), React.createElement("option", {
       value: "inspire"
-    }, "Inspire — Dev 가 그 이미지의 주제·스타일·구도를 빌려 새로 그림")), React.createElement("p", {
+    }, "Inspire — 주제·스타일·구도를 참고해 새로 생성")), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "Inspire는 참고 이미지를 설명(VGL)으로만 바꿔 새로 그립니다(원본 픽셀 미사용). 마스크가 있거나 2장 이상이면 편집으로 처리합니다."), React.createElement("p", {
+    }, "Inspire는 이미지 설명(VGL)으로 새로 생성합니다. 원본 픽셀은 쓰지 않습니다. 마스크·다중 첨부는 편집으로 처리합니다."), React.createElement("p", {
       className: "text-[10px] mt-2 flex flex-wrap gap-2"
     }, [[FIBO_T2I_SPACE_URL, '생성 Space ↗'], [FIBO_EDIT_SPACE_URL, '편집 Space ↗'], [HF_TOKENS_URL, 'HF 토큰 발급 ↗'], [HF_ZEROGPU_DOCS_URL, 'ZeroGPU 할당량 ↗'], [FIBO_DEV_CARD_URL, 'Dev 모델 카드 ↗'], [FIBO_TURBO_CARD_URL, 'Edit Turbo 모델 카드 ↗'], [FIBO_LICENSE_URL, '라이선스(CC BY-NC 4.0) ↗']].map(([href, label]) => React.createElement("a", {
       key: href,
@@ -21540,7 +21591,7 @@ const App = () => {
       className: "text-blue-600 dark:text-blue-400 hover:underline font-semibold"
     }, label))), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "참고: 출력 약 1MP(너비 832~1344·높이 768~1248, 9:16은 2:3). 그림 속 글자는 영문 권장(학습 폰트에 한글 없음). 요청은 HF Space·Bria API(VGL)로 전송. 라이선스 CC BY-NC 4.0(비상업). 붐비면 내 계정에 복제(HF_TOKEN·BRIA_API_TOKEN 필요)."), apiTestStatus.fibo && React.createElement("p", {
+    }, "출력 약 1MP(832~1344×768~1248, 9:16→2:3). 이미지 속 글자는 영문을 권장합니다. 요청은 HF·Bria(VGL)로 전송됩니다. CC BY-NC 4.0: 비상업용. Space 복제에는 HF_TOKEN·BRIA_API_TOKEN이 필요합니다."), apiTestStatus.fibo && React.createElement("p", {
       className: "text-[11px] text-indigo-600 dark:text-indigo-400 mt-2 whitespace-pre-wrap",
       "data-testid": "fibo-test-status"
     }, apiTestStatus.fibo)), React.createElement("div", {
@@ -21558,7 +21609,7 @@ const App = () => {
       className: "px-2.5 py-1 rounded-md bg-blue-600 hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-[11px] font-bold transition"
     }, apiTestLoading.qwen ? '확인 중...' : '연결 확인(무료)')), React.createElement("p", {
       className: "text-[10px] text-gray-600 dark:text-gray-300 mb-2 leading-relaxed"
-    }, "HF 공개 Space의 무료 GPU에서 공식 파이프라인으로 실행합니다(키·결제 불필요). GPU 예약: Turbo 8단계 1K 약 8초 · 본판 40단계 1K 약 22초·2K 약 107초. 이미지가 들어간 편집 요청만 NCII 분류기로 검사합니다."), React.createElement("div", {
+    }, "기본은 HF 무료 GPU입니다. 예약 시간: Turbo 1K 약 8초·본판 1K/2K 약 22/107초. 이미지 편집 요청에는 NCII 검사가 적용됩니다."), React.createElement("div", {
       className: "grid grid-cols-2 gap-2"
     }, React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300"
@@ -21586,7 +21637,7 @@ const App = () => {
       className: "mt-1 w-full p-2 text-xs border rounded-lg bg-white dark:bg-gray-950 border-gray-300 dark:border-gray-700 outline-none focus:ring-2 focus:ring-blue-500 font-mono"
     }))), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "비우면 공개 Space. 내 Space는 '아이디/이름', 직접 서버는 https://…hf.space · …gradio.live · http://localhost:7860"), React.createElement("label", {
+    }, "기본은 공개 Space입니다. 직접 지정: 아이디/이름 또는 hf.space·gradio.live·localhost:7860 주소."), React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300 mt-2 mb-1"
     }, "2.1(본판) 단계 수"), React.createElement("select", {
       value: String(settings.qwenBaseSteps),
@@ -21598,7 +21649,7 @@ const App = () => {
     }, QWEN_BASE_STEP_CHOICES.map(steps => React.createElement("option", {
       key: steps,
       value: String(steps)
-    }, steps === 40 ? '40 — 공개 Space·공식 데모 기본' : steps === 50 ? '50 — 더 정밀(느림)' : `${steps} — 빠름(공식 권장값 아님)`))), React.createElement("label", {
+    }, steps === 40 ? '40 — Space·공식 데모 기본' : steps === 50 ? '50 — 느림·결과 차이 가능' : `${steps} — 빠름·권장값 아님`))), React.createElement("label", {
       className: "block text-[10px] font-semibold text-gray-600 dark:text-gray-300 mt-2 mb-1"
     }, "프롬프트 준비"), React.createElement("select", {
       value: settings.qwenPlanner,
@@ -21622,7 +21673,7 @@ const App = () => {
       className: "text-blue-600 dark:text-blue-400 hover:underline font-semibold"
     }, label))), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, "라이선스: Qwen Research License(연구·평가용, 상업 이용은 별도 허가). 내 Space는 대기열 단독 사용(ZeroGPU Space 무료 2개·PRO 10개). 공식 보강(PE)은 ZeroGPU 경로 전용, 외부 API는 Alibaba Cloud 판(2.1 Turbo·2.1 Pro)."), apiTestStatus.qwen && React.createElement("p", {
+    }, "Qwen Research License: 연구·평가용, 상업 이용은 별도 허가가 필요합니다. PE 보강은 ZeroGPU 전용입니다. 외부 API는 Alibaba Cloud 2.1 Turbo·Pro를 사용합니다."), apiTestStatus.qwen && React.createElement("p", {
       className: "text-[11px] text-indigo-600 dark:text-indigo-400 mt-2 whitespace-pre-wrap",
       "data-testid": "qwen-test-status"
     }, apiTestStatus.qwen)))), React.createElement("div", {
@@ -21654,17 +21705,17 @@ const App = () => {
       className: `toggle-label block overflow-hidden h-7 rounded-full bg-gray-300 dark:bg-gray-700 cursor-pointer transition-colors duration-300 ${settings.saveMode ? 'bg-blue-500' : ''}`
     }))), React.createElement("p", {
       className: "text-xs text-gray-500 dark:text-gray-400 mb-3 leading-relaxed"
-    }, "대화 이력·문서 발췌를 줄이고 1장만 만듭니다(계획 비용은 같음). 세부 보존이 중요하면 끄세요."), SettingToggle({
+    }, "이력·문서 참조를 줄여 1장만 만듭니다. 계획 비용은 별도이며, 세부 보존이 중요하면 끄세요."), SettingToggle({
       tone: 'green',
       checked: settings.turboMode,
       onChange: checked => updateSetting({
         turboMode: checked
       }),
       title: "⚡ 이미지 응답 속도 우선",
-      description: "이미지 모델 생각 '자동'을 최저로, GPT Image 결과는 JPEG로 받습니다. 복잡한 장면은 품질이 달라질 수 있습니다."
+      description: "자동 사고 수준을 낮추고 GPT Image를 JPEG로 받습니다. 품질이 달라질 수 있습니다."
     }), React.createElement("p", {
       className: "text-[11px] text-green-800 dark:text-green-300 mb-3 leading-relaxed bg-white dark:bg-gray-900 rounded-lg border border-green-200 dark:border-green-800 p-2.5"
-    }, "1회 비용 = 제작 계획 + 이미지 출력 + 검색(켠 경우). 문서·압축 처리와 기준(★) 원본 포함은 무료."), React.createElement("label", {
+    }, "비용 = 제작 계획 + 이미지 + 검색. 브라우저 문서·압축 처리와 기준(★) 원본 포함은 무료입니다."), React.createElement("label", {
       className: "mb-3 flex items-start gap-2 text-xs text-gray-600 dark:text-gray-300 cursor-pointer select-none"
     }, React.createElement("input", {
       type: "checkbox",
@@ -21675,16 +21726,16 @@ const App = () => {
       className: "mt-0.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
     }), React.createElement("span", null, React.createElement("span", {
       className: "font-semibold text-gray-800 dark:text-gray-100"
-    }, "내부 이미지 정밀 유지"), React.createElement("span", {
+    }, "직전 결과 이어서 참조"), React.createElement("span", {
       className: "block text-gray-500 dark:text-gray-400"
-    }, "직전 결과와 대화를 이어서 참조합니다(완전 동일 보존은 보장되지 않음)."))), SettingToggle({
+    }, "이전 결과·대화를 참고합니다. 외형이 달라질 수 있습니다."))), SettingToggle({
       checked: settings.batchMode,
       disabled: !isBatchSupportedModel(settings.model),
       onChange: checked => updateSetting({
         batchMode: checked
       }),
       title: "Batch API (비동기 · 공식 50% 할인)" + (isBatchSupportedModel(settings.model) ? '' : ' — 이 모델은 할인 없음'),
-      description: "Google·OpenAI 이미지 50% 할인, 결과는 수 분~24시간 뒤 도착. xAI는 할인 없음 · Flex와 함께 못 씀."
+      description: "지원 모델 50% 할인·최대 24시간 대기. xAI 미지원, Flex와 동시 사용 불가."
     }), SettingToggle({
       checked: settings.flexMode,
       disabled: batchOn,
@@ -21692,7 +21743,7 @@ const App = () => {
         flexMode: checked
       }),
       title: "Flex (나노바나나 1 전용 · 50% 할인, 느림)",
-      description: "Flex 단가가 있는 나노바나나 1 전용. 실제 Flex 처리분만 할인 기록, 거부되면 표준으로 재요청(목표 지연 1~15분)."
+      description: "나노바나나 1 전용·목표 지연 1~15분. 거부되면 표준 요금으로 재요청합니다."
     }), React.createElement("button", {
       onClick: () => {
         setIsSettingsOpen(false);
@@ -21726,7 +21777,7 @@ const App = () => {
       "data-testid": "linked-general-model"
     }, (isF || isQ) && !usesVisualPlanner(settings) ? `제작 계획: ${isQ ? describeQwenPlanMode(getPlanMode(settings)) : describeFiboPlanMode(getPlanMode(settings))} · 분석(🔍)은 ${hasGeneralProviderKey(settings, generalProvider) ? `${GENERAL_MODEL_INFO[generalProvider].name}` : '일반 모델 키가 있어야 가능'}` : `연결 일반 모델: ${GENERAL_MODEL_INFO[generalProvider].name} (${GENERAL_MODEL_INFO[generalProvider].id})`), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 mt-1 leading-relaxed"
-    }, isF ? "FIBO 2.0의 제작 계획 방식은 아래 FIBO 2.0 → 프롬프트 준비에서 고릅니다(계획 모델은 유료, Bria VGL·VGL 없이 바로는 무료)." : isQ ? "Qwen의 제작 계획 방식은 아래 Qwen → 프롬프트 준비에서 고릅니다(계획 모델은 유료, Qwen 보강·입력 그대로는 무료)." : "제작 계획: 일반 모델이 요청·문서·참조 이미지를 분석해 이미지 모델 지시를 씁니다(별도 과금, 결과의 '제작 계획'에서 확인)."), React.createElement("div", {
+    }, isF ? "FIBO → 프롬프트 준비에서 선택합니다. 계획 모델은 유료, Bria VGL·직접 전달은 무료입니다." : isQ ? "Qwen → 프롬프트 준비에서 선택합니다. 계획 모델은 유료, 보강·직접 전달은 무료입니다." : "계획 모델이 요청·문서·이미지를 분석해 제작 지시를 작성합니다. 별도 과금되며 결과에서 확인할 수 있습니다."), React.createElement("div", {
       className: "mt-3 flex flex-wrap gap-2",
       "aria-label": "공식 문서 기준 성능 우선 조합"
     }, ['google', 'openai', 'xai'].map(presetProvider => React.createElement("button", {
@@ -21747,7 +21798,7 @@ const App = () => {
       title: `${GENERAL_MODEL_INFO[presetProvider].name} → ${MODEL_INFO[BEST_MODEL_KEYS[presetProvider]].name}`
     }, `${getProviderLabel(presetProvider)} 성능 우선`))), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-2 leading-relaxed"
-    }, "성능 우선 = 대표 계획 모델 + 고품질 이미지 모델(2K·1장) 조합입니다. 결과 우열을 보장하지는 않습니다.")), React.createElement("div", {
+    }, "성능 우선: 대표 계획 모델 + 고품질 이미지 모델·2K·1장. 결과 품질은 요청에 따라 다릅니다.")), React.createElement("div", {
       className: "rounded-xl border border-blue-200 dark:border-blue-800/50 bg-white dark:bg-gray-950 p-3",
       "data-testid": "search-settings"
     }, React.createElement("h3", {
@@ -21770,7 +21821,7 @@ const App = () => {
       description: describeImageSearchRoute(settings.model, settings)
     }), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed"
-    }, "필요할 때만 검색하고 검색어·출처를 표시합니다. 요금: Google 월 5,000건 무료 후 1,000건당 $14 · OpenAI 1,000회당 $10 · xAI 1,000회당 $5(OpenAI·xAI는 검색 내용이 입력 토큰으로 별도 과금). Google 약관상 OpenAI·xAI 모델은 각자 검색을 씁니다.")), React.createElement("div", {
+    }, "검색어·출처를 표시합니다. 1,000건당 Google $14(월 5,000건 무료)·OpenAI $10·xAI $5. OpenAI·xAI 검색 내용 토큰은 별도 과금됩니다. 공급사별 검색을 사용합니다.")), React.createElement("div", {
       className: "rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-3 space-y-1",
       "data-testid": "thinking-settings"
     }, React.createElement("h3", {
@@ -21813,7 +21864,7 @@ const App = () => {
       value: level
     }, describeThinkingLevel(level, modelInfo.thinkingLevels, modelInfo.defaultThinkingLevel)))) : null, React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed"
-    }, (modelInfo.thinkingLevels || []).length ? "자동 = 앱이 판단(복잡한 요청·문서·여러 장 편집은 모델 기본 이상, 절약·속도 우선 모드는 최저). 직접 고르면 항상 그 값을 보냅니다. 사고 토큰은 출력 단가로 과금됩니다." : modelInfo.thinkingNote || '이 모델은 사고 수준을 지정할 수 없습니다.'), React.createElement("label", {
+    }, (modelInfo.thinkingLevels || []).length ? "자동은 요청 복잡도·절약 설정에 맞춥니다. 직접 선택한 값은 요청에 명시합니다. 사고 토큰은 별도 과금됩니다." : modelInfo.thinkingNote || '이 모델은 사고 수준을 지정할 수 없습니다.'), React.createElement("label", {
       className: "block text-xs font-semibold text-gray-700 dark:text-gray-300 pt-2"
     }, `스캔 PDF 글자 읽기 · ${DOCUMENT_OCR_MODEL_NAME}`), React.createElement("select", {
       value: settings.ocrThinking,
@@ -21827,14 +21878,14 @@ const App = () => {
       value
     }, label))), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed"
-    }, "글자 읽기는 보통 minimal(공식 권장)이면 충분합니다. 올릴수록 비용·시간이 늘어납니다.")), React.createElement("div", {
+    }, "기본 minimal을 권장합니다. 높이면 비용·시간이 늘어납니다.")), React.createElement("div", {
       className: "rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-3"
     }, SettingToggle({
       checked: settings.photorealMode !== false,
       onChange: checked => updateSetting({ photorealMode: checked }),
       testId: 'photoreal-toggle',
-      title: '📷 실사 극대화 (사진처럼)',
-      description: '새 이미지에 사진 지시(구도·렌즈·빛·피부 질감·무보정)를 넣습니다. 편집은 "실사로"라고 할 때만 넣고 원본 화풍을 유지합니다. 다른 화풍을 요청하면 넣지 않습니다.'
+      title: '📷 사진 스타일 지시',
+      description: '새 생성에 사진·질감 지시를 추가합니다. 편집은 실사 전환 요청 시에만 적용합니다.'
     }), React.createElement("button", {
       type: "button",
       "data-testid": "photoreal-preset",
@@ -21855,17 +21906,17 @@ const App = () => {
           qwenBaseSteps: 40,
           count: '1'
         });
-        showToast(provider === 'fibo' ? `📷 ${MODEL_INFO[best].name} · 생성 Dev 50단계(모델 카드 권장) · 최고 품질로 설정했습니다. 무료 GPU 할당량을 가장 많이 쓰는 조합입니다.` : provider === 'qwen' ? `📷 ${MODEL_INFO[best].name}(본판) · ${maxRes} · 40단계(공식 데모 기본) · 최고 품질로 설정했습니다. 2K 1장에 GPU 약 107초를 예약합니다(무료 할당량을 많이 씀).` : `📷 ${MODEL_INFO[best].name} · ${maxRes} · 최고 품질로 설정했습니다. 이미지당 비용이 가장 높은 조합입니다.`);
+        showToast(provider === 'fibo' ? `📷 ${MODEL_INFO[best].name}·Dev 50단계로 설정했습니다. GPU 사용량이 늘어납니다.` : provider === 'qwen' ? `📷 ${MODEL_INFO[best].name}·${maxRes}·40단계로 설정했습니다. 2K는 GPU 약 107초를 예약합니다.` : `📷 ${MODEL_INFO[best].name}·${maxRes}·높은 품질로 설정했습니다. 비용이 늘어날 수 있습니다.`);
       },
       className: "px-2.5 py-2 text-[11px] font-semibold rounded-lg border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 hover:opacity-95"
-    }, `📷 ${getProviderLabel(provider)} 실사 최고 품질로 설정`), React.createElement("p", {
+    }, `📷 ${getProviderLabel(provider)} 해상도·품질 우선 설정`), React.createElement("p", {
       className: "text-[10px] text-gray-500 dark:text-gray-400 mt-2 leading-relaxed"
-    }, "최고 품질 = 나노바나나 프로 4K · GPT Image 2.5 Sunburst 4K·max · Grok Imagine 2.0 2K·medium · FIBO 2.0 Dev 50단계 · Qwen Image 2.1 2K. 비용이 가장 크고 항상 낫다는 보장은 없습니다.")), SettingToggle({
+    }, "공급사별 높은 해상도·품질 설정을 적용합니다. 비용·GPU 사용량이 늘며 결과 개선은 보장되지 않습니다.")), SettingToggle({
       checked: settings.adultFashionMode,
       onChange: checked => updateSetting({ adultFashionMode: checked }),
       testId: 'adult-fashion-toggle',
       title: '성인 패션 편집 · 속옷·수영복',
-      description: '성인의 비노골적 속옷·수영복 화보에서 의상 종류·색·재질·핏을 그대로 전달합니다. 나체·성행위·미성년 묘사는 제외되고 공급사 정책은 그대로 적용됩니다.'
+      description: '성인 화보의 의상·색·재질·핏 지시를 유지합니다. 나체·성행위·미성년 묘사는 제외하며 공급사 정책이 적용됩니다.'
     }), isX && modelInfo.supportsQuality && React.createElement("div", null, React.createElement("label", {
       className: "block text-sm font-semibold mb-1 text-gray-700 dark:text-gray-300"
     }, "Grok Imagine 2.0 품질"), React.createElement("select", {
@@ -21952,7 +22003,7 @@ const App = () => {
       className: "text-green-800 dark:text-green-300"
     }, openFree ? "0원(HF ZeroGPU 무료 할당량에서 차감)" : perUsd == null ? "" : "약 " + totalKrw.toLocaleString('ko-KR') + "원")), React.createElement("p", {
       className: "mt-0.5 text-[10px] text-gray-400"
-    }, getProviderLabel(provider) + " · " + getModelDisplayName(settings.model) + " · " + resLabel + (isF || isQ ? ` · 실행 경로 ${openRoutes.map(route => OPEN_ROUTE_INFO[route].short).join(' → ') || 'ZeroGPU'}` : '') + (openFree ? ` · 비로그인·무료 계정은 할당량을 넘으면 요청이 거부될 뿐 과금되지 않음 · PRO 는 할당량을 넘으면 선불 크레딧에서 10분당 $1 자동 차감(공식)${openNextPaid.length ? ` · 무료 할당량이 떨어지면 ${openNextPaid.join(' → ')}(장당)` : ''} · 계획 모델을 고른 경우 그 비용은 별도` : isF || isQ ? " · 외부 경로 공식 장당 단가 기준(실제 청구액은 응답 usage 가 있으면 그 값)" : " · 출력 단가 기준(입력·제작 계획 별도, 생성 후 실제 사용량으로 다시 계산)") + (settings.saveMode ? " · 절약 모드" : "")))), React.createElement("div", {
+    }, getProviderLabel(provider) + " · " + getModelDisplayName(settings.model) + " · " + resLabel + (isF || isQ ? ` · 경로 ${openRoutes.map(route => OPEN_ROUTE_INFO[route].short).join(' → ') || 'ZeroGPU'}` : '') + (openFree ? ` · 무료 할당량 소진 시 비로그인·무료 계정 실행 거부, PRO 초과분 $1/10분${openNextPaid.length ? ` · 다음 유료 경로: ${openNextPaid.join(' → ')}(장당)` : ''} · 계획 비용 별도` : isF || isQ ? " · 경로별 단가 기준, 청구액 응답 시 반영" : " · 입력·계획 비용 별도, 응답 사용량으로 갱신") + (settings.saveMode ? " · 절약 모드" : "")))), React.createElement("div", {
       className: "grid grid-cols-3 gap-3"
     }, React.createElement("div", null, React.createElement("label", {
       className: "block text-sm font-semibold mb-1 text-gray-700 dark:text-gray-300"
@@ -22037,7 +22088,7 @@ const App = () => {
         regenerateAnchors: checked
       }),
       title: "기준 이미지(★)도 다시 생성",
-      description: "꺼짐(기본): 기준 이미지는 원본 그대로 결과에 넣고 과금하지 않습니다."
+      description: "끄면 기준 원본을 그대로 포함합니다. 해당 이미지의 생성 비용은 없습니다."
     }), SettingToggle({
       tone: 'gray',
       checked: settings.consistencyBoost,
@@ -22045,14 +22096,14 @@ const App = () => {
         consistencyBoost: checked
       }),
       title: "일관성 강화 (기준 이미지가 없을 때)",
-      description: "첫 결과를 나머지의 스타일 기준으로 함께 보냅니다(요청당 참조 1장 추가 · 첫 장 뒤 순차 진행)."
+      description: "첫 결과를 나머지의 스타일 참조로 추가합니다. 첫 장 이후 순서대로 처리합니다."
     })), React.createElement("div", {
       className: "rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-3"
     }, React.createElement("h3", {
       className: "text-sm font-bold text-gray-800 dark:text-gray-200 mb-2"
     }, "🎨 색·톤 충실도 보정"), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 mb-3 leading-relaxed"
-    }, "모델은 편집 때도 그림 전체를 다시 그려 색·밝기가 틀어집니다(뿌연 막·분홍/노랑 끼임·대비/채도 변화). 기준 이미지와 같은 부분의 색 차이로 틀어짐을 계산해 되돌립니다(전 모델·모든 편집 경로). 전체 색감·조명·화풍 변경 요청, 구도 변경, 새 생성에는 적용하지 않습니다."), SettingToggle({
+    }, "원본과 비슷한 영역에서 색·밝기 변화를 추정해 보정합니다. 전체 색감·조명·화풍·구도 변경과 새 생성은 제외합니다. 초점 흐림을 복원하는 기능은 아닙니다."), SettingToggle({
       tone: 'gray',
       checked: settings.toneFidelity,
       onChange: checked => updateSetting({
@@ -22060,22 +22111,22 @@ const App = () => {
       }),
       testId: 'tone-fidelity-toggle',
       title: "색·톤 틀어짐 자동 보정 (권장)",
-      description: "결과마다 보정 전 출력 보기·되돌리기 가능. 끄면 모델 출력 색 그대로."
+      description: "결과에서 보정 전·후를 비교하고 되돌릴 수 있습니다. 끄면 모델 색을 유지합니다."
     })), React.createElement("div", {
       className: "rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-3"
     }, React.createElement("h3", {
       className: "text-sm font-bold text-gray-800 dark:text-gray-200 mb-2"
     }, "🛡️ 원본 보존 편집 (마스크 없이)"), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 mb-3 leading-relaxed"
-    }, "편집 결과에서 실제로 바뀐 부분만 쓰고 나머지(얼굴·체형·배경 등)는 원본 픽셀로 둡니다(칠할 필요 없음). 전체를 바꾸는 편집(화풍·재조명)·원본 복제·합성 모드는 제외."), SettingToggle({
+    }, "편집 영역을 추정해 합성하고 나머지는 원본 픽셀로 유지합니다. 전체 변경·원본 복제·합성 모드는 제외합니다. 결과별 적용 상태를 확인하세요."), SettingToggle({
       tone: 'gray',
       checked: settings.autoPreserve,
       onChange: checked => updateSetting({
         autoPreserve: checked
       }),
       testId: 'auto-preserve-toggle',
-      title: "바뀌지 않은 부분은 원본 픽셀 그대로 (권장)",
-      description: "끄면 모델 출력 그대로(이전 방식)."
+      title: "편집 영역 밖 원본 픽셀 보존 (권장)",
+      description: "적용된 영역 밖은 원본을 사용합니다. 끄면 모델 출력 전체를 사용합니다."
     }), SettingToggle({
       tone: 'gray',
       checked: settings.autoPreserveFaceLock,
@@ -22085,7 +22136,7 @@ const App = () => {
       }),
       testId: 'auto-preserve-face-toggle',
       title: "얼굴 잠금",
-      description: "계획 모델이 찾은 얼굴은 원본 그대로. 얼굴 변경(표정·화장 등)을 요청하면 자동 해제."
+      description: "감지한 얼굴 영역을 원본으로 유지합니다. 표정·화장 등 얼굴 변경 요청 시 해제합니다."
     }), SettingToggle({
       tone: 'gray',
       checked: settings.autoPreserveRegionLock,
@@ -22094,8 +22145,8 @@ const App = () => {
         autoPreserveRegionLock: checked
       }),
       testId: 'auto-preserve-region-toggle',
-      title: "요청 영역 밖 체형·얼굴 변화 되돌리기 (권장)",
-      description: "부분 편집에서 요청하지 않은 곳(다리·가슴·몸 윤곽·얼굴)이 달라지면 원본으로 되돌립니다."
+      title: "요청 영역 밖 얼굴·체형 보존 (권장)",
+      description: "추정 편집 영역 밖 얼굴·가슴·몸 윤곽·다리 변화를 원본으로 되돌립니다. 영역 추정은 틀릴 수 있습니다."
     }), SettingToggle({
       tone: 'gray',
       checked: settings.autoPreserveColorMatch,
@@ -22104,7 +22155,7 @@ const App = () => {
         autoPreserveColorMatch: checked
       }),
       title: "바뀐 부분 색감·채도를 원본에 맞춤",
-      description: "모델의 미세한 밝기·색 변화만큼 새 부분도 원본 톤에 맞춥니다."
+      description: "추정한 색·밝기 차이만큼 편집 영역을 보정합니다."
     }), SettingToggle({
       tone: 'gray',
       checked: settings.autoPreserveMatchResolution,
@@ -22113,21 +22164,21 @@ const App = () => {
         autoPreserveMatchResolution: checked
       }),
       title: "편집 해상도를 원본 크기에 맞춤 (권장)",
-      description: "새 부분이 흐려지지 않게 요청 해상도를 원본 크기에 맞춥니다(원본이 크면 비용 증가)."
+      description: "원본 크기에 가까운 지원 해상도를 요청합니다. 높은 해상도는 비용이 늘 수 있습니다."
     })), React.createElement("div", {
       className: "rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-3"
     }, React.createElement("h3", {
       className: "text-sm font-bold text-gray-800 dark:text-gray-200 mb-2"
     }, "🎭 마스크(부분) 편집"), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 mb-3 leading-relaxed"
-    }, "🖌로 칠한 영역만 편집합니다(전 모델). 합성을 켜면 영역 밖은 원본 픽셀 그대로입니다."), SettingToggle({
+    }, "🖌로 변경할 영역을 칠하세요. 보존 합성이 적용되면 칠한 영역·경계 혼합 범위 밖 원본 픽셀을 유지합니다."), SettingToggle({
       tone: 'gray',
       checked: settings.maskComposite,
       onChange: checked => updateSetting({
         maskComposite: checked
       }),
-      title: "영역 밖 원본 픽셀 보존 합성 (권장)",
-      description: "칠한 영역만 새 결과로, 나머지는 원본 해상도(최대 4096px) 그대로. 끄면 모델 출력 그대로."
+      title: "영역·페더 밖 원본 픽셀 보존 (권장)",
+      description: "칠한 영역과 경계 혼합 범위를 합성합니다. 원본은 최대 긴 변 4096px입니다. 끄면 모델 출력 전체를 사용합니다."
     }), SettingToggle({
       tone: 'gray',
       checked: settings.maskMatchResolution,
@@ -22135,8 +22186,8 @@ const App = () => {
       onChange: checked => updateSetting({
         maskMatchResolution: checked
       }),
-      title: "마스크 편집 해상도를 원본에 자동으로 맞춤 (권장)",
-      description: "요청 해상도를 원본에 맞춥니다(높으면 비용 증가, 낮으면 칠한 영역이 흐려짐)."
+      title: "마스크 요청 해상도 자동 선택 (권장)",
+      description: "원본 크기에 맞춥니다. 비용·편집 영역 선명도는 모델의 지원 해상도에 따라 달라집니다."
     }), React.createElement("div", {
       className: "mb-3",
       style: settings.maskComposite ? undefined : {
@@ -22161,7 +22212,7 @@ const App = () => {
       "aria-label": "마스크 경계 페더"
     }), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 mt-1"
-    }, "경계를 이 폭만큼 섞어 이음매를 없앱니다(0 = 바로 자름).")), SettingToggle({
+    }, "칠한 영역 주변을 이 폭만큼 섞습니다. 경계 밖 픽셀도 달라질 수 있으며 0은 바로 자릅니다.")), SettingToggle({
       tone: 'gray',
       checked: settings.maskAutoAlign,
       disabled: !settings.maskComposite,
@@ -22169,7 +22220,7 @@ const App = () => {
         maskAutoAlign: checked
       }),
       title: "위치 자동 정렬",
-      description: "모델 출력이 밀리거나 확대된 경우 위치·배율을 맞춰 이중 윤곽을 막습니다."
+      description: "모델 출력의 위치·배율 차이를 추정해 맞춥니다."
     }), SettingToggle({
       tone: 'gray',
       checked: settings.maskColorMatch,
@@ -22178,7 +22229,7 @@ const App = () => {
         maskColorMatch: checked
       }),
       title: "경계 색감 자동 보정",
-      description: "경계 바깥 원본 색에 맞춰 보정해 경계가 티 나지 않게 합니다."
+      description: "주변 원본 색을 참고해 경계 색차를 줄입니다."
     }))), React.createElement("div", {
       className: "p-6 pt-4 shrink-0 border-t border-gray-100 dark:border-gray-800"
     }, React.createElement("button", {
@@ -22449,7 +22500,7 @@ const App = () => {
       className: "text-blue-600 dark:text-blue-400 font-semibold hover:underline"
     }, "최신 환율 불러오기")), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed"
-    }, "원화는 위 환율 환산값입니다(카드 청구액과 다를 수 있음). 공식 잔액 API는 xAI만 있고, OpenAI·Google은 콘솔 잔액을 '기준 저장'하면 이후 사용액을 빼서 추정합니다. 다른 앱·콘솔 사용분은 포함되지 않습니다."), cards.map(renderCard))));
+    }, "원화는 표시 환율의 환산값입니다. xAI는 공식 잔액, OpenAI·Google은 저장한 기준 잔액에서 사용액을 뺀 추정치입니다. 다른 앱 사용분·카드 수수료 등은 반영되지 않을 수 있습니다."), cards.map(renderCard))));
   };
   const CreditInfoModal = () => {
     if (!isCreditInfoOpen) return null;
@@ -22542,12 +22593,12 @@ const App = () => {
       title: "Google 나노바나나 (표준가 · 아래 작은 글씨 = Batch 50%)",
       headers: ['모델', '1K', '2K', '4K', 'Flex(가격표)'],
       rows: googleRows,
-      note: "업스케일 = 그 모델로 1장 새로 생성하는 비용. 나노바나나 1은 2027-03-15 종료 예정이며, Flex 단가는 가격표에 있는 나노바나나 1만 표시합니다."
+      note: "업스케일은 이미지 1장 재생성 요금입니다. 나노바나나 1은 2027-03-15 종료 예정이며 Flex는 해당 모델만 표시합니다."
     }), PriceTable({
       title: "xAI Grok Imagine (출력 1장 · 공식 단가표 · 큰 글씨 low)",
       headers: ['모델', '1K', '2K', '참조 이미지'],
       rows: xaiRows,
-      note: "2.0은 실제 제공된 품질로 과금되고, 편집은 입력 이미지도 장당 과금됩니다. 결과에는 xAI가 응답에 준 실제 청구액을 기록합니다."
+      note: "2.0은 제공된 품질로 과금됩니다. 편집 입력 이미지 비용은 별도이며, 응답에 청구액이 있으면 기록합니다."
     }), PriceTable({
       title: "FIBO 2.0 (HF ZeroGPU · Bria 오픈 가중치)",
       headers: ['모델', '생성 1장', '편집 1장', '하루 무료 GPU'],
@@ -22558,7 +22609,7 @@ const App = () => {
       }, 'Fibo 2.0 Dev / Edit Turbo'), React.createElement("span", {
         className: "block text-[10px] text-gray-500 font-mono"
       }, `${FIBO_DEV_REPO} · ${FIBO_TURBO_REPO}`)), '0원 · GPU 예약 120초(외부 경로 $0.04 · 2K 가능)', '0원 · GPU 예약 60초(외부 경로 $0.04)', '무료 계정 토큰 5분 · PRO 40분(+크레딧 10분당 $1) · 비로그인 2분']],
-      note: "HF ZeroGPU 무료 할당량으로 실행합니다(첫 사용 24시간 뒤 재충전 · PRO는 초과분을 크레딧 10분당 $1로). 남은 할당량이 공식 Space의 예약 시간(생성 120초·편집 60초)보다 적으면 거부됩니다."
+      note: "할당량은 첫 사용 24시간 뒤 재충전됩니다. 예약량(생성 120초·편집 60초) 미만이면 실행되지 않습니다. PRO 초과분은 크레딧 $1/10분입니다."
     }), PriceTable({
       title: "Qwen Image 2.1 · 2.1 Turbo (HF ZeroGPU 기본 · 외부 경로 선택)",
       headers: ['모델', 'ZeroGPU 1장(GPU 예약 · 1K / 2K)', '외부 경로 1장', '하루 무료 GPU'],
@@ -22569,12 +22620,12 @@ const App = () => {
       }, MODEL_INFO[key].name), React.createElement("span", {
         className: "block text-[10px] text-gray-500 font-mono"
       }, MODEL_INFO[key].id)), key === 'qwen_image_2_1' ? '0원 · 약 22초 / 107초(40단계)' : '0원 · 약 8초 / 25초', key === 'qwen_image_2_1' ? 'OpenRouter $0.046 · Runware $0.075(2.1 Pro)' : 'Runware $0.0141 · OpenRouter $0.0184', '무료 계정 토큰 5분 · PRO 40분(+크레딧 10분당 $1) · 비로그인 2분']),
-      note: "HF ZeroGPU 무료 할당량으로 실행합니다(첫 사용 24시간 뒤 재충전 · PRO는 초과분을 크레딧 10분당 $1로). GPU 예약 시간은 공개 Space 코드 기준이고 실제 차감은 쓴 만큼입니다. 외부 경로는 Alibaba Cloud API 판을 거칩니다."
+      note: "할당량은 첫 사용 24시간 뒤 재충전됩니다. 표시 시간은 예약량이며 실제 GPU 사용만큼 차감합니다. PRO 초과분은 $1/10분, 외부 경로는 Alibaba Cloud 판입니다."
     }), PriceTable({
       title: "OpenAI GPT Image (출력 1장 · 2.5 사전 미산정)",
       headers: ['모델 / 품질', '1024x1024', '1536x1024', '2048x1152'],
       rows: openaiRows,
-      note: "GPT Image 2.5(Sunburst·Flare)는 공식 계산기가 없어 사전 비용을 미산정으로 두고, 생성 후 실제 토큰(출력 $30/1M)으로 계산합니다."
+      note: "GPT Image 2.5는 사전 비용을 미산정으로 표시합니다. 응답 토큰을 받으면 출력 $30/1M 기준으로 계산합니다."
     }))));
   };
   if (!isChatsLoaded) {
@@ -22686,15 +22737,22 @@ const App = () => {
     }, block))) : null;
   };
   // 마스크 편집 결과 안내(영역 비율, 원본 보존 합성 여부, 정렬·색감 보정, 품질 경고)를 정직하게 표시한다.
+  const renderEditComparison = msg => !msg.editComparison?.sourceUrl ? null : React.createElement("div", {
+    className: "mt-2 text-xs text-gray-600 dark:text-gray-300"
+  }, React.createElement("button", {
+    type: "button", "data-testid": "edit-compare-open",
+    className: "px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600",
+    onClick: () => setEditComparison({ before: msg.editComparison.sourceUrl, after: msg.imageUrl })
+  }, "원본과 나란히 비교"), React.createElement("span", { className: "ml-2" }, "얼굴·체형 동일성은 자동 판정하지 않습니다."));
   const renderMaskResultNote = msg => {
     if (msg.msgType !== 'image' || !msg.maskApplied) return null;
     const modeLabel = MASK_SOURCE_MODE_LABELS[msg.maskSourceMode] || '';
     const sizeText = msg.width && msg.height ? ` ${msg.width}×${msg.height}` : '';
     // maskCompositeUpscaled 는 v1.10.0 초기 기록용(원본을 확대해 합성했던 결과). 현재는 원본을 늘리지 않는다.
-    const outsideText = msg.maskCompositeUpscaled ? '영역 밖은 원본을 출력 크기로 확대해 합성(이전 방식)' : `영역 밖은 원본 픽셀 그대로 합성(원본 해상도${sizeText} 유지${msg.maskFullResolution ? ' · 첨부 원본 전체 해상도' : ''})`;
+    const outsideText = msg.maskCompositeUpscaled ? '영역 밖은 원본 확대 합성(이전 방식)' : `마스크·페더 밖 원본 픽셀 보존${sizeText}${msg.maskFullResolution ? ' · 첨부 원본 기준' : ''}`;
     const resolutionText = msg.maskResolutionAuto && msg.resolution ? `요청 해상도 ${msg.resolution}(원본 크기에 자동 맞춤)` : '';
-    const details = msg.maskComposited ? [`마스크 영역${msg.maskCoverage != null ? `(${msg.maskCoverage}%)` : ''}만 편집`, outsideText, resolutionText, msg.maskAligned ? '위치 자동 정렬' : '', msg.maskColorMatched ? '경계 색감 보정' : '', modeLabel ? `영역 전달: ${modeLabel}` : ''].filter(Boolean).join(' · ') : [`마스크 영역 편집 요청`, modeLabel ? `영역 전달: ${modeLabel}` : '', '원본 보존 합성 꺼짐(모델 출력 그대로)'].filter(Boolean).join(' · ');
-    const warning = msg.maskCompositeError ? `⚠️ 원본 합성에 실패해 모델 출력을 그대로 표시합니다(${msg.maskCompositeError}).` : msg.maskAlignWarning ? '⚠️ 모델이 영역 밖 구도까지 크게 바꿔, 칠한 영역 경계가 어색할 수 있습니다. 재생성하거나 마스크를 조금 넓혀 보세요.' : '';
+    const details = msg.maskComposited ? [`마스크${msg.maskCoverage != null ? ` ${msg.maskCoverage}%` : ''}·경계 혼합 범위 합성`, outsideText, resolutionText, msg.maskAligned ? '위치 정렬' : '', msg.maskColorMatched ? '경계 색감 보정' : '', modeLabel ? `영역 전달: ${modeLabel}` : ''].filter(Boolean).join(' · ') : [`마스크 영역 편집 요청`, modeLabel ? `영역 전달: ${modeLabel}` : '', '보존 합성 꺼짐·모델 출력 사용'].filter(Boolean).join(' · ');
+    const warning = msg.maskCompositeError ? `⚠️ 원본 합성 실패: 모델 출력 표시 중(${msg.maskCompositeError}).` : msg.maskAlignWarning ? '⚠️ 구도 변화가 커 경계가 어색할 수 있습니다. 원본과 비교한 뒤 재생성하거나 마스크를 조정하세요.' : '';
     return React.createElement("div", {
       className: "mt-2 flex items-start gap-1.5 text-[11px] md:text-xs text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-lg px-2.5 py-2 leading-relaxed"
     }, React.createElement("span", {
@@ -22705,11 +22763,11 @@ const App = () => {
   };
   // 원본 보존 편집(마스크 없이) 결과 안내: 바뀐 영역·원본 픽셀 비율·얼굴 잠금·색감 보정·해상도, 보기 전환, 모델 출력으로 바꾸기.
   const AUTO_PRESERVE_SKIP_LABELS = {
-    recomposed: '모델이 구도·위치를 크게 바꿔 원본과 맞출 수 없었습니다',
-    coverage: '모델 출력이 원본 화면을 충분히 덮지 않았습니다',
-    'mostly-changed': '이미지 대부분이 바뀌어 전체 변경으로 판단했습니다',
-    'global-color': '이미지 전체의 색·밝기가 크게 바뀌어 재조명·색보정 같은 전체 변경으로 판단했습니다',
-    error: '합성 중 오류가 났습니다'
+    recomposed: '구도·위치 변화가 큼',
+    coverage: '출력이 원본 영역을 충분히 덮지 않음',
+    'mostly-changed': '대부분의 영역이 달라짐',
+    'global-color': '전체 색·밝기 변화가 큼',
+    error: '합성 오류'
   };
   // 색·톤 충실도 보정 안내: 적용 = 기준 대비 색차 전·후(안정 영역 CIEDE2000 중앙값)와 어두운 곳 들뜸, 미적용 = 사유.
   const renderToneFidelityNote = msg => {
@@ -22717,7 +22775,7 @@ const App = () => {
     if (!info || info.reason === 'disabled') return null;
     const buttonClass = active => `px-2 py-1 rounded-lg border text-[11px] font-semibold transition ${active ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300' : 'border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'}`;
     if (!info.applied) {
-      const text = info.reason === 'faithful' ? `색·톤 확인 — 기준 이미지와 차이가 작아(CIEDE2000 ${info.deBefore ?? '-'}) 보정하지 않았습니다.` : `색·톤 보정 미적용 — ${TFL_SKIP_LABELS[info.reason] || '사유 미상'}${info.error ? ` (${info.error})` : ''}. 이 결과의 색은 모델 출력 그대로입니다.`;
+      const text = info.reason === 'faithful' ? `색·톤: 추정 안정 영역의 색차가 작아 미보정(ΔE00 ${info.deBefore ?? '-'}).` : `색·톤 미보정: ${TFL_SKIP_LABELS[info.reason] || '사유 미상'}${info.error ? ` (${info.error})` : ''}. 모델 출력 색을 유지합니다.`;
       return React.createElement("div", {
         className: "mt-2 flex items-start gap-1.5 text-[11px] md:text-xs text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 rounded-lg px-2.5 py-2 leading-relaxed",
         "data-testid": "tone-fidelity-note"
@@ -22731,8 +22789,10 @@ const App = () => {
     // 어두운 곳 차이(결과 − 기준, 0~255): 평균이 양수면 검은 부분이 들뜬 '뿌연 막', 음수면 가라앉은 것.
     const liftMean = lift ? (Number(lift[0]) + Number(lift[1]) + Number(lift[2])) / 3 : 0;
     const liftValues = lift ? `R${signed(lift[0])} G${signed(lift[1])} B${signed(lift[2])}` : '';
-    const liftText = lift && Math.max(...lift.map(v => Math.abs(Number(v) || 0))) >= 2 ? liftMean > 0 ? ` · 어두운 곳 들뜸(뿌연 막) ${liftValues} 제거` : ` · 어두운 곳 차이 ${liftValues} 보정` : '';
-    const detail = `기준 이미지 대비 색 차이(바뀌지 않은 부분의 CIEDE2000 중앙값) ${info.deBefore} → ${info.deAfter}${liftText}${info.anchorIndex ? ` · 기준 첨부 #${info.anchorIndex}` : ''}`;
+    const liftAfter = Array.isArray(info.darkLiftAfter) ? info.darkLiftAfter : null;
+    const liftAfterValues = liftAfter ? `R${signed(liftAfter[0])} G${signed(liftAfter[1])} B${signed(liftAfter[2])}` : '';
+    const liftText = lift && Math.max(...lift.map(v => Math.abs(Number(v) || 0))) >= 2 ? ` · 어두운 영역 ${liftMean > 0 ? '들뜸' : '차이'} ${liftValues}${liftAfter ? ` → ${liftAfterValues}` : ' (보정 전)'}` : '';
+    const detail = `추정 안정 영역${info.validation === 'spatial-holdout' ? ' 검증 표본' : ''} 색차(ΔE00) ${info.deBefore} → ${info.deAfter}${liftText}${info.anchorIndex ? ` · 기준 #${info.anchorIndex}` : ''}`;
     return React.createElement("div", {
       className: "mt-2 text-[11px] md:text-xs text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/50 rounded-lg px-2.5 py-2 leading-relaxed",
       "data-testid": "tone-fidelity-note"
@@ -22740,7 +22800,7 @@ const App = () => {
       className: "flex items-start gap-1.5"
     }, React.createElement("span", {
       className: "shrink-0"
-    }, "🎨"), React.createElement("span", null, msg.toneReverted ? `보정 전 모델 출력을 쓰는 중입니다(보정 결과는 보관 중). ${detail}` : `색·톤 보정 — ${detail}`)), msg.toneOriginalUrl ? React.createElement("div", {
+    }, "🎨"), React.createElement("span", null, msg.toneReverted ? `보정 전 출력 사용 중. ${detail}` : `색·톤 보정: ${detail}`)), msg.toneOriginalUrl ? React.createElement("div", {
       className: "mt-2 flex flex-wrap gap-1.5"
     }, !msg.toneReverted ? React.createElement("button", {
       type: "button",
@@ -22755,7 +22815,7 @@ const App = () => {
       onClick: () => toggleToneFidelityResult(msg),
       "data-testid": "tone-fidelity-swap",
       className: buttonClass(false)
-    }, msg.toneReverted ? '색·톤 보정 결과로 되돌리기' : '이 결과 대신 보정 전 출력 사용')) : null);
+    }, msg.toneReverted ? '보정 결과 사용' : '보정 전 출력 사용')) : null);
   };
   const renderAutoPreserveNote = msg => {
     const info = msg.msgType === 'image' ? msg.autoPreserve : null;
@@ -22765,14 +22825,14 @@ const App = () => {
       "data-testid": "auto-preserve-note"
     }, React.createElement("span", {
       className: "shrink-0"
-    }, "🛡️"), React.createElement("span", null, `원본 보존 합성 미적용 — ${AUTO_PRESERVE_SKIP_LABELS[info.reason] || '사유 미상'}${info.error ? ` (${info.error})` : ''}. 이 결과는 모델 출력 그대로입니다.`));
+    }, "🛡️"), React.createElement("span", null, `보존 합성 미적용: ${AUTO_PRESERVE_SKIP_LABELS[info.reason] || '사유 미상'}${info.error ? ` (${info.error})` : ''}. 모델 출력 표시 중.`));
     const view = autoPreserveViews[msg.id] || 'result';
     const setView = next => setAutoPreserveViews(prev => ({
       ...prev,
       [msg.id]: prev[msg.id] === next ? 'result' : next
     }));
     const buttonClass = active => `px-2 py-1 rounded-lg border text-[11px] font-semibold transition ${active ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300' : 'border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`;
-    const details = [`바뀐 영역 ${info.changedPct}%만 새 결과`, `원본과 같은 픽셀 ${info.originalPct}%(얼굴·배경 등)`, info.facesLocked ? `얼굴 잠금 ${info.facesLocked}명` : info.faceChangeRequested ? '얼굴 변경 요청이라 얼굴 잠금 안 함' : info.facesFound ? '얼굴 위치가 맞지 않아 얼굴 잠금 안 함' : '', info.regionLock?.applied ? `요청 영역 밖 변화 ${info.regionLock.revertedPct}% 원본으로 되돌림` : '', info.colorMatched ? '바뀐 부분 색감 보정' : '', info.aligned ? '위치 자동 정렬' : '', info.baseWidth && info.baseHeight ? `원본 해상도 ${info.baseWidth}×${info.baseHeight} 그대로` : '', msg.autoPreserveResolutionAuto && msg.resolution ? `요청 ${msg.resolution}(원본 크기에 자동 맞춤)` : '', info.modelWidth && info.modelHeight ? `모델 출력 ${info.modelWidth}×${info.modelHeight}` : ''].filter(Boolean).join(' · ');
+    const details = [`새 결과 영역 ${info.changedPct}%`, `원본과 동일한 픽셀 ${info.originalPct}%`, info.facesLocked ? `얼굴 잠금 ${info.facesLocked}명` : info.faceChangeRequested ? '얼굴 변경 요청·잠금 해제' : info.facesFound ? '얼굴 위치 불일치·잠금 미적용' : '', info.regionLock?.strictBounds ? '요청 영역 밖 픽셀 보존(영역은 자동 추정)' : info.regionLock?.applied ? `영역 밖 변화 ${info.regionLock.revertedPct}% 복원` : '', info.colorMatched ? '편집 영역 색감 보정' : '', info.aligned ? '위치 정렬' : '', info.baseWidth && info.baseHeight ? `원본 ${info.baseWidth}×${info.baseHeight}` : '', msg.autoPreserveResolutionAuto && msg.resolution ? `요청 ${msg.resolution}·자동 맞춤` : '', info.modelWidth && info.modelHeight ? `모델 출력 ${info.modelWidth}×${info.modelHeight}` : ''].filter(Boolean).join(' · ');
     return React.createElement("div", {
       className: "mt-2 text-[11px] md:text-xs text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-lg px-2.5 py-2 leading-relaxed",
       "data-testid": "auto-preserve-note"
@@ -22780,7 +22840,7 @@ const App = () => {
       className: "flex items-start gap-1.5"
     }, React.createElement("span", {
       className: "shrink-0"
-    }, "🛡️"), React.createElement("span", null, msg.autoPreserveReverted ? `모델 출력으로 바꾼 상태입니다(원본 보존 합성 결과는 보관 중). ${details}` : `원본 보존 합성 — ${details}`)), React.createElement("div", {
+    }, "🛡️"), React.createElement("span", null, msg.autoPreserveReverted ? `모델 출력 사용 중. ${details}` : `원본 보존 합성: ${details}`)), React.createElement("div", {
       className: "mt-2 flex flex-wrap gap-1.5"
     }, msg.autoPreserveMaskUrl && !msg.autoPreserveReverted ? React.createElement("button", {
       type: "button",
@@ -22797,7 +22857,7 @@ const App = () => {
       onClick: () => toggleAutoPreserveResult(msg),
       "data-testid": "auto-preserve-swap",
       className: buttonClass(false)
-    }, msg.autoPreserveReverted ? '원본 보존 합성으로 되돌리기' : '이 결과 대신 모델 출력 사용') : null));
+    }, msg.autoPreserveReverted ? '보존 합성 결과 사용' : '모델 출력 사용') : null));
   };
   // 마스크(편집 영역) 미리보기: 저장 마스크는 칠한 곳만 불투명한 분홍 PNG 라 그대로 반투명하게 겹친다.
   const renderMaskOverlay =(maskUrl, roundedClass = 'rounded-xl', badge = 'left') => React.createElement(React.Fragment, null, React.createElement("img", {
@@ -22968,7 +23028,7 @@ const App = () => {
         prettyJson = String(run.vgl);
       }
     }
-    const lines = [`${run.checkpointName || (isEdit ? 'Fibo 2.0 Edit Turbo' : 'Fibo 2.0 Dev')} · ${isEdit ? '편집' : run.inspire ? 'Inspire(참고 이미지로 새로 생성)' : '생성'} · ${run.steps ? `${run.steps}단계` : '단계 수 공급사 기본'} · 시드 ${run.seed ?? '-'}${run.seedReused ? '(직전 생성과 같은 시드 — 바꾼 필드만 달라짐)' : ''}`,`${/^zero-/.test(run.hardware || '') ? 'ZeroGPU · ' : run.hardware ? `${run.hardware} · ` : ''}모델 출력 ${msg.apiResolution || '-'}${!isEdit && run.style && run.style !== 'None' ? ` · 스타일 ${run.style}` : ''}${isEdit && run.inputImages > 1 ? ` · 이미지 ${run.inputImages}장(첫 장을 편집)` : ''}${run.masked ? ' · 공식 마스크' : run.maskMode === 'described' ? ' · 마스크 영역을 위치 설명으로 전달(참조 이미지와 함께라 공식 마스크 불가)' : ''} · ${openRunCostText(msg)}`, ...describeOpenRunRoute(run), run.nativeOnly ? '2K 를 골랐지만 ZeroGPU 공식 Space 는 약 1MP 만 만들어 그 크기 그대로 두었습니다(확대 안 함). 약 4MP 의 진짜 2K 는 실행 경로 "HF 크레딧"·WaveSpeed·Runware(장당 $0.04)에서 만듭니다.' : '', run.ratioClamped ? `요청 비율 ${run.requestedRatio} 은 공식 생성 Space 의 크기 범위(너비 832~1344 · 높이 768~1248) 밖이라 가장 가까운 ${msg.apiResolution || '크기'}로 생성했습니다.` : '', `구조화 프롬프트: ${vglLabel}`].filter(Boolean);
+    const lines = [`${run.checkpointName || (isEdit ? 'Fibo 2.0 Edit Turbo' : 'Fibo 2.0 Dev')} · ${isEdit ? '편집' : run.inspire ? 'Inspire·참조 생성' : '생성'} · ${run.steps ? `${run.steps}단계` : '단계 수 기본값'} · 시드 ${run.seed ?? '-'}${run.seedReused ? '(직전 시드·다른 부분도 달라질 수 있음)' : ''}`,`${/^zero-/.test(run.hardware || '') ? 'ZeroGPU · ' : run.hardware ? `${run.hardware} · ` : ''}모델 출력 ${msg.apiResolution || '-'}${!isEdit && run.style && run.style !== 'None' ? ` · 스타일 ${run.style}` : ''}${isEdit && run.inputImages > 1 ? ` · 이미지 ${run.inputImages}장·첫 장 편집` : ''}${run.masked ? ' · 공식 마스크' : run.maskMode === 'described' ? ' · 다중 참조: 마스크 위치 설명' : ''} · ${openRunCostText(msg)}`, ...describeOpenRunRoute(run), run.nativeOnly ? '요청은 2K지만 ZeroGPU 출력 약 1MP를 유지했습니다. HF 크레딧·WaveSpeed·Runware는 약 4MP 출력을 지원합니다(장당 $0.04).' : '', run.ratioClamped ? `요청 비율 ${run.requestedRatio}이 지원 범위 밖이므로 ${msg.apiResolution || '가까운 크기'}로 생성했습니다.` : '', `구조화 프롬프트: ${vglLabel}`].filter(Boolean);
     return React.createElement("details", {
       className: "mt-2 text-[11px] md:text-xs rounded-lg px-2.5 py-2 leading-relaxed border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30",
       "data-testid": "fibo-run-details",
@@ -23003,7 +23063,7 @@ const App = () => {
       "data-testid": "fibo-vgl-to-input",
       onClick: () => {
         setInput(prettyJson);
-        showToast('구조화 프롬프트를 입력창에 넣었습니다 — 필드 하나만 고쳐 보내면 같은 시드로 다시 그려 그 부분만 달라집니다(재생성 버튼은 새 시드).');
+        showToast('JSON을 입력창에 넣었습니다. 수정 후 보내면 같은 시드를 사용하지만 다른 부분도 달라질 수 있습니다. 재생성은 새 시드를 사용합니다.');
       },
       className: "px-2 py-1 rounded-md bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] font-bold"
     }, '입력창에 넣기(필드 고쳐 다시 그리기)'))) : null));
@@ -23016,7 +23076,7 @@ const App = () => {
     const notes = Array.isArray(run?.routeNotes) && run.routeNotes.length ? ` — 자동 전환: ${run.routeNotes.join(' → ')} → ${OPEN_ROUTE_INFO[route]?.short || route}` : '';
     const lines = [`실행 경로: ${label}${notes}`];
     if (route === 'zerogpu' && Number(run?.quotaBase) > 0) lines.push(`ZeroGPU 남은 할당량 ${formatGpuSeconds(run.quotaRemaining)} / ${formatGpuSeconds(run.quotaBase)}${Number(run.gpuSeconds) > 0 ? ` · 이번 GPU 사용 약 ${formatGpuSeconds(run.gpuSeconds)}` : ''}${run.overquotaSeconds ? ` · 크레딧 초과분 ${formatGpuSeconds(run.overquotaSeconds)}` : ''}${run.quotaResetsAt ? ` · 다시 채워짐 ${formatHfResetTime(run.quotaResetsAt)}` : ''}`);
-    if (route === 'zerogpu' && run?.anonymous) lines.push('HF 토큰 없이(비로그인 할당량) 실행 — 설정 → 오픈 모델 공통에 토큰을 넣으면 내 계정 할당량·크레딧을 씁니다.');
+    if (route === 'zerogpu' && run?.anonymous) lines.push('비로그인 HF 할당량을 사용했습니다. 설정에 HF 토큰을 넣으면 계정 할당량·크레딧을 사용합니다.');
     if (run?.providerNsfwFlag) lines.push('공급사가 이 결과에 NSFW 표시를 붙였습니다(차단은 아님).');
     return lines;
   };
@@ -23076,11 +23136,11 @@ const App = () => {
       Array.isArray(plan.changes) && plan.changes.length > 0 && React.createElement("p", null, `변경: ${plan.changes.map(item => mdInlinePlain(readable(item))).join(' · ')}`),
       Array.isArray(plan.preserve) && plan.preserve.length > 0 && React.createElement("p", null, `보존: ${plan.preserve.map(item => mdInlinePlain(readable(item))).join(' · ')}`),
       plan.fashionModeApplied === true && React.createElement("p", null, "성인 패션 편집 범위 적용 · 제공사 심사 유지"),
-      plan.photorealApplied === true && React.createElement("p", null, "📷 실사 극대화 적용(카메라·렌즈·빛·피부 질감·무보정 지시)"),
+      plan.photorealApplied === true && React.createElement("p", null, "📷 사진·조명·피부 질감 지시 적용"),
       plan.thinking?.sent && React.createElement("p", null, `🧠 생각 수준: ${describeThinkingLevel(plan.thinking.sent, PLANNER_THINKING_LEVELS[plan.provider] || [], PLANNER_THINKING_DOC_DEFAULTS[plan.provider])}${plan.thinking.requested && plan.thinking.requested !== plan.thinking.sent ? ` · 선택한 ${String(plan.thinking.requested).toLowerCase()}는 거부되어 바꿈` : ''}`),
       plan.requestTrim && React.createElement("p", {
         className: "text-yellow-800 dark:text-yellow-200"
-      }, `📏 원문 ${count(plan.requestTrim.originalChars)}자가 이미지 모델 입력 한도(${formatPromptBudget({ unit: plan.requestTrim.unit, max: Number(plan.requestTrim.limit) || 0 })})를 넘어, 앞·뒤 ${count(plan.requestTrim.keptChars)}자만 직접 전달했습니다. 원문 전체는 계획 모델이 읽고 위 제작 지시에 반영했습니다.`),
+    }, `📏 원문 ${count(plan.requestTrim.originalChars)}자가 전달 한도(${formatPromptBudget({ unit: plan.requestTrim.unit, max: Number(plan.requestTrim.limit) || 0 })})를 넘어 앞·뒤 ${count(plan.requestTrim.keptChars)}자만 직접 보냈습니다. 요약된 내용은 제작 지시에서 확인하세요.`),
       plan.mode && React.createElement("p", null, `작업 종류: ${readable(plan.mode)}`), Number(coverage.totalChars) > 0 && React.createElement("p", null,
       `문서 전달 범위: ${count(coverage.sentChars)}자 / ${count(coverage.totalChars)}자${coverage.partial ? ' · 일부 발췌(전체 문서를 분석한 결과가 아닙니다)' : ''}`
     ), evidence.length > 0 && React.createElement("div", null, React.createElement("strong", null, "사용한 근거 · 일반 모델 제시"), React.createElement("ul", {
@@ -23093,7 +23153,7 @@ const App = () => {
       `일반 모델 사용량: 입력 ${usageInput == null ? '미제공' : count(usageInput)} · 출력 ${usageOutput == null ? '미제공' : count(usageOutput)} 토큰${usageThinking ? usage?.thoughtsTokenCount != null ? ` + 사고 ${count(usageThinking)} 토큰` : ` (추론 ${count(usageThinking)} 토큰)` : ''}`
     ), React.createElement("p", {
       className: "text-gray-500 dark:text-gray-400"
-    }, typeof plan.costUsd === 'number' ? `일반 모델 비용 ${formatKrw(plan.costUsd, settings.fxRate)} (${formatUsdShort(plan.costUsd)} · ${plan.costSource === 'billed' ? 'xAI 실제 청구액' : '토큰 × 공식 단가'}) · 이미지 비용과 별도` : "일반 모델 비용은 이미지 비용과 별도입니다(이 기록에는 사용량 정보가 없어 계산하지 못함).")));
+    }, typeof plan.costUsd === 'number' ? `일반 모델 ${formatKrw(plan.costUsd, settings.fxRate)} (${formatUsdShort(plan.costUsd)} · ${plan.costSource === 'billed' ? 'xAI 청구액 응답' : '토큰 × 단가'}) · 이미지 비용 별도` : "사용량 응답이 없어 일반 모델 비용은 미산정입니다. 이미지 비용과 별도입니다.")));
   };
   // 프롬프트 수정 중 첨부 편집: 이미지 삭제·추가, 마스크 그리기·수정·삭제, 문서 삭제·추가, 이전 문서 참조 켜고 끄기.
   const renderEditAttachments = () => {
@@ -23197,7 +23257,7 @@ const App = () => {
     onClick: () => handleRegenerateTurn(msg.id),
     disabled: busyTurnSourceIds.has(msg.id) || getTurnOutputIds(activeChat.messages, index).some(id => busyTargetIds.has(id)),
     className: actionButtonClass,
-    title: "이 프롬프트의 결과 전체를 새로 만들어 교체합니다(이후 대화 유지)."
+      title: "이 요청의 결과 전체를 재생성합니다. 이후 대화는 유지합니다."
   }, React.createElement(Icons.Refresh, null), " 결과 재생성"), React.createElement("button", {
     onClick: () => startEditing(msg),
     className: actionButtonClass
@@ -23207,7 +23267,7 @@ const App = () => {
   }, React.createElement(Icons.Copy, null), " Copy"), React.createElement("button", {
     onClick: () => startMsgSelectMode(msg),
     className: actionButtonClass,
-    title: "여러 메시지를 골라 한 번에 삭제합니다(이 프롬프트부터 선택)"
+      title: "이 요청부터 선택해 여러 메시지를 삭제합니다."
   }, React.createElement(Icons.CheckSquare, null), " 선택"), React.createElement("button", {
     onClick: () => deleteMessage(msg.id),
     className: "hover:text-red-500 flex items-center gap-1.5 text-[11px] md:text-xs font-medium"
@@ -23240,7 +23300,7 @@ const App = () => {
       className: "text-[11px] text-gray-500 dark:text-gray-400"
     }, `${getProviderLabel(job.provider)} · ${getModelDisplayName(msg.modelKey)} · 공식 50% 할인 · 제출 ${submitted} (${elapsedMin}분 경과) · 상태 ${job.state || '확인 전'}${checkedLabel ? ` · 마지막 확인 ${checkedLabel}` : ''}`), React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400"
-    }, "보통 수 분(최대 24시간) 뒤 결과가 이 자리에 자동 표시됩니다(30초마다 확인)."), job.lastError ? React.createElement("p", {
+    }, "완료 시 결과를 표시합니다(최대 24시간·30초마다 확인)."), job.lastError ? React.createElement("p", {
       className: "text-[11px] text-red-500 mt-1"
     }, `상태 확인 실패(자동 재시도): ${job.lastError}`) : null))), msgSelectMode ? null : React.createElement("div", {
       className: "flex flex-wrap gap-3 md:gap-4 text-gray-400 pl-2"
@@ -23327,16 +23387,16 @@ const App = () => {
       className: "mt-2 flex items-start gap-1.5 text-[11px] md:text-xs text-yellow-800 dark:text-yellow-200 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800/50 rounded-lg px-2.5 py-2 leading-relaxed"
     }, React.createElement("span", {
       className: "shrink-0"
-    }, "★"), React.createElement("span", null, "기준 이미지라 원본을 그대로 결과에 포함했습니다(API 호출·과금 없음). 이 이미지도 편집하려면 '이 이미지도 편집 생성'을 누르세요.")), msg.msgType === 'image' && (msg.referenceSource === 'upscale' || msg.upscaledFrom) && React.createElement("div", {
+    }, "★"), React.createElement("span", null, "기준 원본을 포함했습니다(생성 비용 없음). 편집하려면 '이 이미지도 편집 생성'을 누르세요.")), msg.msgType === 'image' && (msg.referenceSource === 'upscale' || msg.upscaledFrom) && React.createElement("div", {
       className: "mt-2 flex items-start gap-1.5 text-[11px] md:text-xs text-yellow-800 dark:text-yellow-200 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800/50 rounded-lg px-2.5 py-2 leading-relaxed"
     }, React.createElement("span", {
       className: "shrink-0"
-    }, "💡"), React.createElement("span", null, "업스케일은 재생성 과정이므로 디테일이 달라질 수 있습니다. 후속 편집은 참조 이미지와 현재 지시를 사용합니다.")), renderMaskResultNote(msg), renderAutoPreserveNote(msg), renderToneFidelityNote(msg), renderDocRefsNote(msg), renderMessageSearch(msg), renderVisualPlanNote(msg), renderFiboRunNote(msg), renderQwenRunNote(msg)), msg.msgType === 'image' && msg.imageUrl && getMessageModelKey(msg) && !msg.isAnchorPassthrough && React.createElement("div", {
+    }, "💡"), React.createElement("span", null, "업스케일은 재생성하므로 얼굴·체형·디테일이 달라질 수 있습니다. 원본과 비교하세요.")), renderEditComparison(msg), renderMaskResultNote(msg), renderAutoPreserveNote(msg), renderToneFidelityNote(msg), renderDocRefsNote(msg), renderMessageSearch(msg), renderVisualPlanNote(msg), renderFiboRunNote(msg), renderQwenRunNote(msg)), msg.msgType === 'image' && msg.imageUrl && getMessageModelKey(msg) && !msg.isAnchorPassthrough && React.createElement("div", {
       className: "mt-2 mr-2 inline-flex items-center gap-1.5 text-[11px] md:text-xs font-semibold px-2.5 py-1.5 rounded-lg border " + (providerOfMsg === 'xai' ? "text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700" : providerOfMsg === 'fibo' || providerOfMsg === 'qwen' ? "text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 border-indigo-200 dark:border-indigo-800" : providerOfMsg === 'openai' ? "text-green-600 dark:text-green-300 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800" : "text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800/50"),
       title: "이 이미지를 생성한 모델"
     }, React.createElement("span", null, "🎨"), React.createElement("span", null, "생성 모델"), React.createElement("strong", null, msg.fiboRun?.checkpointName ? String(msg.fiboRun.checkpointName).replace(/^Fibo\b/, 'FIBO') : getModelDisplayName(getMessageModelKey(msg))), msg.upscaledFrom ? React.createElement("span", null, `· ${msg.upscaledFrom}→${(msg.resolution || '').toUpperCase()} 업스케일`) : null), msg.msgType === 'image' && msg.imageUrl && !msg.isAnchorPassthrough && (msg.costKrw || typeof msg.costUsd === 'number') && React.createElement("div", {
       className: "mt-2 inline-flex flex-wrap items-center gap-1.5 text-[11px] md:text-xs text-green-800 dark:text-green-300 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg px-2.5 py-1.5 font-medium",
-      title: msg.costSource === 'free-quota' ? "Hugging Face ZeroGPU 일일 무료 GPU 할당량에서 차감(공급사 과금 없음). 계획 모델을 쓴 경우 그 비용은 별도." : msg.costSource === 'zerogpu-credits' ? "ZeroGPU 일일 할당량을 넘긴 GPU 시간이 PRO 선불 크레딧에서 차감된 금액(실행 전후 할당량 API 의 초과 사용 시간 × 10분당 $1, 공식 단가)." : msg.costSource === 'usage' ? "응답 usage로 계산한 이미지 단계 비용. 일반 모델 분석 요금 별도. 최종 청구는 공급사 콘솔에서 확인하세요." : "이미지 단계 추정치. 응답 usage 없음. 일반 모델 분석 요금 별도."
+      title: msg.costSource === 'free-quota' ? "HF 무료 GPU 할당량 사용. 계획 모델 비용은 별도입니다." : msg.costSource === 'zerogpu-credits' ? "초과 GPU 시간 × $1/10분으로 계산한 PRO 크레딧 비용입니다." : msg.costSource === 'usage' ? "응답 사용량으로 계산한 이미지 비용입니다. 계획·분석은 별도이며 최종 청구는 콘솔에서 확인하세요." : "사용량 응답이 없는 이미지 비용 추정치입니다. 계획·분석 비용은 별도입니다."
     }, React.createElement("span", null, msg.costSource === 'free-quota' ? "💳 이미지 비용" : msg.costSource === 'zerogpu-credits' ? "💳 이미지 비용(ZeroGPU 크레딧)" : msg.costSource === 'usage' ? "💳 이미지 비용(사용량 계산)" : "💳 이미지 비용(추정)"), React.createElement("strong", null, msg.costSource === 'free-quota' ? "0원" : msg.costKrw ? `약 ${msg.costKrw.toLocaleString('ko-KR')}원` : formatKrw(msg.costUsd, settings.fxRate)), typeof msg.costUsd === 'number' && msg.costSource !== 'free-quota' ? React.createElement("span", {
       className: "text-green-600 dark:text-green-400"
     }, `(${formatUsdShort(msg.costUsd)})`) : null, billingLabel ? React.createElement("span", {
@@ -23391,7 +23451,7 @@ const App = () => {
     }, React.createElement(Icons.Image, null), " Use as Ref"), msg.msgType === 'image' && msg.imageUrl && React.createElement("button", {
       onClick: () => startMaskEditFromMessage(msg),
       className: actionButtonClass,
-      title: "바꿀 부분만 칠해 그 영역만 편집합니다."
+      title: "변경할 부분을 칠해 마스크를 지정합니다."
     }, React.createElement(Icons.Brush, null), " 마스크 편집"), React.createElement("button", {
       onClick: () => branchChat(msg.id),
       className: "hover:text-green-500 flex items-center gap-1.5 text-[11px] md:text-xs font-medium"
@@ -23626,7 +23686,7 @@ const App = () => {
         title: conversationDocs.map(doc => doc.name).join(', ')
       }, conversationDocs.map(doc => doc.name).join(', ')), React.createElement("span", {
         className: "text-gray-400"
-      }, docCarryOverride === null ? docCarryAuto ? '· 프롬프트에서 문서 언급을 감지해 자동으로 켰습니다' : '· 문서를 언급하면(예: "문서의 3장 장면") 자동으로 켜집니다' : '· 직접 지정'), docCarryOverride !== null ? React.createElement("button", {
+      }, docCarryOverride === null ? docCarryAuto ? '· 문서 언급 감지·자동 포함' : '· 문서 언급 시 자동 포함' : '· 직접 지정'), docCarryOverride !== null ? React.createElement("button", {
         type: "button",
         onClick: () => setDocCarryOverride(null),
         className: "text-blue-600 dark:text-blue-400 hover:underline"
@@ -23650,7 +23710,7 @@ const App = () => {
       onOcr: () => runDocumentOcr(doc.id, 'tray')
     }))), readyDocs.length ? React.createElement("p", {
       className: "mt-2 text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed"
-    }, `계획 모델에 최대 ${PLANNER_DOCUMENT_CHARS.toLocaleString('ko-KR')}자 전송(현재 ${totalChars.toLocaleString('ko-KR')}자, 넘으면 관련 부분만 발췌). 삽화·표 배치는 반영되지 않을 수 있습니다.`) : null, React.createElement("div", {
+    }, `문서 ${totalChars.toLocaleString('ko-KR')}자·최대 ${PLANNER_DOCUMENT_CHARS.toLocaleString('ko-KR')}자 전송. 초과 시 관련 부분을 발췌하며 삽화·표 배치는 누락될 수 있습니다.`) : null, React.createElement("div", {
       className: "mt-2 flex flex-wrap items-center gap-2"
     }, DOCUMENT_PRESETS.map(preset => React.createElement("button", {
       key: preset.label,
@@ -23706,7 +23766,7 @@ const App = () => {
       imageSearch: !settings.imageSearch
     }), `🖼 이미지 검색 ${settings.imageSearch ? 'ON' : 'OFF'}`, describeImageSearchRoute(settings.model, settings), 'quick-image-search'), provider === 'fibo' ? React.createElement("label", {
       className: "flex items-center gap-1 text-[11px] text-gray-500 dark:text-gray-400",
-      title: `FIBO 2.0 프롬프트 준비 — 지금 적용: ${describeFiboPlanMode(fiboPlanMode)} (입력창에 JSON 객체를 쓰면 그대로 보냄)`
+      title: `FIBO 준비: ${describeFiboPlanMode(fiboPlanMode)}. JSON은 그대로 전달합니다.`
     }, "📝 준비", React.createElement("select", {
       value: settings.fiboPlanner,
       onChange: e => updateSetting({
@@ -23719,7 +23779,7 @@ const App = () => {
       value: choice
     }, choice === 'auto' ? `자동(${fiboAutoMode === 'vgl' ? 'Bria VGL' : GENERAL_MODEL_INFO[fiboAutoMode]?.name || fiboAutoMode})` : choice === 'vgl' ? 'Bria 공식 VGL' : choice === 'direct' ? 'VGL 없이 바로' : `${GENERAL_MODEL_INFO[choice].name}${hasGeneralProviderKey(settings, choice) ? '' : '(키 없음)'}`)))) : null, provider === 'fibo' ? React.createElement("label", {
       className: "flex items-center gap-1 text-[11px] text-gray-500 dark:text-gray-400",
-      title: "FIBO 2.0 생성(Dev) 단계 수 — 50 공식 권장 · 30 공식 Space 기본(빠름). 터보 모드면 30."
+      title: "FIBO 생성 단계: 권장 50·빠름 30. 속도 우선 모드는 30입니다."
     }, "🎚 단계", React.createElement("select", {
       value: String(settings.fiboDevSteps),
       onChange: e => updateSetting({
@@ -23732,7 +23792,7 @@ const App = () => {
       value: String(steps)
     }, `Dev ${steps}`)))) : null, provider === 'qwen' ? React.createElement("label", {
       className: "flex items-center gap-1 text-[11px] text-gray-500 dark:text-gray-400",
-      title: `Qwen 프롬프트 준비 — 지금 적용: ${describeQwenPlanMode(qwenPlanMode)}`
+      title: `Qwen 준비: ${describeQwenPlanMode(qwenPlanMode)}`
     }, "📝 준비", React.createElement("select", {
       value: settings.qwenPlanner,
       onChange: e => updateSetting({
@@ -23764,7 +23824,7 @@ const App = () => {
       fiboRoute: 'auto'
     }, settings.model).map(route => OPEN_ROUTE_INFO[route].short).join('→')})` : `${OPEN_ROUTE_INFO[choice].short}${isOpenRouteReady(settings, choice) ? '' : choice === 'hf' ? '(토큰 없음)' : '(키 없음)'}`)))) : null, provider === 'qwen' || provider === 'fibo' ? React.createElement("label", {
       className: "flex items-center gap-1 text-[11px] text-gray-500 dark:text-gray-400 cursor-pointer select-none",
-      title: "무검열 우선: Qwen은 입력을 그대로 보내고, FIBO 생성은 VGL 작성기가 거부하면 VGL 없이 한 번 더 그립니다."
+      title: "원문 우선: Qwen 직접 전달·FIBO VGL 거부 시 직접 재시도. 공급사 정책은 적용됩니다."
     }, React.createElement("input", {
       type: "checkbox",
       checked: settings.openRawMode !== false,
@@ -23773,7 +23833,7 @@ const App = () => {
       }),
       "data-testid": "quick-open-raw",
       className: "rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-    }), "무검열 우선") : null, provider !== 'fibo' && provider !== 'qwen' || usesVisualPlanner(settings) ? React.createElement("label", {
+    }), "원문 우선") : null, provider !== 'fibo' && provider !== 'qwen' || usesVisualPlanner(settings) ? React.createElement("label", {
       className: "flex items-center gap-1 text-[11px] text-gray-500 dark:text-gray-400",
       title: `${planner.name} 생각 수준 — ${PLANNER_THINKING_HINTS[plannerProvider]}`
     }, "🧠 계획", React.createElement("select", {
@@ -23814,8 +23874,8 @@ const App = () => {
     }, "지정 불가")), input ? React.createElement("span", {
       className: `text-[11px] ${overPlanner ? 'text-red-500 font-semibold' : overDirect ? 'text-yellow-600 dark:text-yellow-400' : 'text-gray-400'}`,
       "data-testid": "prompt-length",
-      title: plannerInUse ? `이미지 모델에 원문 그대로 전달: ${directLabel}까지 · 계획 모델 ${planner.name} 입력 한도 ${planner.inputTokens.toLocaleString('ko-KR')} 토큰(문서·대화 포함). 이미지 모델 한도를 넘는 원문은 계획 모델이 전체를 읽어 제작 지시에 담고, 이미지 모델에는 앞·뒤만 직접 보냅니다.` : `${provider === 'qwen' ? 'Qwen' : 'FIBO 2.0(Bria VGL)'}에 원문 그대로 전달: ${directLabel}까지(공식 한도 미공개). 넘는 부분은 앞·뒤만 남깁니다.`
-    }, `${input.length.toLocaleString('ko-KR')}자 · 약 ${tokens.toLocaleString('ko-KR')} 토큰${overPlanner ? ` · 계획 모델 한도(${planner.inputTokens.toLocaleString('ko-KR')} 토큰) ${tokens > planner.inputTokens ? '초과 — 줄여 주세요' : '근접'}` : directSize > budget.max ? (plannerInUse ? ` · 이미지 모델 직접 한도(${directLabel}) 초과 → 계획 모델이 전체를 반영하고 이미지 모델엔 앞·뒤만 전달` : ` · ${provider === 'qwen' ? 'Qwen' : 'FIBO'} 전달 한도(${directLabel}) 초과 → 앞·뒤만 전달`) : overDirect ? ` · 이미지 모델 직접 한도(${directLabel}) 근접` : ''}`) : null);
+      title: plannerInUse ? `직접 전달 한도 ${directLabel}. ${planner.name} 입력은 문서·대화 포함 ${planner.inputTokens.toLocaleString('ko-KR')}토큰까지입니다. 초과 원문은 계획으로 요약하며 직접 전달 시 앞·뒤를 남깁니다.` : `${provider === 'qwen' ? 'Qwen' : 'FIBO'} 앱 전달 한도 ${directLabel}(공식 한도 미공개). 초과 시 앞·뒤를 남깁니다.`
+    }, `${input.length.toLocaleString('ko-KR')}자 · 약 ${tokens.toLocaleString('ko-KR')}토큰${overPlanner ? ` · 계획 모델 ${planner.inputTokens.toLocaleString('ko-KR')}토큰 ${tokens > planner.inputTokens ? '초과·줄여 주세요' : '근접'}` : directSize > budget.max ? (plannerInUse ? ` · 직접 한도 ${directLabel} 초과·계획 요약 + 원문 앞뒤 전달` : ` · 전달 한도 ${directLabel} 초과·원문 앞뒤 전달`) : overDirect ? ` · 직접 한도 ${directLabel} 근접` : ''}`) : null);
   };
   // 입력창 위 첨부 트레이(최대 20장): 번호·삭제·기준(★) 지정·다중 편집 방식 선택.
   const renderAttachmentTray = () => {
@@ -23856,7 +23916,7 @@ const App = () => {
       const ignoredMasks = maskedIndices.filter(index => anchors.includes(index));
       if (ignoredMasks.length) maskWarnings.push(`기준(★) 이미지 ${ignoredMasks.map(n => `#${n}`).join(', ')}는 다시 생성하지 않으므로 마스크가 쓰이지 않습니다.`);
     }
-    const maskRouteText = getModelProvider(settings.model) === 'fibo' ? 'FIBO 2.0 공식 마스크(흰색 = 바꿀 곳)로 영역을 전달 — 참조 이미지와 함께면 공식 마스크를 쓸 수 없어 위치 설명 + 앱 합성' : getModelProvider(settings.model) === 'qwen' ? 'Qwen 이 공식으로 지원하는 칠한 표시 방식(영역 안내 이미지) + 위치 설명으로 영역을 전달' : getModelProvider(settings.model) === 'openai' ? 'GPT Image 공식 mask 파라미터로 영역을 전달' : maxInputs >= 2 ? '공식 mask 파라미터가 없는 모델이라 영역 안내 이미지 + 좌표로 영역을 전달' : '이 모델은 이미지를 1장만 받아 좌표 지시로 영역을 전달';
+    const maskRouteText = getModelProvider(settings.model) === 'fibo' ? 'FIBO: 공식 마스크 사용(다중 참조는 위치 설명 사용)' : getModelProvider(settings.model) === 'qwen' ? 'Qwen: 영역 안내 이미지·위치 설명' : getModelProvider(settings.model) === 'openai' ? 'GPT Image: 공식 mask 사용' : maxInputs >= 2 ? '영역 안내 이미지·좌표 전달' : '이미지 1장·좌표 전달';
     // 마스크 이미지별 요청 해상도·합성 해상도·예상 단가(요청 직전과 같은 규칙으로 계산).
     const maskResolutionLines = uploadedImages.map((item, i) => {
       if (!item.mask) return null;
@@ -23897,7 +23957,7 @@ const App = () => {
       className: "mt-2 space-y-1.5"
     }, React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed"
-    }, `🎭 마스크${isMulti ? ` ${maskedIndices.map(n => `#${n}`).join(', ')}` : ''} — 칠한 영역만 편집합니다. ${maskRouteText}하고, ${settings.maskComposite ? '결과에서 칠한 영역 밖은 원본 픽셀로 되돌려 합성합니다.' : '원본 보존 합성이 꺼져 있어 모델 출력을 그대로 씁니다(설정에서 켤 수 있음).'}`), settings.maskComposite && maskResolutionLines.length ? React.createElement("p", {
+    }, `🎭 마스크${isMulti ? ` ${maskedIndices.map(n => `#${n}`).join(', ')}` : ''} · ${maskRouteText}. ${settings.maskComposite ? '합성 적용 시 마스크·페더 밖 원본 픽셀을 유지합니다.' : '보존 합성 꺼짐: 모델 출력 전체를 사용합니다.'}`), settings.maskComposite && maskResolutionLines.length ? React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed"
     }, maskResolutionLines.map((line, i) => React.createElement("span", {
       key: `mask-res-${i}`,
@@ -23926,7 +23986,7 @@ const App = () => {
     }, preserveActive ? React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed",
       "data-testid": "auto-preserve-hint"
-    }, "🛡️ 편집이면 바뀐 부분만 새 결과로 쓰고 나머지(얼굴·체형·배경 등)는 원본 픽셀 그대로 둡니다(전체를 바꾸는 요청 제외).", preserveLines.map((line, i) => React.createElement("span", {
+    }, "🛡️ 부분 편집은 추정 영역 밖 원본 픽셀을 보존합니다. 전체 변경 요청은 제외하며 결과별 적용 상태를 확인하세요.", preserveLines.map((line, i) => React.createElement("span", {
       key: `preserve-res-${i}`,
       className: "block"
     }, `📐 ${line}`))) : null, React.createElement("p", {
@@ -23990,7 +24050,7 @@ const App = () => {
       className: `px-2.5 py-1 rounded-lg border text-[11px] font-semibold transition ${mode === option.value ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300' : 'border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400'}`
     }, option.label))), mode === 'each' ? React.createElement(React.Fragment, null, React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed"
-    }, autoCombined ? `기준 ${anchors.map(n => `#${n}`).join(', ')} (프롬프트에서 자동 감지) — 첨부한 모든 이미지가 번호로 언급돼 개별 편집할 대상이 없으므로, 보내면 합성(#1 이 바탕 · ${getEffectiveCount(settings)}장 출력)으로 처리합니다. 개별 편집을 원하면 ☆/★ 로 기준을 직접 고르세요.` : anchors.length ? `기준 ${anchors.map(n => `#${n}`).join(', ')}${Array.isArray(manualAnchors) ? ' (수동 지정)' : ' (프롬프트에서 자동 감지)'} — 나머지 이미지를 기준에 맞춰 같은 지시로 편집합니다.${settings.regenerateAnchors ? '' : ' 기준 이미지는 원본 그대로 결과에 포함(과금 없음).'}` : '기준 없음 — 모든 이미지에 같은 지시를 일관되게 적용합니다. (예: "3번째 그림을 기준으로 그림체를 똑같이" 라고 쓰면 #3이 자동으로 기준이 됩니다)'), React.createElement("div", {
+    }, autoCombined ? `모든 첨부가 기준으로 감지되어 합성합니다(#1 바탕·${getEffectiveCount(settings)}장). 개별 편집은 ☆/★로 기준을 직접 고르세요.` : anchors.length ? `기준 ${anchors.map(n => `#${n}`).join(', ')}${Array.isArray(manualAnchors) ? '·수동' : '·자동'}: 나머지 이미지를 같은 지시로 편집합니다.${settings.regenerateAnchors ? '' : ' 기준 원본은 생성 비용 없이 포함합니다.'}` : '기준 없음: 전체에 같은 지시를 적용합니다. "3번째 그림체로"처럼 입력하면 #3을 기준으로 감지합니다.'), React.createElement("div", {
       className: "flex flex-wrap gap-3"
     }, toggle(settings.keepSourceAspect, checked => updateSetting({
       keepSourceAspect: checked
@@ -24003,7 +24063,7 @@ const App = () => {
       className: "text-[11px] text-blue-600 dark:text-blue-400 hover:underline"
     }, "자동 감지로 되돌리기") : null)) : React.createElement("p", {
       className: "text-[11px] text-gray-500 dark:text-gray-400"
-    }, maskedIndices.length ? `첨부한 ${count}장을 한 요청에 참고해 #${maskedIndices[0]}의 칠한 영역만 편집합니다(다른 이미지는 참조 · 모델 한도 ${maxInputs}장).` : `첨부한 ${count}장을 모두 한 요청에 참고해 새 이미지를 만듭니다(모델 한도 ${maxInputs}장).`), warnings.map((warning, i) => React.createElement("p", {
+    }, maskedIndices.length ? `${count}장을 참고해 #${maskedIndices[0]}의 마스크 영역을 편집합니다(참조 한도 ${maxInputs}장).` : `${count}장을 참고해 새 이미지를 만듭니다(참조 한도 ${maxInputs}장).`), warnings.map((warning, i) => React.createElement("p", {
       key: `warn-${i}`,
       className: "text-[11px] text-red-500 font-medium"
     }, `⚠️ ${warning}`))) : null, maskBlock);
@@ -24023,7 +24083,7 @@ const App = () => {
     className: "w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white shadow-sm"
   }, React.createElement(Icons.Sparkles, null)), React.createElement("h1", {
     className: "font-bold text-lg tracking-tight"
-  }, "\uC560\uBBF8\uB098\uC774 v1.26.0")), React.createElement("button", {
+  }, "\uC560\uBBF8\uB098\uC774 v1.26.1")), React.createElement("button", {
     className: "md:hidden text-gray-500",
     onClick: () => setIsSidebarOpen(false)
   }, React.createElement(Icons.Close, null))), React.createElement("div", {
@@ -24332,7 +24392,7 @@ const App = () => {
       }
     },
     onPaste: e => handlePaste(e, 'tray'),
-    placeholder: uploadedDocs.length && !uploadedImages.some(item => item.mask) ? "문서 내용을 바탕으로 그릴 지시를 입력하세요... (예: 2장의 장면을 수채화로 그려줘 / 이 보고서를 인포그래픽으로)" : uploadedImages.some(item => item.mask) ? "칠한 영역에 적용할 변경 내용을 입력하세요... (예: 빨간 모자로 바꿔줘 / 이 물체를 지워줘)" : uploadedImages.length >= 2 ? "\uC5EC\uB7EC \uC7A5\uC744 \uD55C \uBC88\uC5D0 \uD3B8\uC9D1\uD560 \uC9C0\uC2DC\uB97C \uC785\uB825\uD558\uC138\uC694... (\uC608: \uCCA8\uBD80\uD55C \uC774\uBBF8\uC9C0 \uC804\uBD80 3\uBC88\uC9F8 \uADF8\uB9BC\uC744 \uAE30\uC900\uC73C\uB85C \uADF8\uB9BC\uCCB4\uB97C \uB611\uAC19\uC774 \uD574\uC918)" : "\uD504\uB86C\uD504\uD2B8\uB97C \uC785\uB825\uD558\uC138\uC694... (\uC608: \uC0AC\uC774\uBC84\uD391\uD06C \uC2A4\uD0C0\uC77C\uB85C \uD3B8\uC9D1)",
+    placeholder: uploadedDocs.length && !uploadedImages.some(item => item.mask) ? "문서로 그릴 내용을 입력하세요. 예: 2장 장면을 수채화로" : uploadedImages.some(item => item.mask) ? "칠한 영역의 변경 내용을 입력하세요. 예: 모자를 빨간색으로" : uploadedImages.length >= 2 ? "여러 이미지의 변경 내용을 입력하세요. 예: 3번째 그림체로 통일" : "만들거나 편집할 내용을 입력하세요.",
     className: "flex-1 max-h-32 min-h-[44px] bg-transparent resize-none outline-none py-2.5 md:py-3 px-1 md:px-2 text-sm md:text-[15px] leading-relaxed text-gray-900 dark:text-gray-100 placeholder-gray-400",
     rows: "1"
   }), React.createElement("div", {
@@ -24357,7 +24417,20 @@ const App = () => {
     initialMask: maskEditor.initialMask,
     onApply: applyMaskFromEditor,
     onCancel: () => closeMaskEditor(false)
-  }), lightboxImg && React.createElement("div", {
+  }), editComparison && React.createElement("div", {
+    role: "dialog", "aria-modal": true, "aria-label": "원본·편집본 비교", "data-testid": "edit-compare-dialog",
+    className: "edit-compare-dialog fixed inset-0 z-[350] bg-black/95 p-4 text-white",
+    onClick: () => setEditComparison(null)
+  }, React.createElement("div", { className: "max-w-full mx-auto", onClick: event => event.stopPropagation() },
+    React.createElement("div", { className: "flex justify-between items-center mb-3" },
+      React.createElement("strong", null, "원본·편집본 비교"),
+      React.createElement("button", { type: "button", onClick: () => setEditComparison(null), className: "px-3 py-2 rounded-lg border border-gray-600" }, "닫기")),
+    React.createElement("p", { className: "text-sm mb-3 text-gray-300" }, "눈·코·입, 가슴 윤곽, 몸 비율, 다리 굵기·길이를 확인하세요. 사진을 누르면 크게 볼 수 있습니다. 가려진 신체 치수는 판정할 수 없습니다."),
+    React.createElement("div", { className: "edit-compare-grid" },
+      [{ label: "원본(합성 기준)", url: editComparison.before }, { label: "현재 편집본", url: editComparison.after }].map(item => React.createElement("figure", { key: item.label },
+        React.createElement("figcaption", { className: "mb-2 text-sm" }, item.label),
+        React.createElement("img", { src: item.url, alt: item.label, className: "w-full object-contain cursor-zoom-in rounded-lg", onClick: () => setLightboxImg({ imageUrl: item.url, dpi: OUTPUT_DPI }) }))))
+  )), lightboxImg && React.createElement("div", {
     className: "fixed inset-0 z-[400] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in",
     onClick: () => setLightboxImg(null)
   }, React.createElement("img", {
