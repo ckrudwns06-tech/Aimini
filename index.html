@@ -7,7 +7,7 @@
          This personal local app calls provider APIs directly. Use a backend secret store before public hosting.
          React 18.3.1 is bundled inline with its license notice. Document readers load from a pinned-version external CDN. -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://generativelanguage.googleapis.com https://api.x.ai https://management-api.x.ai https://api.openai.com https://unpkg.com https://data-api.ecb.europa.eu https://huggingface.co https://router.huggingface.co https://*.hf.space https://*.gradio.live https://api.wavespeed.ai https://queue.fal.run https://api.fal.ai https://fal.media https://*.fal.media https://api.runware.ai https://im.runware.ai https://openrouter.ai http://localhost:* http://127.0.0.1:*; worker-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
-    <title>애미나이 ver.1.26.1 · Qwen Image 2.1 · FIBO 2.0</title>
+    <title>애미나이 ver.1.27.0 · Qwen Image 2.1 · FIBO 2.0</title>
     <style>
       .edit-compare-dialog { overflow: auto; }
       .edit-compare-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
@@ -815,7 +815,7 @@ const OUTPUT_DPI = 300;
 const MAX_UPLOAD_BYTES = 20 * 1024 * 1024;
 const XAI_EDIT_REFERENCE_MAX_DIM = 2048;
 const XAI_EDIT_REFERENCE_QUALITY = 0.96;
-// xAI 프롬프트 상한은 첨부 코드의 보수적 기존값이며, 이번 실제 API 한도 검증은 보류 상태다.
+// xAI 프롬프트 상한: 공식 문서에 한도가 없어 앱의 기존 상한(UTF-8 바이트 기준)을 쓴다.
 // (바이트 수 ≥ 토큰 수이므로 바이트로 세면 단위가 토큰이어도 항상 한도 안이다.)
 const XAI_PROMPT_BYTE_LIMITS = {
   'grok-imagine-image': 16000,
@@ -949,6 +949,7 @@ const fetchEcbUsdKrw = async signal => {
 // 사전 추정에는 출력 단가만 쓰고, 실제 기록 단가는 응답 usage.cost_in_usd_ticks(1달러 = 10^10 ticks)로 계산한다.
 // Grok Imagine 공식 단가(USD/장). docs.x.ai/developers/pricing 페이지 데이터(resolutionPricing · pricePerInputImage, 2026-10-31 확인).
 // 2.0 은 실제로 제공된(served) 품질로 과금된다(공식 이미지 생성 문서). low 1K $0.04 · 2K $0.06 / medium 1K $0.06 · 2K $0.08,
+// 입력(참조) 이미지는 1장당 2.0 $0.01 · 1.0 $0.002(아래 표의 inputImage).
 // 이 표는 사전 추정에만 쓰고, 결과의 기록 비용은 항상 응답의 usage.cost_in_usd_ticks(실제 청구액)를 쓴다.
 const XAI_PRICES_USD = {
   'grok-imagine-image-2.0': {
@@ -1054,7 +1055,8 @@ const HF_SPACE_WAKE_TIMEOUT_MS = 15 * 60 * 1000;
 //  - 7B 단일 스트림 DiT(32층) + Qwen3-VL 8B 텍스트 인코더 + 16배 RGBA VAE. 2.1 본판(2026-09-14 공개)은 공개 Space 기본 40단계,
 //    2.1 Turbo(2026-10-09 공개)는 체크포인트에 저장된 8단계·CFG 1 스케줄의 증류판이다(같은 QwenImage21Pipeline).
 //  - 해상도 기준 1024·1536·2048(기본 2048), 비율 1:1·4:3·3:4·3:2·2:3·16:9·9:16. 편집 참조 이미지 최대 10장(<image1>…<image10>).
-//  - 비율을 정하지 않은 편집은 마지막 입력 이미지의 비율을 따른다(파이프라인 코드). 앱은 공식 데모 관례대로 편집 대상을 첫 번째에 두고
+//  - 비율을 정하지 않은 편집은 마지막 입력 이미지의 비율을 따른다(파이프라인 코드). 앱은 공식 데모 관례대로 편집 대상을 첫 번째에 두고,
+//    비율은 공식 비율 지정·영역 안내·대상 사본으로 맞춘다.
 //  - 라이선스: Qwen Research License(연구·평가용, 상업적 이용은 별도 허가 필요). 가중치에는 안전 검사기 구성 요소가 없다(model_index.json).
 // 실행: HF 'hugging-apps' 의 공개 ZeroGPU Space(공식 diffusers 파이프라인 데모)를 Gradio 대기열 API 로 브라우저에서 바로 부른다.
 // ZeroGPU 일일 GPU 할당량(공식): 비로그인 2분 · 무료 계정 5분 · PRO 40분(PRO 는 선불 크레딧 10분당 $1 로 자동 초과 사용).
@@ -1373,6 +1375,10 @@ const DEFAULT_SETTINGS = {
   toneFidelity: true,
   // 응답 속도 우선: 이미지 모델 사고를 '자동'으로 둔 경우 최저로 낮추고, GPT Image 결과를 JPEG 로 받는다.
   turboMode: false,
+  // 백그라운드 대비(v1.27.0, 기본 켜짐): 생성 중 화면 꺼짐 방지(Screen Wake Lock — 화면을 보고 있을 때만, 끝나면 해제) ·
+  // 끝나지 못한 작업 자동 이어하기(브라우저가 백그라운드에서 페이지를 종료했거나 숨겨진 동안 연결이 끊긴 작업을 다시 열 때·돌아올 때 처음부터 다시 실행).
+  keepAwakeWhileGenerating: true,
+  resumeInterrupted: true,
   // 🔎 검색(기본 꺼짐 · 검색마다 과금). Google 모델 = Google 검색, OpenAI·xAI = 각 공급사 공식 웹 검색.
   webSearch: false,
   // 🖼 이미지 검색. 나노바나나 2.1·2 = Google 이미지 검색, OpenAI·xAI = 계획 모델의 공식 웹 검색 이미지 결과.
@@ -1428,6 +1434,8 @@ const sanitizeSettings = (settings = {}) => {
   next.autoPreserveColorMatch = next.autoPreserveColorMatch !== false;
   next.autoPreserveMatchResolution = next.autoPreserveMatchResolution !== false;
   next.toneFidelity = next.toneFidelity !== false;
+  next.keepAwakeWhileGenerating = next.keepAwakeWhileGenerating !== false;
+  next.resumeInterrupted = next.resumeInterrupted !== false;
   // 기본값이 꺼짐이므로 true 일 때만 켠다(값이 비어 있으면 꺼짐).
   next.turboMode = next.turboMode === true;
   next.webSearch = next.webSearch === true;
@@ -1904,7 +1912,8 @@ const computeGoogleCostFromUsage = (modelKey, usage, tier = 'standard') => {
     if (/IMAGE/i.test(String(detail?.modality || ''))) imageTokens += count;else detailTextTokens += count;
   });
   if (imageTokens <= 0) return null;
-  // candidatesTokenCount 1606 vs IMAGE 상세 1120). 전체 출력 토큰에서 이미지 토큰을 뺀 값으로 텍스트 출력 토큰을
+  // candidatesTokensDetails 에는 이미지 토큰만 실리고 함께 출력된 텍스트 토큰이 빠질 수 있다. 전체 출력 토큰(candidatesTokenCount)에서
+  // 이미지 토큰을 뺀 값으로 텍스트 출력 토큰을
   // 보정해, 텍스트 출력 단가($7.50/1M 등)가 누락되지 않게 한다. (thoughtsTokenCount 는 공식 과금식상 별도 합산.)
   const textTokens = Math.max(detailTextTokens, candidateTokens - imageTokens);
   const textRate = pricing.textOut ?? 0;
@@ -2421,6 +2430,7 @@ const initDB = () => {
 };
 // ── 큰 값 분리 저장(v1.19.0 에서 검증된 방식 이식) ──────────────────────────────────────────────────────────────────────────
 // 크롬·엣지(Chromium) IndexedDB 는 값 1개가 약 127MB(133,169,152바이트)를 넘으면 저장을 거부한다 — 동기 예외 없이 트랜잭션이
+// UnknownError 로 중단된다.
 // 예전에는 모든 채팅(4K 이미지 data URL 포함)을 'chats' 값 하나로 기록해, 4K 이미지 5~6장 분량을 넘으면 이후 변경이 경고 없이
 // 저장되지 않았다(새로고침하면 사라짐). 이제 큰 문자열(이미지 data URL 64KB 이상 · 그 밖의 글 256K자 이상)은 'blob:<키>:<id>'
 // 레코드로 따로 저장하고(같은 내용은 1번만, 32M자를 넘으면 조각으로) 본 값에는 참조만 남긴다. 새로 생긴 큰 값만 기록하므로 저장도
@@ -2495,6 +2505,169 @@ const isSoleOpenTab = async () => {
   } catch (e) {
     return false;
   }
+};
+// ─── 진행 중 작업 기록(v1.27.0 · 백그라운드에서 페이지가 종료될 때 대비) ──────────────────────────────────────
+// 브라우저는 숨겨진 페이지를 동결(freeze)하고, 메모리가 부족하면 알림 없이 폐기·종료한다(Page Lifecycle API). Android Chrome 은
+// 백그라운드 약 5분 뒤 동결하며, 데스크톱의 동결 예외(Web Lock·IndexedDB 등)를 모바일에서는 따르지 않는다
+// (chromium.googlesource.com/chromium/src/+/HEAD/chrome/browser/performance_manager/docs/freezing_opt_out_opt_in.md).
+// 동결은 다시 보이면 그대로 이어진다(진행 중이던 요청의 응답 포함 — 2026-11-10 Chrome 153 실측: 동결 12초 동안 도착한 3MB 응답이
+// 재개 직후 그대로 전달됨). 하지만 폐기·종료되면 메모리의 작업이 사라진다. 그래서 작업을 시작할 때 localStorage 에 기록하고
+// 끝나면 지운다. 다시 열었을 때 남은 기록 = 끝나지 못한 작업 → 자동으로 처음부터 다시 만들거나(설정) 재생성 버튼과 함께 안내한다.
+// 기록에는 API 키를 넣지 않는다(이어 할 때 현재 설정의 키를 쓴다). 탭마다 고유 Web Lock 을 쥐어, 아직 열려 있는 다른 탭의 작업은 건드리지 않는다.
+const RUN_JOURNAL_KEY = 'aeminai-run-journal';
+const RUN_JOURNAL_MAX_AGE_MS = 24 * 60 * 60 * 1000;
+const RUN_JOURNAL_MAX_RESUMES = 2;
+const RUN_JOURNAL_MAX_ENTRIES = 40;
+// 끝난 작업의 결과가 IndexedDB 에 기록될 시간을 준 뒤 기록을 지운다(그 사이 종료되면 다시 열 때 결과가 있는지 확인해 건너뛴다).
+const RUN_JOURNAL_CLEAR_DELAY_MS = 1500;
+const RUN_TAB_LOCK_PREFIX = 'aeminai-tab:';
+const RUN_TAB_ID = createStoreBlobId();
+let runTabLockPromise = null;
+const ensureRunTabLock = () => {
+  if (runTabLockPromise) return runTabLockPromise;
+  runTabLockPromise = new Promise(resolve => {
+    if (!navigator.locks?.request) {
+      resolve(false);
+      return;
+    }
+    navigator.locks.request(`${RUN_TAB_LOCK_PREFIX}${RUN_TAB_ID}`, () => {
+      resolve(true);
+      return new Promise(() => {});
+    }).catch(() => resolve(false));
+  });
+  return runTabLockPromise;
+};
+ensureRunTabLock();
+const readRunJournal = () => {
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(RUN_JOURNAL_KEY) || '[]');
+    return Array.isArray(parsed) ? parsed.filter(entry => entry && typeof entry === 'object' && typeof entry.id === 'string') : [];
+  } catch (e) {
+    return [];
+  }
+};
+const writeRunJournal = entries => {
+  try {
+    if (entries.length) window.localStorage.setItem(RUN_JOURNAL_KEY, JSON.stringify(entries.slice(-RUN_JOURNAL_MAX_ENTRIES)));else window.localStorage.removeItem(RUN_JOURNAL_KEY);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+const updateRunJournal = updater => writeRunJournal(updater(readRunJournal()));
+const addRunJournalEntry = entry => updateRunJournal(list => [...list.filter(item => item.id !== entry.id), {
+  ...entry,
+  tabId: RUN_TAB_ID
+}]);
+const removeRunJournalEntry = id => updateRunJournal(list => list.filter(item => item.id !== id));
+// 이 탭의 기록에 '사용자가 페이지를 떠남(새로고침·닫기·이동)' 표시를 하거나 지운다. 떠난 뒤 남은 작업은 자동으로 다시 만들지 않는다.
+const markRunJournalLeft = left => updateRunJournal(list => list.map(item => item.tabId === RUN_TAB_ID ? {
+  ...item,
+  leftAt: left ? Date.now() : null
+} : item));
+// 끝나지 못한 작업(이 탭 것이 아니고, 그 탭이 더 이상 열려 있지 않은 기록)을 꺼내고 기록에서 지운다.
+const takeInterruptedRuns = async () => {
+  if (!readRunJournal().length) return [];
+  await ensureRunTabLock();
+  let liveTabs = null;
+  if (navigator.locks?.query) {
+    try {
+      const state = await navigator.locks.query();
+      liveTabs = new Set((state.held || []).map(lock => String(lock.name || '')).filter(name => name.startsWith(RUN_TAB_LOCK_PREFIX)).map(name => name.slice(RUN_TAB_LOCK_PREFIX.length)));
+    } catch (e) {}
+  }
+  const taken = [];
+  updateRunJournal(list => list.filter(item => {
+    if (item.tabId === RUN_TAB_ID || liveTabs?.has(item.tabId)) return true;
+    taken.push(item);
+    return false;
+  }));
+  return taken.sort((a, b) => (Number(a.startedAt) || 0) - (Number(b.startedAt) || 0));
+};
+// 기록된 작업의 결과가 이미 저장돼 있는지(끝난 직후 기록을 지우기 전에 종료된 경우): 그 작업이 시작된 뒤에 생긴 결과·오류가 있으면 끝난 것이다.
+const isJournaledRunFinished = (chat, entry) => {
+  const messages = chat?.messages || [];
+  const since = (Number(entry.startedAt) || 0) - 1000;
+  if (entry.kind === 'upscale') return messages.some(m => m.upscaleSourceMsgId === entry.msgId && (Number(m.timestamp) || 0) >= since);
+  if (entry.kind === 'regen' && Array.isArray(entry.replaceMessageIds) && entry.replaceMessageIds.length && entry.replaceMessageIds.every(id => !messages.some(m => m.id === id))) return true;
+  return Boolean(entry.sourceUserMsgId) && messages.some(m => m.role !== 'user' && m.sourceUserMsgId === entry.sourceUserMsgId && (Number(m.timestamp) || 0) >= since && !(entry.replaceMessageIds || []).includes(m.id));
+};
+// 페이지가 숨겨진 횟수(작업 도중 한 번이라도 숨겨졌는지 판단용)와, 숨겨진 동안 끝난 작업 수의 탭 제목 표시(다시 보면 원래 제목).
+let pageHiddenEpoch = document.hidden ? 1 : 0;
+let backgroundDoneCount = 0;
+let backgroundErrorCount = 0;
+let backgroundBaseTitle = null;
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    pageHiddenEpoch++;
+    return;
+  }
+  if (backgroundBaseTitle != null) {
+    document.title = backgroundBaseTitle;
+    backgroundBaseTitle = null;
+    backgroundDoneCount = 0;
+    backgroundErrorCount = 0;
+  }
+});
+// 동결(freeze) 시간을 뺀 '실행 시간' 시계(v1.27.0). 동결된 페이지는 아무것도 하지 못하므로, 오래 동결됐다가 돌아온 직후 제한 시간을 넘겼다고
+// 판단하면 동결 중 이미 도착한 응답까지 버리게 된다. freeze·resume 은 Page Lifecycle API 이벤트(Chromium). 이벤트가 없는 브라우저는 벽시계와 같다.
+let pageFrozenTotalMs = 0;
+let pageFrozenAt = null;
+document.addEventListener('freeze', () => {
+  pageFrozenAt = Date.now();
+});
+document.addEventListener('resume', () => {
+  if (pageFrozenAt != null) pageFrozenTotalMs += Math.max(0, Date.now() - pageFrozenAt);
+  pageFrozenAt = null;
+});
+const activeNow = () => Date.now() - pageFrozenTotalMs - (pageFrozenAt != null ? Math.max(0, Date.now() - pageFrozenAt) : 0);
+// AbortSignal.timeout(ms)와 같지만 동결 시간을 세지 않는다(시간이 되면 TimeoutError 로 중단).
+const activeTimeoutSignal = ms => {
+  const controller = new AbortController();
+  const deadline = activeNow() + ms;
+  const check = () => {
+    // resume 이벤트보다 밀린 타이머가 먼저 실행되면 동결 시간이 아직 빠지지 않았으므로 잠시 뒤 다시 확인한다.
+    if (pageFrozenAt != null) {
+      setTimeout(check, 1000);
+      return;
+    }
+    const left = deadline - activeNow();
+    if (left <= 0) controller.abort(new DOMException('The operation timed out.', 'TimeoutError'));else setTimeout(check, Math.min(left, 60000));
+  };
+  setTimeout(check, Math.min(ms, 60000));
+  return controller.signal;
+};
+// failed: 오류로 끝난 작업이면 true(제목에 오류 수를 따로 표시한다).
+const noteBackgroundCompletion = (count = 1, failed = false) => {
+  if (!document.hidden || !(count > 0)) return;
+  if (backgroundBaseTitle == null) backgroundBaseTitle = document.title;
+  backgroundDoneCount += count;
+  if (failed) backgroundErrorCount += count;
+  document.title = backgroundErrorCount ? `⚠️ ${backgroundDoneCount}건 끝남(오류 ${backgroundErrorCount}) · ${backgroundBaseTitle}` : `✅ ${backgroundDoneCount}건 완료 · ${backgroundBaseTitle}`;
+};
+// 네트워크 단계의 실패(연결 끊김·응답 없음)인지. fetch 는 TypeError 로 알린다(Chrome "Failed to fetch"·본문 중단 "network error" ·
+// Firefox "NetworkError when attempting to fetch resource." · Safari "Load failed"). 앱이 감싼 경로 오류는 code/hfCode 'network'.
+// 코드 오류(TypeError: … is not a function 등)는 네트워크 실패로 보지 않도록 브라우저 문구만 인정한다.
+const NETWORK_FAILURE_PATTERN = /Failed to fetch|NetworkError when attempting to fetch|^(?:TypeError:\s*)?(?:Load failed|network error)$|network connection was lost|ERR_(?:NETWORK|INTERNET_DISCONNECTED|CONNECTION_(?:RESET|CLOSED|ABORTED|REFUSED|TIMED_OUT)|NAME_NOT_RESOLVED)/i;
+const isLikelyNetworkFailure = error => {
+  if (!error || error.name === 'AbortError') return false;
+  if (error.code === 'network' || error.hfCode === 'network') return true;
+  return NETWORK_FAILURE_PATTERN.test(String(error.message || error).trim());
+};
+// 페이지가 보이고 온라인일 때 fn 을 한 번 실행한다(숨김·오프라인이면 그때까지 기다린다).
+const runWhenPageActive = fn => {
+  let done = false;
+  const ready = () => document.visibilityState === 'visible' && navigator.onLine !== false;
+  const check = () => {
+    if (done || !ready()) return;
+    done = true;
+    document.removeEventListener('visibilitychange', check);
+    window.removeEventListener('online', check);
+    setTimeout(fn, 0);
+  };
+  document.addEventListener('visibilitychange', check);
+  window.addEventListener('online', check);
+  check();
 };
 const shouldExternalizeString = text => text.length >= (text.startsWith('data:') ? STORE_INLINE_DATA_URL_MAX : STORE_INLINE_TEXT_MAX);
 const isPlainStoreObject = node => {
@@ -2682,6 +2855,11 @@ const writeStoreValue = (db, key, value) => {
   const store = transaction.objectStore(storeName);
   if (external) prepared.blobs.forEach((text, id) => putStoreBlob(store, key, id, text));
   store.put(external ? prepared.stored : value, key);
+  // 요청을 모두 넣었으니 바로 커밋을 시작한다(IndexedDB 3.0 commit()). 자동 커밋은 요청 결과 이벤트가 처리된 뒤에야 일어나,
+  // 숨김·동결 직전에 시작한 기록이 페이지가 동결·폐기되면 확정되지 않을 수 있다.
+  try {
+    if (typeof transaction.commit === 'function') transaction.commit();
+  } catch (e) {}
   return new Promise(resolve => {
     transaction.oncomplete = () => {
       if (external) prepared.referenced.forEach(id => registry.persisted.add(id));
@@ -2803,9 +2981,13 @@ const useIndexedDBState = (key, initialValue) => {
       if (document.visibilityState === 'hidden') flushWrite();
     };
     document.addEventListener('visibilitychange', onVisibility);
+    // 숨겨진 뒤 도착한 결과의 트레일링 기록이 남아 있으면, 페이지 동결(freeze — Page Lifecycle API) 직전에 마저 기록한다.
+    // 동결된 페이지는 알림 없이 폐기될 수 있다(developer.chrome.com/docs/web-platform/page-lifecycle-api).
+    document.addEventListener('freeze', flushWrite);
     window.addEventListener('pagehide', flushWrite);
     return () => {
       document.removeEventListener('visibilitychange', onVisibility);
+      document.removeEventListener('freeze', flushWrite);
       window.removeEventListener('pagehide', flushWrite);
       flushWrite();
     };
@@ -2911,28 +3093,61 @@ const loadImageElement = (src, signal) => {
     img.src = src;
   });
 };
+// 숨겨진 페이지(다른 탭·다른 앱·화면 꺼짐)용 양보 통로(v1.27.0). Chrome 은 숨겨진 페이지의 타이머 작업에 실행 시간 예산을 둔다
+// (developer.chrome.com/blog/background_tabs: 10초 뒤부터, 예산 재충전 0.01초/초). 그래서 setTimeout 으로 쪼갠 무거운 후처리는
+// 거의 멈춘다 — 2026-11-10 Chrome 153 실측: 숨김 상태 20초 동안 setTimeout 양보 40ms 작업 27회(CPU 5%) vs MessageChannel 500회(100%).
+// MessageChannel 메시지는 타이머가 아니라 예산 제한을 받지 않는다(페이지 '동결' 중에는 둘 다 멈추고, 재개되면 이어진다).
+const hiddenYieldQueue = [];
+let hiddenYieldChannel = null;
+const getHiddenYieldChannel = () => {
+  if (hiddenYieldChannel || typeof MessageChannel === 'undefined') return hiddenYieldChannel;
+  hiddenYieldChannel = new MessageChannel();
+  hiddenYieldChannel.port1.onmessage = () => {
+    const next = hiddenYieldQueue.shift();
+    if (next) next();
+  };
+  return hiddenYieldChannel;
+};
 const yieldToMainThread = signal => new Promise((resolve, reject) => {
   throwIfAborted(signal);
-  // 백그라운드 탭·가려진(최소화된) 창에서는 requestAnimationFrame 이 멈추므로 짧은 타이머와 경쟁시켜 먼저 오는 쪽으로 양보한다
-  // (다른 탭을 보는 동안에도 후처리·마스크 합성이 멈추지 않고 이어진다).
+  let settled = false;
+  let frameId = null;
+  let timerId = null;
   const done = () => {
+    if (settled) return;
+    settled = true;
     cleanup();
     resolve();
   };
-  const frameId = requestAnimationFrame(done);
-  const timerId = setTimeout(done, document.hidden ? 0 : 50);
+  const onVisibility = () => {
+    // 양보 중에 페이지가 숨겨지면 requestAnimationFrame 이 멈추고 타이머는 예산 제한을 받으므로 바로 이어 간다.
+    if (document.hidden) done();
+  };
   const cleanup = () => {
-    cancelAnimationFrame(frameId);
-    clearTimeout(timerId);
+    if (frameId != null) cancelAnimationFrame(frameId);
+    if (timerId != null) clearTimeout(timerId);
+    document.removeEventListener('visibilitychange', onVisibility);
     signal?.removeEventListener('abort', onAbort);
   };
   const onAbort = () => {
+    if (settled) return;
+    settled = true;
     cleanup();
     reject(makeAbortError());
   };
   signal?.addEventListener('abort', onAbort, {
     once: true
   });
+  const channel = document.hidden ? getHiddenYieldChannel() : null;
+  if (channel) {
+    hiddenYieldQueue.push(done);
+    channel.port2.postMessage(0);
+    return;
+  }
+  // 보이는 페이지: 화면을 한 번 그릴 기회를 주고(requestAnimationFrame) 짧은 타이머와 경쟁시켜 먼저 오는 쪽으로 이어 간다.
+  frameId = requestAnimationFrame(done);
+  timerId = setTimeout(done, document.hidden ? 0 : 50);
+  document.addEventListener('visibilitychange', onVisibility);
 });
 const blobToDataUrlWithAbort = (blob, signal) => new Promise((resolve, reject) => {
   throwIfAborted(signal);
@@ -2966,7 +3181,10 @@ const blobToDataUrlWithAbort = (blob, signal) => new Promise((resolve, reject) =
 });
 const canvasToDataUrlWithAbort = (canvas, mimeType = 'image/png', quality, signal) => {
   throwIfAborted(signal);
-  if (!canvas.toBlob) return Promise.resolve(canvas.toDataURL(mimeType, quality));
+  // 숨겨진 페이지에서는 동기 인코딩(toDataURL)을 쓴다(v1.27.0). Chrome 의 비동기 toBlob 은 유휴 시간에 인코딩을 예약해, 숨겨진 페이지에서는
+  // 호출마다 약 1초를 기다린다 — 2026-11-10 Chrome 153 실측(2048×1536): 숨김 상태 toBlob PNG 1,141ms·JPEG 1,032ms vs toDataURL 130ms·37ms,
+  // 결과 data URL 은 바이트까지 동일. 화면을 볼 때는 화면이 멈추지 않도록 지금처럼 toBlob 을 쓴다.
+  if (!canvas.toBlob || document.hidden) return Promise.resolve(canvas.toDataURL(mimeType, quality));
   return new Promise((resolve, reject) => {
     let settled = false;
     const cleanup = () => signal?.removeEventListener('abort', onAbort);
@@ -5731,7 +5949,7 @@ const buildGoogleGenerationPayload = (contents, settings, modelId, visualSeed = 
   const imageConfig = {};
   if (aspectRatio && aspectRatio !== 'auto') imageConfig.aspectRatio = aspectRatio;
   if (resolution && resolution !== '1K') imageConfig.imageSize = resolution;
-  // 실행됐고, TEXT+IMAGE 에서는 2회 중 2회 실행됐다(공식 웹 검색 예시도 TEXT+IMAGE). 추가 텍스트 토큰은 소량이다.
+  // 검색 도구가 실리면 TEXT+IMAGE 로 받는다(공식 웹 검색 예시도 TEXT+IMAGE). 추가 텍스트 토큰은 소량이다.
   const generationConfig = {
     responseModalities: imageOnly && !searchTool ? ['IMAGE'] : ['TEXT', 'IMAGE']
   };
@@ -5961,7 +6179,8 @@ const dedupeSearchLinks = (items, key) => {
   }).slice(0, SEARCH_SOURCE_MAX);
 };
 // Google groundingMetadata(공식 필드: webSearchQueries·imageSearchQueries·groundingChunks·searchEntryPoint.renderedContent).
-// imageUri(이미지 주소, 리다이렉트), title(<b> 태그 포함), domain } }. 웹 청크: { web: { uri(리다이렉트), title(도메인) } }.
+// 이미지 검색 근거는 이미지 청크 { image: { sourceUri(이미지가 있는 웹페이지, 리다이렉트 주소), imageUri(이미지 주소, 리다이렉트),
+// title(<b> 태그 포함), domain } }, 웹 청크는 { web: { uri(리다이렉트), title(도메인) } } 로 온다.
 const normalizeGoogleGrounding = (metadata, request = {}) => {
   const md = metadata && typeof metadata === 'object' ? metadata : null;
   if (!md && !request?.searchRequested) return null;
@@ -6556,7 +6775,7 @@ const runOpenModelRoutes = async ({
     const runner = runners[route];
     const routeSession = session[route] || (session[route] = {});
     const routeTimeout = route === 'zerogpu' ? null : OPEN_ROUTE_TIMEOUT_MS;
-    const timeoutSignal = routeTimeout && typeof AbortSignal !== 'undefined' && AbortSignal.timeout && AbortSignal.any ? AbortSignal.any([signal, AbortSignal.timeout(routeTimeout)].filter(Boolean)) : signal;
+    const timeoutSignal = routeTimeout && typeof AbortSignal !== 'undefined' && AbortSignal.any ? AbortSignal.any([signal, activeTimeoutSignal(routeTimeout)].filter(Boolean)) : signal;
     try {
       if (!runner) throw makeRouteError(route, 'unsupported', `${OPEN_ROUTE_INFO[route]?.label || route} 경로는 이 모델을 지원하지 않습니다.`);
       const prefix = routes.length > 1 || route !== 'zerogpu' ? `${OPEN_ROUTE_INFO[route].short} · ` : '';
@@ -7228,7 +7447,8 @@ const buildQwenErrorMessage = ({
   const retry = text.match(/retry in\s+(\d+:\d{2}:\d{2}|\d+\s*s)/i);
   const left = text.match(/\((\d+)\s*s left vs\.?\s*(\d+)\s*s requested\)|\((\d+)\s*s requested vs\.?\s*(\d+)\s*s left\)/i);
   if (/runs? limit/i.test(text)) {
-    // more quota" — GPU 시간과 별개로 비로그인 실행 횟수가 제한된다.
+    // 오류 원문 "You have exceeded your ZeroGPU runs limit … Authenticate with a Hugging Face token for more quota" — GPU 시간과 별개로
+    // 비로그인 실행 횟수가 제한된다.
     title = 'HF ZeroGPU 실행 횟수 한도에 도달했습니다';
     summary = '토큰 없이(비로그인) 쓸 수 있는 실행 횟수를 다 썼거나, 계정의 하루 실행 한도에 걸렸습니다. Hugging Face 는 토큰으로 인증하면 더 많은 할당량을 준다고 안내합니다(무료 계정 하루 GPU 5분 · PRO 40분, 공식).';
     solutions = ['설정 → 오픈 모델 공통 → HF 토큰을 넣으세요(huggingface.co/settings/tokens).', '할당량은 첫 사용 24시간 뒤 다시 채워집니다(공식).', '실행 경로를 "자동"으로 두고 외부 API 키를 넣으면 다음 경로로 이어서 만듭니다.'];
@@ -7372,7 +7592,7 @@ const runQwenZeroGpu = async ({
   signal,
   onStatus
 }) => {
-  const timeoutSignal = typeof AbortSignal !== 'undefined' && AbortSignal.timeout && AbortSignal.any ? AbortSignal.any([signal, AbortSignal.timeout(QWEN_CALL_TIMEOUT_MS)].filter(Boolean)) : signal;
+  const timeoutSignal = typeof AbortSignal !== 'undefined' && AbortSignal.any ? AbortSignal.any([signal, activeTimeoutSignal(QWEN_CALL_TIMEOUT_MS)].filter(Boolean)) : signal;
   const token = getHfToken(settings);
   try {
     const runtime = session.runtime || await resolveQwenRuntime(settings, variant, timeoutSignal, onStatus);
@@ -7861,6 +8081,7 @@ const composeQwenPrompt = ({
 };
 // 사용자 번호(#2 · 2번 · 2번째 · 두 번째 · 사진 2 · 2nd · second image · 마지막 사진 · user image #2)를 이번 요청의 입력 위치
 // 표기(<imageN>)로 바꾼다. Qwen 은 입력 순서로 이미지를 가리키므로, 대상 이미지를 마지막에 보내는 등 입력 순서가 사용자 번호와
+// 다르면 번호를 잘못 읽을 수 있다.
 // 이번 요청에 없는 번호는 그대로 둔다. 번호 인식 규칙은 parseReferencedImageIndices 와 같다.
 const QWEN_IMAGE_NUMBER_RULES = [{
   re: /(?<!\d)(\d{1,2})\s*(?:번\s*째|번째|째)/g,
@@ -8209,7 +8430,8 @@ const buildFiboErrorMessage = ({
   const retry = text.match(/retry in\s+(\d+:\d{2}:\d{2}|\d+\s*s)/i);
   const left = text.match(/\((\d+)\s*s left vs\.?\s*(\d+)\s*s requested\)|\((\d+)\s*s requested vs\.?\s*(\d+)\s*s left\)/i);
   if (/runs? limit/i.test(text)) {
-    // Hugging Face token for more quota" — GPU 시간과 별개로 비로그인 실행 횟수가 제한된다.
+    // 오류 원문 "You have exceeded your ZeroGPU runs limit … Authenticate with a Hugging Face token for more quota" — GPU 시간과 별개로
+    // 비로그인 실행 횟수가 제한된다.
     title = 'HF ZeroGPU 실행 횟수 한도에 도달했습니다';
     summary = '토큰 없이(비로그인) 쓸 수 있는 실행 횟수를 다 썼습니다. Hugging Face 는 토큰으로 인증하면 더 많은 할당량을 준다고 안내합니다(무료 계정 하루 GPU 5분 · PRO 40분, 공식).';
     solutions = ['huggingface.co 에서 계정을 만들고 Settings → Access Tokens 에서 토큰을 만든 뒤, 설정 → 오픈 모델 공통 → HF 토큰에 넣으세요(키 저장이 켜져 있으면 새로고침해도 유지).', '할당량은 첫 사용 24시간 뒤 다시 채워집니다(공식).', '실행 경로를 "자동"으로 두면 HF 크레딧(장당 $0.04)·외부 API 키로 이어서 만듭니다.'];
@@ -8393,13 +8615,15 @@ const ensureHfSpaceRunning = async (spaceId, token, signal, onStatus, errs = '')
   if (HF_DEAD_STAGES.test(info.stage)) throw stageError();
   if (!HF_WAKE_STAGES.test(info.stage)) return info;
   const startedAt = Date.now();
+  // 제한 시간은 동결 시간을 뺀 실행 시간으로 잰다(백그라운드에서 동결됐다가 돌아온 직후 바로 실패하지 않도록).
+  const startedActive = activeNow();
   fetch(`${info.host}/`, {
     headers: hfAuthHeaders(info.host, token),
     signal
   }).catch(() => {});
   while (HF_WAKE_STAGES.test(info.stage)) {
     onStatus?.(`Space ${HF_STAGE_LABELS[info.stage] || info.stage} · ${Math.round((Date.now() - startedAt) / 1000)}초 경과(잠든 Space 는 모델을 다시 올리느라 수 분 걸릴 수 있음)`);
-    if (Date.now() - startedAt > HF_SPACE_WAKE_TIMEOUT_MS) throw stageError();
+    if (activeNow() - startedActive > HF_SPACE_WAKE_TIMEOUT_MS) throw stageError();
     await delayWithAbort(5000, signal);
     info = await fetchHfSpaceInfo(spaceId, token, signal, errs);
     if (HF_DEAD_STAGES.test(info.stage)) throw stageError();
@@ -8651,7 +8875,8 @@ const callGradioEndpoint = async (runtime, name, data, signal, onStatus, waiting
 };
 // 대기열 호출(공식 JS 클라이언트와 같은 프로토콜): POST {api}/queue/join → GET {api}/queue/data?session_hash=… (SSE, msg 별 JSON).
 // /call/ 과 달리 ① 대기 순서·예상 시간(estimation) ② 진행(progress) ③ 실패 원문(process_completed.output.error)을 준다 —
-// 같은 요청이 /call/ 은 null, 대기열은 "You have exceeded your ZeroGPU runs limit…"). 중지하면 /cancel 로 대기열 작업도 취소한다.
+// Gradio 5 의 /call/ 은 실패 원문 없이 data: null 만 보낼 수 있다(대기열은 "You have exceeded your ZeroGPU runs limit…" 같은 원문을 준다).
+// 중지하면 /cancel 로 대기열 작업도 취소한다.
 // 함수 번호를 모르거나 대기열 경로가 없는 서버(404·405)는 /call/ 로 처리한다.
 const createGradioSessionHash = () => {
   const bytes = crypto.getRandomValues(new Uint8Array(8));
@@ -8964,7 +9189,7 @@ const runFiboZeroGpu = async ({
     raw: `FIBO 2.0 편집은 한 요청에 이미지 1~${FIBO_MAX_INPUT_IMAGES}장만 받습니다(공식 Space · 이번 요청 ${images.length}장).`,
     task: kind
   }));
-  const timeoutSignal = typeof AbortSignal !== 'undefined' && AbortSignal.timeout && AbortSignal.any ? AbortSignal.any([signal, AbortSignal.timeout(FIBO_CALL_TIMEOUT_MS)].filter(Boolean)) : signal;
+  const timeoutSignal = typeof AbortSignal !== 'undefined' && AbortSignal.any ? AbortSignal.any([signal, activeTimeoutSignal(FIBO_CALL_TIMEOUT_MS)].filter(Boolean)) : signal;
   const token = getHfToken(settings);
   try {
     const runtime = session.runtime || await resolveFiboRuntime(settings, kind, timeoutSignal, onStatus);
@@ -11625,7 +11850,7 @@ const analyzeAutoPreserve = (src, res, hints = {}) => {
   const gDiff = apcBoxBlur(apcGradientDiff(srcLab[0], resLab[0], sw, sh), sw, sh, blurRadius);
   // 질감 변화(v1.25.0, 대비와 무관): 국소 밝기 표준편차의 상대 차이 |σ원본 − σ결과| ÷ (σ원본 + σ결과 + 0.5).
   // 검은 머리카락 ↔ 어두운 배경처럼 색차·밝기 기울기 차가 작아도 한쪽에만 결이 있으면 크게 나온다.
-  // 같은 곳의 질감 차이는 0.24~0.58, 바뀌지 않은 배경·다리는 99% 지점 0.18~0.24 → ×30 이면 바뀐 곳만 감지 범위에 든다.
+  // 가중치 ×30(APC_TEXTURE_WEIGHT)은 바뀌지 않은 영역의 질감 차이(작음)는 감지 범위 밖에, 결이 생기거나 사라진 곳은 안에 들도록 정한 값이다.
   const texRadius = Math.max(2, Math.round(longEdge / 256));
   const localSd = L => {
     const sq = new Float32Array(n);
@@ -13688,7 +13913,7 @@ const buildMaskedEditRequest = async ({
   }
   if (provider === 'qwen') {
     // Qwen: 입력 순서 [대상, 참조…, 영역 안내]. 공식 데모의 다중 이미지 예시처럼 바탕(편집 대상)을 첫 번째(<image1>)에 둔다
-    // 영역 안내 이미지는 대상과 같은 그림·같은 비율이라 마지막에 두면 출력이 대상 비율을 그대로 따른다(파이프라인 규칙).
+    // 비율 Auto 는 마지막 입력을 따르는데, 영역 안내 이미지는 대상과 같은 그림·같은 비율이라 마지막에 두면 출력이 대상 비율을 그대로 따른다(파이프라인 규칙).
     // 공식 README: 동그라미·칠한 표시·별도 마스크로 국소 편집을 지정할 수 있다 → 영역 안내 이미지를 함께 보낸다.
     const guideUrl = 2 + refs.length <= maxInputs ? await buildMaskGuideImage(prepared, signal, MASK_GUIDE_MAX_DIM) : null;
     const targetUrl = await prepareEditInputImage(sourceUrl, 'qwen', signal);
@@ -16506,7 +16731,7 @@ const PHOTOREAL_PLANNER_GUIDANCE = 'PHOTOREALISM MODE (selected by the user) —
 //  - OpenAI 이미지 프롬프팅 가이드: "For edits, say "change only X" and list the details to preserve" · 의상 교체 예시 "Do not change her face,
 //    facial features, skin tone, body shape, pose, or identity in any way. Preserve her exact likeness, expression, hairstyle, and proportions."
 //  - xAI 이미지 프롬프팅 가이드: 바꿀 내용을 먼저 쓰고 같은 피사체·각도·크롭을 유지하는 문장을 덧붙인다(전체 장면을 다시 쓰면 피사체가 흔들린다).
-// 인물 보존 지시는 결과 동일성을 보장하지 않는다. 실제 검증 범위는 REVIEW_REPORT.md 참조.
+// 인물 보존 지시는 결과 동일성을 보장하지 않는다(픽셀 보존은 원본 보존 합성이 맡는다).
 // 사용자 요청이 직접 바꾸라는 항목은 요청이 우선한다(마지막 줄).
 // v1.26.1: 이미지 모델은 과장된(스타일화된) 비율을 평균 체형 쪽으로 되돌리는 경향이 있어(다리를 가늘게·가슴을 작게), 비율 항목을
 // 구체적으로(머리·몸 비율, 다리 길이·굵기, 상체 길이) 적고 '평균화하지 말 것'을 명시한다. 얼굴·체형 줄은 전체 편집(자세·구도·화풍 변경)
@@ -16946,6 +17171,7 @@ const applyVisualPlanContext = (messages, plan) => {
 // 남겨 한도에 맞춘다(결과의 제작 계획에 표시). 공식 한도(2026-10-30 확인):
 //  · OpenAI GPT Image: prompt 최대 32,000자(API 레퍼런스)
 //  · Google 나노바나나: 입력 토큰 2.1·2 = 131,072 / 프로·2 Lite·1 = 65,536(모델 카드). 참조 이미지 최대 장수·실행 맥락 몫을 뺀다.
+//  · xAI Grok Imagine: 공식 문서에 한도가 없어 XAI_PROMPT_BYTE_LIMITS(UTF-8 바이트) 상한을 쓴다.
 const GOOGLE_PROMPT_TOKEN_MARGIN = 6000;
 const GOOGLE_REFERENCE_IMAGE_TOKENS = 1120;
 const getImagePromptBudget = (target, settings) => {
@@ -18360,6 +18586,17 @@ const App = () => {
   // 색·톤 보정 결과의 보기 전환(보정 결과 / 보정 전 모델 출력).
   const [toneViews, setToneViews] = useState({});
   const [customDialog, setCustomDialog] = useState(null);
+  // Escape 로 맨 위 창 닫기(v1.27.0): 확인 대화상자(= 취소) → 갤러리 → 잔액 → 기능·요금 → 설정. 각 창의 배경 클릭·닫기 버튼과 같은 동작이다.
+  // 라이트박스·원본 비교 창은 위 효과가, 마스크 편집기는 자체 처리가 맡는다.
+  useEffect(() => {
+    if (!customDialog && !isGalleryOpen && !isBalanceOpen && !isCreditInfoOpen && !isSettingsOpen) return undefined;
+    const onKeyDown = event => {
+      if (event.key !== 'Escape' || event.defaultPrevented || lightboxImg || editComparison || maskEditor) return;
+      if (customDialog) setCustomDialog(null);else if (isGalleryOpen) setIsGalleryOpen(false);else if (isBalanceOpen) setIsBalanceOpen(false);else if (isCreditInfoOpen) setIsCreditInfoOpen(false);else if (isSettingsOpen) setIsSettingsOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [customDialog, isGalleryOpen, isBalanceOpen, isCreditInfoOpen, isSettingsOpen, lightboxImg, editComparison, maskEditor]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const [editingMsgId, setEditingMsgId] = useState(null);
@@ -18398,6 +18635,72 @@ const App = () => {
   const activeTurnRuns = activeRuns.filter(run => run.kind === 'turn');
   const busyTargetIds = new Set(activeRuns.flatMap(run => run.targets));
   const busyTurnSourceIds = new Set(activeTurnRuns.map(run => run.sourceUserMsgId).filter(Boolean));
+  // 어느 채팅방이든 진행 중인 작업(대기 포함)이 있는지. Batch 대기(서버 비동기 작업)는 여기 포함되지 않는다.
+  const hasLiveWork = Object.keys(generatingChats).length > 0;
+  // 생성 중 화면 꺼짐 방지(v1.27.0 · Screen Wake Lock API). 화면을 보고 있을 때만 잡을 수 있고(숨겨지면 브라우저가 자동 해제),
+  // 다시 보이면 다시 잡는다(MDN 권장). 휴대폰이 화면 자동 꺼짐으로 백그라운드가 되어 작업이 느려지거나 동결되는 일을 줄인다. 끝나면 바로 놓는다.
+  useEffect(() => {
+    if (!hasLiveWork || settings.keepAwakeWhileGenerating === false || !navigator.wakeLock?.request) return undefined;
+    let sentinel = null;
+    let requesting = false;
+    let stopped = false;
+    const acquire = async () => {
+      if (stopped || sentinel || requesting || document.visibilityState !== 'visible') return;
+      requesting = true;
+      try {
+        const lock = await navigator.wakeLock.request('screen');
+        if (stopped) {
+          lock.release().catch(() => {});
+          return;
+        }
+        sentinel = lock;
+        lock.addEventListener('release', () => {
+          if (sentinel === lock) sentinel = null;
+        });
+      } catch (e) {
+        // 절전 모드·배터리 부족·권한 정책 등으로 거부될 수 있다(MDN). 생성에는 영향이 없다.
+      } finally {
+        requesting = false;
+      }
+    };
+    const onVisibility = () => {
+      if (document.visibilityState === 'visible') acquire();
+    };
+    acquire();
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => {
+      stopped = true;
+      document.removeEventListener('visibilitychange', onVisibility);
+      if (sentinel) sentinel.release().catch(() => {});
+      sentinel = null;
+    };
+  }, [hasLiveWork, settings.keepAwakeWhileGenerating]);
+  // 작업 중 탭 닫기·새로고침을 한 번 확인한다(데스크톱 브라우저. 모바일 브라우저는 대개 이 확인을 띄우지 않는다).
+  useEffect(() => {
+    if (!hasLiveWork) return undefined;
+    const onBeforeUnload = event => {
+      event.preventDefault();
+      event.returnValue = '';
+    };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, [hasLiveWork]);
+  // 사용자가 페이지를 떠나면(새로고침·닫기·이동 = pagehide) 남은 작업 기록에 표시해, 다시 열 때 자동으로 다시 만들지 않고 안내만 한다.
+  // 브라우저가 백그라운드에서 페이지를 폐기·종료할 때는 pagehide 가 오지 않는다(Page Lifecycle API).
+  useEffect(() => {
+    const onPageHide = event => {
+      if (!event.persisted) markRunJournalLeft(true);
+    };
+    const onPageShow = event => {
+      if (event.persisted) markRunJournalLeft(false);
+    };
+    window.addEventListener('pagehide', onPageHide);
+    window.addEventListener('pageshow', onPageShow);
+    return () => {
+      window.removeEventListener('pagehide', onPageHide);
+      window.removeEventListener('pageshow', onPageShow);
+    };
+  }, []);
   useEffect(() => {
     if (theme === 'dark') document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');
   }, [theme]);
@@ -19960,6 +20263,8 @@ const App = () => {
     sourceUserMsgId = null
   } = {}) => {
     recordSpend(spendItemsFromMessages(newMessages));
+    // 숨겨진 동안 끝난 결과·오류는 탭 제목에 표시한다(중단 안내는 결과가 아니므로 세지 않는다).
+    if (newMessages.some(m => !m.interrupted)) noteBackgroundCompletion(1, newMessages.every(m => m.msgType === 'error'));
     setChats(prev => prev.map(c => {
       if (c.id !== chatId) return c;
       let messages = [...c.messages];
@@ -20081,7 +20386,8 @@ const App = () => {
       // 원본 복제(replicate)는 다시 그리는 작업이라 원본 보존 합성을 하지 않는다.
       actionType,
       // 제자리 재생성 여부(FIBO 구조화 캡션 JSON 은 새 요청이면 직전 시드를 재사용하고, 재생성이면 새 시드로 변형을 만든다).
-      inPlace: isInPlace
+      // 끝나지 못한 새 요청을 이어서 다시 만드는 경우(중단 안내 자리에 넣음)는 새 요청으로 본다.
+      inPlace: isInPlace && !options.resumeNoticeId
     };
     let releaseTurn = null;
     let previousTurn = null;
@@ -20109,6 +20415,30 @@ const App = () => {
     const ensureActiveRun = () => {
       if (controller.signal.aborted || !isChatRunCurrent(chatId, runId)) throw makeAbortError();
     };
+    // 진행 중 작업 기록(v1.27.0): 브라우저가 백그라운드에서 페이지를 종료해도 다시 열 때 이어서 만들 수 있게 남긴다(API 키 제외).
+    const journalId = createMessageId('run');
+    const runStartedAt = Date.now();
+    const hiddenEpochAtStart = pageHiddenEpoch;
+    const resumeCount = Math.max(0, Number(options.resumeCount) || 0);
+    const journalEntry = {
+      id: journalId,
+      kind: isInPlace && !options.resumeNoticeId ? 'regen' : 'turn',
+      chatId,
+      sourceUserMsgId,
+      actionType,
+      promptText,
+      replaceMessageIds,
+      noticeId: options.resumeNoticeId || null,
+      targetIndices: generationOptions.targetIndices,
+      forceCount: generationOptions.forceCount,
+      genGroupId: generationOptions.genGroupId,
+      settings: stripApiKeys(settingsSnapshot),
+      batch: isBatchActive(settingsSnapshot),
+      resumes: resumeCount,
+      startedAt: runStartedAt
+    };
+    addRunJournalEntry(journalEntry);
+    let clearJournalNow = false;
     if (isFiboModel(settingsSnapshot.model)) generationOptions.onStatus = text => updateChatRun(chatId, runId, {
       status: `FIBO 2.0 · ${text}`
     });
@@ -20273,7 +20603,7 @@ const App = () => {
         if (partialErrorMessage) {
           showToast(`일부 요청 실패: ${getErrorToastSummary(partialErrorMessage.text)}`);
         } else if (isInPlace) {
-          showToast("재생성 완료 · 기존 결과를 새 결과로 교체했습니다.");
+          showToast(options.resumeNoticeId ? "끝나지 못했던 작업을 다시 만들었습니다." : "재생성 완료 · 기존 결과를 새 결과로 교체했습니다.");
         }
         if (chatId !== activeChatId) {
           showToast(`다른 채팅방의 이미지 생성이 완료되었습니다.`);
@@ -20287,8 +20617,15 @@ const App = () => {
         k: 'plan'
       }]);
       const abortedOrStale = error.name === 'AbortError' || error.message === 'Aborted' || !isChatRunCurrent(chatId, runId);
+      // 숨겨진 동안(다른 앱·화면 꺼짐·다른 탭) 연결이 끊겨 응답을 받지 못한 작업: 화면으로 돌아오고 온라인이 되면 처음부터 다시 실행한다
+      // (설정 '끝나지 못한 작업 자동 이어하기'). 화면을 보는 중에 난 네트워크 오류는 그대로 오류로 알린다.
+      const backgroundDrop = !abortedOrStale && isLikelyNetworkFailure(error) && (document.hidden || pageHiddenEpoch !== hiddenEpochAtStart) && settingsRef.current?.resumeInterrupted !== false && !journalEntry.batch && resumeCount < RUN_JOURNAL_MAX_RESUMES;
       if (abortedOrStale) {
+        clearJournalNow = true;
         if (isChatRunCurrent(chatId, runId)) showToast("프롬프트 생성이 중단되었습니다.");
+      } else if (backgroundDrop) {
+        clearJournalNow = true;
+        scheduleBackgroundDropRetry(journalEntry);
       } else {
         const keyMissing = /^(GOOGLE|XAI|OPENAI)_API_KEY_MISSING$/.test(error.message || '');
         if (keyMissing) setIsSettingsOpen(true);
@@ -20339,13 +20676,17 @@ const App = () => {
     } finally {
       releaseTurn?.();
       endChatGeneration(chatId, runId);
+      // 중지·대상 삭제·재시도 예약은 바로 지우고, 끝난 작업은 결과가 IndexedDB 에 기록될 시간을 준 뒤 지운다.
+      if (clearJournalNow) removeRunJournalEntry(journalId);else setTimeout(() => removeRunJournalEntry(journalId), RUN_JOURNAL_CLEAR_DELAY_MS);
     }
   };
   const handleUpscale = async (msg, targetResolution, options = {}) => {
     if (!msg || msg.msgType !== 'image') return;
-    const upscaleKey = `${activeChatId}:${msg.id}`;
+    // options.chatId: 다른 채팅방의 끝나지 못한 업스케일을 이어서 할 때(기본은 보고 있는 채팅방).
+    const chatId = options.chatId || activeChatId;
+    const upscaleKey = `${chatId}:${msg.id}`;
     if (upscalingMsgIds[msg.id] || upscaleStartingRef.current.has(upscaleKey)) return;
-    if (options.replaceMessageId && getBusyTargetIds(activeChatId).has(options.replaceMessageId)) return;
+    if (options.replaceMessageId && getBusyTargetIds(chatId).has(options.replaceMessageId)) return;
     if (!getUpscaleTargets(msg.resolution).includes(targetResolution)) return;
     const source = msg.sourceImageUrl || msg.imageUrl;
     if (!source) {
@@ -20355,8 +20696,7 @@ const App = () => {
     const requestedUpscaleModel = options.modelKey || (UPSCALE_MODEL_KEYS.includes(upscaleModel) ? upscaleModel : DEFAULT_UPSCALE_MODEL_KEY);
     // 업스케일 모델(나노바나나 2.1·2·프로)은 모두 Flex 미지원이라 고른 모델의 표준 티어로 요청한다.
     const modelKey = requestedUpscaleModel;
-    const settingsSnapshot = createGenerationSettingsSnapshot(settings);
-    const chatId = activeChatId;
+    const settingsSnapshot = options.settingsSnapshot || createGenerationSettingsSnapshot(settings);
     const replaceMessageIds = options.replaceMessageId ? [options.replaceMessageId] : [];
     // 키리스 Canvas 모드: 업스케일도 키 없이 시도를 허용한다.
     upscaleStartingRef.current.add(upscaleKey);
@@ -20368,6 +20708,23 @@ const App = () => {
       targets: replaceMessageIds,
       anchors: [msg.id]
     });
+    const journalId = createMessageId('run');
+    const hiddenEpochAtStart = pageHiddenEpoch;
+    const resumeCount = Math.max(0, Number(options.resumeCount) || 0);
+    const journalEntry = {
+      id: journalId,
+      kind: 'upscale',
+      chatId,
+      msgId: msg.id,
+      targetResolution,
+      modelKey,
+      replaceMessageId: options.replaceMessageId || null,
+      settings: stripApiKeys(settingsSnapshot),
+      resumes: resumeCount,
+      startedAt: Date.now()
+    };
+    addRunJournalEntry(journalEntry);
+    let clearJournalNow = false;
     setUpscalingMsgIds(prev => ({
       ...prev,
       [msg.id]: true
@@ -20432,11 +20789,17 @@ const App = () => {
       }));
       incrementUsage(1);
       recordSpend(spendItemsFromMessages([newMsg]));
+      noteBackgroundCompletion(1);
       showToast(`${targetResolution} 업스케일 완료 · 후속 편집 전 이 이미지 삭제 권장`);
     } catch (error) {
       const abortedOrStale = error.name === 'AbortError' || error.message === 'Aborted' || !isChatRunCurrent(chatId, runId);
+      const backgroundDrop = !abortedOrStale && isLikelyNetworkFailure(error) && (document.hidden || pageHiddenEpoch !== hiddenEpochAtStart) && settingsRef.current?.resumeInterrupted !== false && resumeCount < RUN_JOURNAL_MAX_RESUMES;
       if (abortedOrStale) {
+        clearJournalNow = true;
         if (isChatRunCurrent(chatId, runId)) showToast("업스케일이 중단되었습니다.");
+      } else if (backgroundDrop) {
+        clearJournalNow = true;
+        scheduleBackgroundDropRetry(journalEntry);
       } else if (error.message === 'GOOGLE_API_KEY_MISSING') {
         setIsSettingsOpen(true);
         showToast("⚠️ 업스케일은 Google Gemini API 키가 필요합니다.");
@@ -20445,6 +20808,7 @@ const App = () => {
       } else {
         showToast(`업스케일 오류: ${getErrorToastSummary(localizeGenerationError(error, 'Google Gemini'))}`);
       }
+      if (!abortedOrStale && !backgroundDrop) noteBackgroundCompletion(1, true);
     } finally {
       setUpscalingMsgIds(prev => {
         if (!(msg.id in prev)) return prev;
@@ -20456,8 +20820,163 @@ const App = () => {
       });
       upscaleStartingRef.current.delete(upscaleKey);
       endChatGeneration(chatId, runId);
+      if (clearJournalNow) removeRunJournalEntry(journalId);else setTimeout(() => removeRunJournalEntry(journalId), RUN_JOURNAL_CLEAR_DELAY_MS);
     }
   };
+  // ─── 끝나지 못한 작업 이어서 다시 만들기(v1.27.0) ───────────────────────────────────────────────
+  // 이어 하기 = 같은 요청을 처음부터 다시 실행한다(중단된 요청의 응답은 되찾을 수 없다). 종료·연결 끊김 전에 공급사가 처리를 마쳤다면
+  // 그 요청도 과금됐을 수 있으므로 안내문에 적는다. 자동으로 하지 않는 경우(설정 꺼짐·사용자가 페이지를 떠남·Batch·24시간 지남·
+  // 자동 이어하기가 거듭 중단됨)는 결과 자리에 안내만 남기고, '오류 요청 재생성'으로 직접 다시 만든다.
+  const describeRunStart = entry => {
+    const started = new Date(Number(entry.startedAt) || Date.now());
+    return `${started.getMonth() + 1}월 ${started.getDate()}일 ${started.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}`;
+  };
+  // cause: 'killed'(브라우저가 페이지 종료) · 'network'(숨겨진 동안 연결 끊김) · 'left'(사용자가 새로고침·닫기).
+  // blocker: 자동으로 다시 만들지 않는 사유(null = 자동). phase: 'resuming'(지금 다시 실행) · 'waiting'(화면으로 돌아오면 실행).
+  const buildInterruptedNoticeText = (entry, cause, blocker = null, phase = 'resuming') => {
+    const when = describeRunStart(entry);
+    const causeText = cause === 'network' ? `화면을 보지 않는 동안(다른 앱·화면 꺼짐·다른 탭) 네트워크 연결이 끊겨 ${when}에 시작한 생성의 응답을 받지 못했습니다.` : cause === 'left' ? `페이지를 새로고침하거나 닫아 ${when}에 시작한 생성이 끝나지 못했습니다.` : `브라우저가 백그라운드에서 페이지를 종료해(메모리 확보 등) ${when}에 시작한 생성이 끝나지 못했습니다.`;
+    const why = blocker === 'off' ? ' 설정에서 자동 이어하기가 꺼져 있습니다.' : blocker === 'batch' ? ' Batch 요청은 이미 서버에 제출됐을 수 있어 자동으로 다시 보내지 않습니다(공급사 콘솔의 Batch 목록을 확인하세요).' : blocker === 'old' ? ' 24시간이 지나 자동으로 다시 만들지 않습니다.' : blocker === 'repeat' ? ` 자동 이어하기가 ${RUN_JOURNAL_MAX_RESUMES}번 모두 끝나지 못해 더 자동으로 하지 않습니다(기기 메모리 부족이면 해상도·장수를 낮춰 보세요).` : '';
+    const next = blocker ? '다시 만들려면 아래 \'오류 요청 재생성\'을 누르세요.' : phase === 'waiting' ? '화면으로 돌아오고 인터넷이 연결되면 같은 요청을 처음부터 자동으로 다시 실행합니다.' : '같은 요청을 처음부터 다시 실행합니다. 멈추거나 실패하면 아래 \'오류 요청 재생성\'을 누르세요.';
+    return [`⏸ ${blocker ? '끝나지 못한 작업' : '끝나지 못한 작업을 이어서 다시 만듭니다'}`, `${causeText}${why}`, next, '', '중단 전에 공급사가 처리를 마쳤다면 그 요청도 과금됐을 수 있습니다(공급사 콘솔에서 확인).'].join('\n');
+  };
+  // 새 요청 결과 자리의 중단 안내 메시지(이미 있으면 그 자리 · 그 내용으로 갱신).
+  const putInterruptedNotice = (entry, chat, noticeId, text, modelKey) => {
+    const existing = noticeId ? chat?.messages.find(m => m.id === noticeId && m.interrupted) : null;
+    const targetIndices = Array.isArray(entry.targetIndices) && entry.targetIndices.length ? entry.targetIndices : null;
+    const notice = {
+      ...(existing || {}),
+      id: existing?.id || createMessageId('err'),
+      role: 'model',
+      msgType: 'error',
+      interrupted: true,
+      text,
+      prompt: entry.promptText || '',
+      provider: getModelProvider(modelKey),
+      modelKey,
+      sourceUserMsgId: entry.sourceUserMsgId,
+      actionType: entry.actionType || 'generate',
+      genGroupId: entry.genGroupId || entry.sourceUserMsgId,
+      genFailedTargets: targetIndices || [],
+      genMissingCount: targetIndices ? null : entry.forceCount || null,
+      timestamp: existing?.timestamp || Date.now()
+    };
+    if (existing) {
+      setChats(prev => prev.map(c => c.id !== entry.chatId ? c : {
+        ...c,
+        messages: c.messages.map(m => m.id === notice.id ? notice : m)
+      }));
+    } else {
+      applyGeneratedMessages(entry.chatId, [notice], {
+        sourceUserMsgId: entry.sourceUserMsgId
+      });
+    }
+    return notice.id;
+  };
+  // 기록 1건을 이어서 다시 만들거나 안내한다. cause: 'killed'(페이지 종료) · 'network'(숨겨진 동안 연결 끊김) — 자동 불가 사유가 있으면 그 사유.
+  // 반환: 'resumed' · 'noted' · 'skipped'.
+  const resumeJournaledRun = (entry, chatList, cause = 'killed') => {
+    const chat = chatList.find(c => c.id === entry.chatId);
+    if (!chat || isJournaledRunFinished(chat, entry)) return 'skipped';
+    const current = settingsRef.current || settings;
+    const age = Date.now() - (Number(entry.startedAt) || 0);
+    const blocker = current?.resumeInterrupted === false ? 'off' : entry.leftAt ? 'left' : entry.batch ? 'batch' : age > RUN_JOURNAL_MAX_AGE_MS ? 'old' : (Number(entry.resumes) || 0) >= RUN_JOURNAL_MAX_RESUMES ? 'repeat' : null;
+    const autoResume = !blocker;
+    const keys = Object.fromEntries(API_KEY_FIELDS.map(field => [field, current?.[field] || '']));
+    const snapshot = createGenerationSettingsSnapshot({
+      ...current,
+      ...(entry.settings || {}),
+      ...keys
+    });
+    const nextResumes = (Number(entry.resumes) || 0) + 1;
+    if (entry.kind === 'upscale') {
+      const source = chat.messages.find(m => m.id === entry.msgId);
+      if (!source || !entry.targetResolution) return 'skipped';
+      if (!autoResume) return 'noted';
+      handleUpscale(source, entry.targetResolution, {
+        chatId: chat.id,
+        modelKey: entry.modelKey,
+        replaceMessageId: entry.replaceMessageId && chat.messages.some(m => m.id === entry.replaceMessageId) ? entry.replaceMessageId : undefined,
+        settingsSnapshot: snapshot,
+        resumeCount: nextResumes
+      });
+      return 'resumed';
+    }
+    const userIdx = entry.sourceUserMsgId ? chat.messages.findIndex(m => m.id === entry.sourceUserMsgId) : -1;
+    if (userIdx === -1) return 'skipped';
+    const contextMessages = chat.messages.slice(0, userIdx + 1);
+    const runOptions = {
+      sourceUserMsgId: entry.sourceUserMsgId,
+      genGroupId: entry.genGroupId || entry.sourceUserMsgId,
+      targetIndices: Array.isArray(entry.targetIndices) && entry.targetIndices.length ? entry.targetIndices : null,
+      forceCount: entry.forceCount || null,
+      resumeCount: nextResumes
+    };
+    if (entry.kind === 'regen') {
+      // 제자리 재생성: 기존 결과는 그대로 있으므로 안내 없이 같은 결과 자리에서 다시 만든다.
+      const liveTargets = (entry.replaceMessageIds || []).filter(id => chat.messages.some(m => m.id === id));
+      if (!liveTargets.length) return 'skipped';
+      if (!autoResume) return 'noted';
+      executeGenerate(contextMessages, entry.promptText || '', entry.actionType || 'generate', snapshot, chat.id, {
+        ...runOptions,
+        replaceMessageIds: liveTargets
+      });
+      return 'resumed';
+    }
+    // 새 요청: 결과 자리에 안내를 넣고(이미 있으면 갱신), 자동이면 그 자리에서 다시 만든다(성공하면 안내가 결과로 바뀐다).
+    const noticeId = putInterruptedNotice(entry, chat, entry.noticeId, buildInterruptedNoticeText(entry, blocker === 'left' ? 'left' : cause, blocker), snapshot.model);
+    if (!autoResume) return 'noted';
+    executeGenerate(contextMessages, entry.promptText || '', entry.actionType || 'generate', snapshot, chat.id, {
+      ...runOptions,
+      replaceMessageIds: [noticeId],
+      resumeNoticeId: noticeId
+    });
+    return 'resumed';
+  };
+  // 숨겨진 동안 연결이 끊긴 작업: 화면으로 돌아오고 온라인이 되면 다시 만든다(그동안 새 요청의 결과 자리에는 안내를 둔다).
+  // 기다리는 동안 페이지가 종료돼도 다시 열 때 이어 하도록 새 기록으로 남긴다(원래 기록은 실행 쪽 finally 가 지운다).
+  const scheduleBackgroundDropRetry = entry => {
+    const waiting = {
+      ...entry,
+      id: createMessageId('run'),
+      cause: 'network',
+      leftAt: null,
+      resumes: Number(entry.resumes) || 0
+    };
+    if (entry.kind === 'turn') {
+      const chat = chatsRef.current.find(c => c.id === entry.chatId);
+      const noticeId = putInterruptedNotice(entry, chat, entry.noticeId, buildInterruptedNoticeText(entry, 'network', null, 'waiting'), entry.settings?.model);
+      waiting.noticeId = noticeId;
+      waiting.replaceMessageIds = [noticeId];
+    }
+    addRunJournalEntry(waiting);
+    runWhenPageActive(async () => {
+      // 기다리는 사이 사용자가 지웠거나(기록 없음) 다른 탭이 이미 이어 갔으면 하지 않는다.
+      if (!readRunJournal().some(item => item.id === waiting.id)) return;
+      removeRunJournalEntry(waiting.id);
+      const latest = await readLatestChats();
+      const result = resumeJournaledRun(waiting, latest, 'network');
+      if (result === 'resumed') showToast('🔁 화면을 보지 않는 동안 연결이 끊긴 작업을 다시 만듭니다.');
+    });
+  };
+  // 앱을 다시 열 때 한 번: 끝나지 못한 작업(다른 탭에서 진행 중인 것 제외)을 찾아 이어서 만들거나 안내한다.
+  const resumeCheckedRef = useRef(false);
+  useEffect(() => {
+    if (!isChatsLoaded || resumeCheckedRef.current) return;
+    resumeCheckedRef.current = true;
+    (async () => {
+      const entries = await takeInterruptedRuns();
+      if (!entries.length) return;
+      const latest = await readLatestChats();
+      let resumed = 0;
+      let noted = 0;
+      entries.forEach(entry => {
+        const result = resumeJournaledRun(entry, latest, entry.cause === 'network' ? 'network' : 'killed');
+        if (result === 'resumed') resumed++;else if (result === 'noted') noted++;
+      });
+      if (resumed) showToast(`🔁 끝나지 못한 작업 ${resumed}개를 이어서 다시 만듭니다${noted ? ` · ${noted}개는 결과 자리의 '오류 요청 재생성'으로 다시 만들 수 있습니다` : ''}.`);else if (noted) showToast(`⏸ 끝나지 못한 작업 ${noted}개 — 결과 자리의 '오류 요청 재생성'(재생성)으로 다시 만들 수 있습니다.`);
+    })();
+  }, [isChatsLoaded]);
   const handleAction = async (actionType = 'generate') => {
     const trayItems = uploadedImages.filter(item => item.url);
     const imageUrls = trayItems.map(item => item.url);
@@ -21061,7 +21580,15 @@ const App = () => {
     };
     tick();
     const timer = setInterval(tick, BATCH_POLL_INTERVAL_MS);
-    return () => clearInterval(timer);
+    // 숨겨진 탭의 반복 타이머는 5분 뒤 1분에 한 번으로 묶인다(Chrome 강화 타이머 제한). 다시 보이면 바로 한 번 확인한다.
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') tick();
+    };
+    document.addEventListener('visibilitychange', onVisible);
+    return () => {
+      clearInterval(timer);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
   }, [isChatsLoaded, pendingBatchSignature]);
   const handleCancelBatch = async msg => {
     const job = msg?.batchJob;
@@ -22097,6 +22624,31 @@ const App = () => {
       }),
       title: "일관성 강화 (기준 이미지가 없을 때)",
       description: "첫 결과를 나머지의 스타일 참조로 추가합니다. 첫 장 이후 순서대로 처리합니다."
+    })), React.createElement("div", {
+      className: "rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-3",
+      "data-testid": "background-settings"
+    }, React.createElement("h3", {
+      className: "text-sm font-bold text-gray-800 dark:text-gray-200 mb-2"
+    }, "📱 백그라운드 작업"), React.createElement("p", {
+      className: "text-[11px] text-gray-500 dark:text-gray-400 mb-3 leading-relaxed"
+    }, "다른 탭·다른 앱으로 가도 생성·후처리는 계속됩니다. 휴대폰 브라우저는 백그라운드 몇 분 뒤 페이지를 멈추고(돌아오면 이어서 진행), 메모리가 부족하면 페이지를 종료할 수 있습니다. 종료·연결 끊김으로 끝나지 못한 작업은 아래 설정으로 다시 만듭니다."), SettingToggle({
+      tone: 'gray',
+      checked: settings.keepAwakeWhileGenerating !== false,
+      onChange: checked => updateSetting({
+        keepAwakeWhileGenerating: checked
+      }),
+      testId: 'keep-awake-toggle',
+      title: "생성 중 화면 꺼짐 방지 (권장)",
+      description: navigator.wakeLock?.request ? "작업 중 화면을 보고 있는 동안 자동 꺼짐을 막고, 끝나면 해제합니다. 절전 모드에서는 브라우저가 거부할 수 있습니다." : "이 브라우저는 화면 꺼짐 방지(Screen Wake Lock)를 지원하지 않거나, HTTPS·로컬 파일이 아닌 주소라 사용할 수 없습니다."
+    }), SettingToggle({
+      tone: 'gray',
+      checked: settings.resumeInterrupted !== false,
+      onChange: checked => updateSetting({
+        resumeInterrupted: checked
+      }),
+      testId: 'resume-interrupted-toggle',
+      title: "끝나지 못한 작업 자동 이어하기 (권장)",
+      description: `브라우저가 페이지를 종료했거나 화면을 보지 않는 동안 연결이 끊긴 작업을, 다시 열거나 돌아올 때 처음부터 다시 실행합니다(24시간 이내 · 최대 ${RUN_JOURNAL_MAX_RESUMES}번). 직접 새로고침·닫기·Batch는 안내만 합니다. 중단 전에 처리된 요청도 과금됐을 수 있습니다.`
     })), React.createElement("div", {
       className: "rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 p-3"
     }, React.createElement("h3", {
@@ -24083,7 +24635,7 @@ const App = () => {
     className: "w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white shadow-sm"
   }, React.createElement(Icons.Sparkles, null)), React.createElement("h1", {
     className: "font-bold text-lg tracking-tight"
-  }, "\uC560\uBBF8\uB098\uC774 v1.26.1")), React.createElement("button", {
+  }, "\uC560\uBBF8\uB098\uC774 v1.27.0")), React.createElement("button", {
     className: "md:hidden text-gray-500",
     onClick: () => setIsSidebarOpen(false)
   }, React.createElement(Icons.Close, null))), React.createElement("div", {
@@ -24234,6 +24786,8 @@ const App = () => {
     className: "hidden sm:inline"
   }, msgSelectMode ? "선택 끝" : "선택")), React.createElement("button", {
     onClick: () => setTheme(theme === 'dark' ? 'light' : 'dark'),
+    title: theme === 'dark' ? "밝은 테마로 전환" : "어두운 테마로 전환",
+    "aria-label": theme === 'dark' ? "밝은 테마로 전환" : "어두운 테마로 전환",
     className: "p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 text-gray-600 dark:text-gray-300 transition-colors shadow-sm"
   }, React.createElement(Icons.Sun, null)), React.createElement("button", {
     onClick: () => setIsSettingsOpen(true),
