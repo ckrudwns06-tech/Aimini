@@ -18613,14 +18613,14 @@ const buildZipBlob = entries => {
   });
 };
 // 결과 저장 위치 열기. 폴더: 고른 폴더 안에 새 하위 폴더(원본 덮어쓰기 방지). ZIP: IndexedDB 에 모은다. 다운로드: 한 장씩 내려받는다.
-const openBulkSink = async (kind, jobId, saveBlob) => {
+const openBulkSink = async (kind, jobId, saveBlob, folderPrefix = '애미나이_결과') => {
   if (kind === 'folder') {
     if (!supportsDirectoryPicker()) throw new Error('이 브라우저는 폴더 저장을 지원하지 않습니다(Chrome·Edge 데스크톱 전용). 설정에서 ZIP 저장으로 바꾸세요.');
     const root = await window.showDirectoryPicker({
       id: 'aeminai-bulk',
       mode: 'readwrite'
     });
-    const folderName = `애미나이_결과_${bulkStamp()}`;
+    const folderName = `${folderPrefix}_${bulkStamp()}`;
     const dir = await root.getDirectoryHandle(folderName, {
       create: true
     });
@@ -19688,7 +19688,7 @@ const START_GUIDE_TIPS = [
   ['실사화·화풍', '이미지 첨부 + "실사화해줘" → 장면 분석 후 구도 그대로 다시 렌더링.'],
   ['이어서 편집', '"더 밝게" → 직전 결과 수정 · 🖌 마스크 = 칠한 곳만 변경.'],
   ['얼굴·기준', '👤 얼굴 참조 · ★ 기준 사진의 색·톤·그림체 맞춤.'],
-  ['사진별 지시', '첨부 사진을 누르면 개별 프롬프트·합성용 사진 · 🗂 AI 분류 그룹마다 그룹 프롬프트·참조 사진.'],
+  ['사진별 지시', '첨부 사진을 누르면 개별 프롬프트·합성용 사진 · 🗂 AI 분류 그룹마다 그룹 프롬프트·참조 사진 · 그룹별 ZIP·폴더 내려받기.'],
   ['검색', '🔎·🖼 켜면 최신 정보 반영(검색마다 요금).'],
   ['결과 설명', '💬 끄면 이미지만 표시.'],
   ['품질', '기본 = 최고 품질(⚙에서 균형·초절약).'],
@@ -19713,6 +19713,7 @@ const FEATURE_SUMMARY_ROWS = [
   ['다중 이미지', '개별 편집 / 합성', '출력 장수만큼'],
   ['📝 사진별 지시', '사진마다 개별 프롬프트·합성용 사진(공통 + 그룹 + 개별)', '사진 장수만큼(참조 사진은 입력 요금)'],
   ['🗂 AI 분류·그룹', '분류 기준대로 그룹 → 그룹 프롬프트·참조 사진', '언어 모델(한 번에 사진 최대 20장)'],
+  ['⬇ 그룹별 내려받기', '그룹마다 폴더로 ZIP·폴더 저장(원본 파일 그대로)', '무료'],
   ['🔑 키 실시간 검증', '입력하면 키 상태·쓸 수 있는 모델 확인', '무료(조회만)'],
   ['마스크 편집', '칠한 곳만 수정', '이미지 1장'],
   ['형태 잠금', '부분 편집 때 얼굴·체형 유지', '무료'],
@@ -23033,6 +23034,71 @@ const readDirectiveDraft = msg => {
   };
 };
 const hasItemDirective = item => Boolean(cleanDirectiveText(item?.note) || item?.noteRef?.url);
+// ── 그룹별 내려받기(ZIP · 폴더) ── 그룹마다 하위 폴더, 그룹 없는 사진은 '그룹 없음' 폴더.
+// 사진은 가능하면 원본 파일 그대로(원본 이름·바이트·수정 시각) 담고, 원본 파일이 없을 때만(새로고침 뒤 프롬프트 수정 등) 앱이 저장한 사본을 담는다.
+const GROUP_EXPORT_UNGROUPED = '그룹 없음';
+const EXPORT_IMAGE_EXT = {
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
+  'image/webp': 'webp',
+  'image/gif': 'gif',
+  'image/bmp': 'bmp',
+  'image/avif': 'avif',
+  'image/heic': 'heic',
+  'image/heif': 'heif',
+  'image/tiff': 'tif'
+};
+const resolveExportBlob = async item => {
+  if (item?.file instanceof Blob) return {
+    blob: item.file,
+    original: true
+  };
+  if (item?.lazy && item.source) return {
+    blob: await resolveAttachmentBlob(item.source),
+    original: true
+  };
+  const registered = item?.sourceMeta ? findSourceFile(item.sourceMeta) : null;
+  if (registered) return {
+    blob: registered,
+    original: true
+  };
+  const url = [item?.original, item?.originalUrl, item?.url].find(value => typeof value === 'string' && value.startsWith('data:'));
+  const blob = url ? dataUrlToBlob(url) : null;
+  return blob ? {
+    blob,
+    original: false
+  } : null;
+};
+const buildExportFileName = (item, index, blob, original) => {
+  const base = String(item?.name || item?.sourceMeta?.name || '').trim();
+  const ext = EXPORT_IMAGE_EXT[String(blob?.type || '').toLowerCase()] || 'png';
+  if (!base) return `사진_${String(index).padStart(4, '0')}.${ext}`;
+  // 원본 바이트면 원본 이름 그대로, 앱 사본이면 확장자를 실제 형식에 맞춘다(예: IMG_1.HEIC → IMG_1.webp).
+  return original ? base : `${base.replace(/\.[a-z0-9]{1,5}$/i, '')}.${ext}`;
+};
+// 내보낼 목록: [{ item, index(첨부 번호), folder, groupId }]. 같은 폴더 이름은 ' (2)'를 붙여 나눈다.
+const planGroupExport = (items, groups, onlyGroupId = null) => {
+  const used = new Map();
+  const nameFolder = name => {
+    const clean = sanitizeBulkFileName(cleanGroupName(name) || '그룹').replace(/\.+$/, '') || '그룹';
+    const key = clean.toLowerCase();
+    const count = (used.get(key) || 0) + 1;
+    used.set(key, count);
+    return count === 1 ? clean : `${clean} (${count})`;
+  };
+  const folderOf = new Map((groups || []).map(group => [group.id, nameFolder(group.name)]));
+  let ungrouped = '';
+  return (items || []).map((item, i) => {
+    const grouped = folderOf.has(item.groupId);
+    if (!grouped && !ungrouped) ungrouped = nameFolder(GROUP_EXPORT_UNGROUPED);
+    return {
+      item,
+      index: i + 1,
+      folder: grouped ? folderOf.get(item.groupId) : ungrouped,
+      groupId: grouped ? item.groupId : null
+    };
+  }).filter(entry => !onlyGroupId || entry.groupId === onlyGroupId);
+};
 // 대량 첨부(파일 참조) 항목의 미리보기: 필요할 때 한 장만 읽어 작은 JPEG 를 만든다.
 const LAZY_PREVIEW_MAX_DIM = 720;
 const useItemPreview = item => {
@@ -23278,6 +23344,9 @@ const DirectiveGroupModal = ({
   onPickRef,
   onRemoveRef,
   onDelete,
+  onExport,
+  exportBusy = false,
+  canFolder = false,
   onClose
 }) => {
   const groupId = group?.id || '';
@@ -23425,7 +23494,29 @@ const DirectiveGroupModal = ({
     type: "button",
     className: "am-dir-btn",
     onClick: () => setLimit(value => value + GROUP_MODAL_PAGE)
-  }, `${Math.min(GROUP_MODAL_PAGE, items.length - limit).toLocaleString('ko-KR')}장 더 보기 (남은 ${(items.length - limit).toLocaleString('ko-KR')}장)`) : null), React.createElement("div", {
+  }, `${Math.min(GROUP_MODAL_PAGE, items.length - limit).toLocaleString('ko-KR')}장 더 보기 (남은 ${(items.length - limit).toLocaleString('ko-KR')}장)`) : null, React.createElement("span", {
+    className: "am-dir-label"
+  }, "이 그룹 사진 내려받기 (원본 파일 그대로)"), React.createElement("div", {
+    className: "am-dir-row"
+  }, React.createElement("button", {
+    type: "button",
+    className: "am-dir-btn",
+    disabled: exportBusy || !memberCount,
+    onClick: () => {
+      commitAll();
+      onExport(groupId, 'zip');
+    },
+    "data-testid": "group-export-zip-one"
+  }, "📦 ZIP으로 받기"), canFolder ? React.createElement("button", {
+    type: "button",
+    className: "am-dir-btn",
+    disabled: exportBusy || !memberCount,
+    onClick: () => {
+      commitAll();
+      onExport(groupId, 'folder');
+    },
+    "data-testid": "group-export-folder-one"
+  }, "📁 폴더에 저장") : null)), React.createElement("div", {
     className: "am-dir-foot"
   }, React.createElement("button", {
     type: "button",
@@ -23504,6 +23595,9 @@ const App = () => {
   });
   const [classifyRun, setClassifyRun] = useState(null);
   const classifyAbortRef = useRef(null);
+  // 그룹별 내려받기 진행 상태 { target, kind('zip'|'folder'), done, total }.
+  const [groupExport, setGroupExport] = useState(null);
+  const groupExportAbortRef = useRef(null);
   // 합성용·그룹 참조 사진 고르기(숨은 파일 입력 하나를 같이 쓴다): { kind: 'item' | 'group', target, id }
   const directiveRefInputRef = useRef(null);
   const directiveRefPickRef = useRef(null);
@@ -25473,10 +25567,21 @@ const App = () => {
       });
     };
     let settings = job.settings;
-    const saveResult = async image => {
+    // 그룹이 있으면 결과도 그룹마다 하위 폴더(첨부 그룹별 내려받기와 같은 폴더 이름)에 저장한다.
+    const groupFolders = new Map();
+    if (job.kind === 'each' && Array.isArray(job.groups) && job.groups.length) {
+      const folderPlan = planGroupExport(job.items.map(item => ({
+        groupId: item.groupId
+      })), job.groups);
+      folderPlan.forEach((entry, i) => groupFolders.set(job.items[i].index, entry.folder));
+    }
+    const folderAllocators = new Map();
+    const saveResult = async (image, unit = null) => {
       outputSeq += 1;
       const file = await buildBulkOutputFile(image, settings, `애미나이_${stamp}_${String(outputSeq).padStart(4, '0')}`, signal);
-      const path = allocatePath(file.name);
+      const folder = unit ? groupFolders.get(unit.index) : '';
+      if (folder && !folderAllocators.has(folder)) folderAllocators.set(folder, createBulkPathAllocator());
+      const path = folder ? `${folder}/${folderAllocators.get(folder)(file.name)}` : allocatePath(file.name);
       const crc = sink.kind === 'zip' ? crc32(new Uint8Array(await file.blob.arrayBuffer())) : 0;
       await sink.write(path, file.blob, crc);
       const usd = Math.max(0, Number(image.costUsd) || 0);
@@ -25557,7 +25662,7 @@ const App = () => {
           });
           const images = (result?.images || []).filter(img => img?.imageUrl && !img.isAnchorPassthrough);
           if (!images.length) throw new Error(result?.error || '결과 이미지가 없습니다.');
-          for (const image of await chainPipeline(images, unit)) await saveResult(image);
+          for (const image of await chainPipeline(images, unit)) await saveResult(image, unit);
           if (images.length < unit.count) recordFailure(unit, new Error(result?.error || `${unit.count - images.length}장을 받지 못했습니다.`), unit.count - images.length);
           return;
         }
@@ -25643,7 +25748,7 @@ const App = () => {
         });
         const images = (result?.images || []).filter(img => img?.imageUrl && !img.isAnchorPassthrough);
         if (!images.length) throw new Error(result?.error || '결과 이미지가 없습니다.');
-        for (const image of await chainPipeline(images, unit)) await saveResult(image);
+        for (const image of await chainPipeline(images, unit)) await saveResult(image, unit);
       };
       let cursor = 0;
       const laneCount = zeroGpuOnly ? 1 : BULK_MAX_CONCURRENCY[provider] || 4;
@@ -27659,7 +27764,7 @@ const App = () => {
     setCustomDialog({
       type: 'confirm',
       title: `📦 대량 작업 · ${spec.total.toLocaleString('ko-KR')}장`,
-      text: [`${spec.kind === 'each' ? `첨부 사진 ${spec.total.toLocaleString('ko-KR')}장을 ${spec.directiveCount ? '공통 지시와 사진별 지시로' : '같은 지시로'} 한 장씩 편집합니다.` : `같은 지시로 ${spec.total.toLocaleString('ko-KR')}장을 만듭니다.`}`, `모델: ${getModelDisplayName(spec.settings.model)} · 예상 비용: ${usdText}(이미지 단가 기준${spec.kind === 'count' && usesVisualPlanner(spec.settings) ? ' + 언어 모델 1회' : ''})`, `저장: ${sinkLabel}`, spec.pipelineStages?.length ? `🔗 단계 편집: 장마다 ${[spec.settings.model, ...spec.pipelineStages.map(stage => stage.model)].map(getModelDisplayName).join(' → ')} (최종만 저장)` : '', spec.sharedRefs.length ? `함께 보내는 사진: ${spec.sharedRefs.map(ref => ref.role === 'face' ? '👤 얼굴' : '★ 기준').join(', ')}` : '', spec.directiveCount ? `사진별 지시: ${spec.directiveCount.toLocaleString('ko-KR')}장(공통 + 그룹 + 개별 지시 · 합성용·그룹 참조 사진은 그 사진 요청에만)` : '', '진행 중에는 탭을 닫거나 새로고침하지 마세요(남은 항목 중단). ⏹로 언제든 중지할 수 있습니다.'].filter(Boolean).join('\n'),
+      text: [`${spec.kind === 'each' ? `첨부 사진 ${spec.total.toLocaleString('ko-KR')}장을 ${spec.directiveCount ? '공통 지시와 사진별 지시로' : '같은 지시로'} 한 장씩 편집합니다.` : `같은 지시로 ${spec.total.toLocaleString('ko-KR')}장을 만듭니다.`}`, `모델: ${getModelDisplayName(spec.settings.model)} · 예상 비용: ${usdText}(이미지 단가 기준${spec.kind === 'count' && usesVisualPlanner(spec.settings) ? ' + 언어 모델 1회' : ''})`, `저장: ${sinkLabel}${spec.kind === 'each' && spec.groups?.length ? ' · 그룹마다 하위 폴더' : ''}`, spec.pipelineStages?.length ? `🔗 단계 편집: 장마다 ${[spec.settings.model, ...spec.pipelineStages.map(stage => stage.model)].map(getModelDisplayName).join(' → ')} (최종만 저장)` : '', spec.sharedRefs.length ? `함께 보내는 사진: ${spec.sharedRefs.map(ref => ref.role === 'face' ? '👤 얼굴' : '★ 기준').join(', ')}` : '', spec.directiveCount ? `사진별 지시: ${spec.directiveCount.toLocaleString('ko-KR')}장(공통 + 그룹 + 개별 지시 · 합성용·그룹 참조 사진은 그 사진 요청에만)` : '', '진행 중에는 탭을 닫거나 새로고침하지 마세요(남은 항목 중단). ⏹로 언제든 중지할 수 있습니다.'].filter(Boolean).join('\n'),
       onConfirm: () => startBulkJob(spec)
     });
   };
@@ -31904,6 +32009,102 @@ const App = () => {
     }, `${input.length.toLocaleString('ko-KR')}자 · 약 ${tokens.toLocaleString('ko-KR')} 토큰${overPlanner ? ` · 언어 모델 한도(${planner.inputTokens.toLocaleString('ko-KR')} 토큰) ${tokens > planner.inputTokens ? '초과 — 줄여 주세요' : '근접'}` : directSize > budget.max ? (plannerInUse ? ` · 이미지 모델 한도(${directLabel}) 초과 → 언어 모델이 전체를 반영, 이미지 모델엔 앞·뒤만` : ` · ${getModelDisplayName(settings.model)} 한도(${directLabel}) 초과 → 앞·뒤만 전달`) : overDirect ? ` · 이미지 모델 한도(${directLabel}) 근접` : ''}`) : null);
   };
   // 입력창 위 첨부 트레이(최대 20장): 번호·삭제·기준(★) 지정·다중 편집 방식 선택.
+  // 그룹별 내려받기: kind 'zip'(ZIP 한 개 · 그룹마다 폴더) | 'folder'(고른 폴더 안에 새 폴더 · 그룹마다 하위 폴더).
+  // onlyGroupId 가 있으면 그 그룹만. 폴더 고르기 창은 누른 동작 안에서 바로 연다(브라우저 규칙).
+  const exportDirectiveGroups = async (target, kind, onlyGroupId = null) => {
+    if (groupExport) {
+      showToast('⬇ 이미 내려받기를 준비하고 있습니다.');
+      return;
+    }
+    const {
+      items,
+      groups
+    } = getDirectiveSource(target);
+    if (!groups.length) {
+      showToast('🗂 먼저 AI로 분류하거나 그룹을 만드세요.');
+      return;
+    }
+    const plan = planGroupExport(items, groups, onlyGroupId);
+    if (!plan.length) {
+      showToast('⬇ 이 그룹에 사진이 없습니다.');
+      return;
+    }
+    const onlyName = onlyGroupId ? sanitizeBulkFileName(groups.find(group => group.id === onlyGroupId)?.name || '그룹') : '';
+    const prefix = onlyName ? `애미나이_그룹_${onlyName}` : '애미나이_그룹별';
+    let folderSink = null;
+    if (kind === 'folder') {
+      try {
+        folderSink = await openBulkSink('folder', '', null, prefix);
+      } catch (error) {
+        showToast(error?.name === 'AbortError' ? '폴더 선택을 취소했습니다.' : `⚠️ ${String(error?.message || error).slice(0, 160)}`);
+        return;
+      }
+    }
+    const controller = new AbortController();
+    groupExportAbortRef.current = controller;
+    setGroupExport({
+      target,
+      kind,
+      done: 0,
+      total: plan.length
+    });
+    const entries = [];
+    const allocators = new Map();
+    const unreadable = [];
+    const copies = [];
+    let lastPaint = 0;
+    try {
+      for (let i = 0; i < plan.length; i++) {
+        throwIfAborted(controller.signal);
+        const entry = plan[i];
+        let resolved = null;
+        try {
+          resolved = await resolveExportBlob(entry.item);
+        } catch (error) {
+          resolved = null;
+        }
+        if (!resolved?.blob) unreadable.push(`#${entry.index}`);else {
+          if (!resolved.original) copies.push(`#${entry.index}`);
+          const name = buildExportFileName(entry.item, entry.index, resolved.blob, resolved.original);
+          if (!allocators.has(entry.folder)) allocators.set(entry.folder, createBulkPathAllocator());
+          const path = `${entry.folder}/${allocators.get(entry.folder)(name)}`;
+          if (folderSink) await folderSink.write(path, resolved.blob);else entries.push({
+            path,
+            blob: resolved.blob,
+            size: resolved.blob.size,
+            crc: crc32(new Uint8Array(await resolved.blob.arrayBuffer())),
+            mtime: resolved.blob.lastModified || Date.now()
+          });
+        }
+        if (Date.now() - lastPaint > 200 || i === plan.length - 1) {
+          lastPaint = Date.now();
+          setGroupExport(prev => prev ? {
+            ...prev,
+            done: i + 1
+          } : prev);
+        }
+      }
+      const saved = folderSink ? plan.length - unreadable.length : entries.length;
+      if (!saved) throw new Error('읽을 수 있는 사진이 없습니다.');
+      let where = folderSink ? folderSink.label : '';
+      if (!folderSink) {
+        const zip = buildZipBlob(entries);
+        const fileName = `${prefix}_${bulkStamp()}.zip`;
+        if (!(await saveBlobAsFile(zip, fileName))) {
+          if (isAppWebView) showToast('⚠️ 이 앱 안 브라우저는 ZIP 저장을 막습니다. Chrome·Safari 같은 일반 브라우저에서 여세요.');
+          return;
+        }
+        where = `${fileName} · ${formatByteSize(zip.size)}`;
+      }
+      const folders = new Set(plan.filter(entry => !unreadable.includes(`#${entry.index}`)).map(entry => entry.folder)).size;
+      showToast(`⬇ ${saved.toLocaleString('ko-KR')}장 · 폴더 ${folders}개 → ${where}${copies.length ? ` · 원본 파일이 없어 앱 사본으로 담은 사진 ${copies.length}장` : ''}${unreadable.length ? ` · 읽지 못한 사진 ${unreadable.slice(0, 5).join(', ')}${unreadable.length > 5 ? ' 외' : ''}` : ''}`);
+    } catch (error) {
+      showToast(error?.name === 'AbortError' || controller.signal.aborted ? '⬇ 내려받기를 멈췄습니다.' : `⚠️ 내려받지 못했습니다: ${String(error?.message || error).slice(0, 160)}`);
+    } finally {
+      if (groupExportAbortRef.current === controller) groupExportAbortRef.current = null;
+      setGroupExport(null);
+    }
+  };
   // 첨부 트레이의 역할(👤 얼굴 · ★ 기준 · 개별/합성) — 트레이와 사진별 지시 창이 같은 규칙을 쓴다.
   const computeTrayRoles = () => {
     const eagerItems = uploadedImages.filter(item => !item.lazy);
@@ -32041,7 +32242,33 @@ const App = () => {
       type: "button",
       className: "am-chip",
       onClick: () => clearDirectiveGroups(target)
-    }, "그룹 모두 해제") : null) : null);
+    }, "그룹 모두 해제") : null) : null, groups.length ? React.createElement("div", {
+      className: "am-classify-row",
+      "data-testid": `group-export-${target}`
+    }, React.createElement("span", {
+      className: "text-[11px] font-semibold text-gray-600 dark:text-gray-300"
+    }, "⬇ 그룹별 내려받기"), groupExport?.target === target ? React.createElement("button", {
+      type: "button",
+      className: "am-chip",
+      onClick: () => groupExportAbortRef.current?.abort(),
+      "data-testid": `group-export-stop-${target}`
+    }, React.createElement("span", {
+      className: "loader-xs"
+    }), `${groupExport.kind === 'folder' ? '폴더에 저장' : 'ZIP 만드는'} 중 ${groupExport.done.toLocaleString('ko-KR')}/${groupExport.total.toLocaleString('ko-KR')} · 멈춤`) : React.createElement(React.Fragment, null, React.createElement("button", {
+      type: "button",
+      className: "am-chip",
+      disabled: Boolean(groupExport),
+      onClick: () => exportDirectiveGroups(target, 'zip'),
+      title: '그룹마다 폴더로 나눈 ZIP 파일 1개로 받기(원본 파일 그대로)',
+      "data-testid": `group-export-zip-${target}`
+    }, "📦 ZIP"), supportsDirectoryPicker() ? React.createElement("button", {
+      type: "button",
+      className: "am-chip",
+      disabled: Boolean(groupExport),
+      onClick: () => exportDirectiveGroups(target, 'folder'),
+      title: '고른 폴더 안에 새 폴더를 만들고 그룹마다 하위 폴더로 저장(원본 파일 그대로)',
+      "data-testid": `group-export-folder-${target}`
+    }, "📁 폴더에 저장") : null)) : null);
   };
   // 사진별 지시 창(사진 · 그룹). 이전/다음으로 넘겨도 같은 창을 쓴다(입력 중인 글은 넘길 때 그 사진에 저장).
   const renderDirectiveModal = () => {
@@ -32071,6 +32298,9 @@ const App = () => {
           ref: null
         }),
         onDelete: groupId => deleteDirectiveGroup(modal.target, groupId),
+        onExport: (groupId, kind) => exportDirectiveGroups(modal.target, kind, groupId),
+        exportBusy: Boolean(groupExport),
+        canFolder: supportsDirectoryPicker(),
         onClose: () => setDirectiveModal(null)
       });
     }
